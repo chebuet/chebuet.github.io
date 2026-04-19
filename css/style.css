@@ -124,4 +124,13 @@ footer {
   .cards, .grid {
     flex-direction: column;
   }
+
+  a.notice-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  }
+
+  a.notice-link * {
+  text-decoration: none !important;
+  }
 }
