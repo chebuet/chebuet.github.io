@@ -23,13 +23,10 @@ body {
 }
 
 .buet-che-logo {
-  width: 36px !important;
-  height: 36px !important;
-  min-width: 36px;
-  min-height: 36px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
   border-radius: 50%;
-  display: block;
 }
 
 .nav-links {
