@@ -29,10 +29,12 @@ body {
   border-radius: 50%;
 }
 
-.notice-link {
-  text-decoration: none;
+.notice-link,
+.notice-link:visited,
+.notice-link:hover,
+.notice-link:active {
+  text-decoration: none !important;
   color: inherit;
-  display: block;
 }
 
 .notice-item {
