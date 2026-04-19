@@ -29,6 +29,12 @@ body {
   border-radius: 50%;
 }
 
+.notice-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
