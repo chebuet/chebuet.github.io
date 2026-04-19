@@ -22,6 +22,12 @@ body {
   padding: 15px 0;
 }
 
+.buet-che-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
