@@ -34,6 +34,15 @@ body {
   color: inherit;
 }
 
+.supervisor-banner a {
+  color: white;
+  background-color: #003366; /* or your theme color */
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
