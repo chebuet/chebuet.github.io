@@ -29,22 +29,9 @@ body {
   border-radius: 50%;
 }
 
-.notice-link,
-.notice-link:visited,
-.notice-link:hover,
-.notice-link:active {
-  text-decoration: none !important;
+.notice-link {
+  text-decoration: none;
   color: inherit;
-}
-
-.notice-item {
-  transition: 0.2s ease;
-}
-
-.notice-item:hover {
-  transform: translateX(4px);
-  background: #f7f3e8;
-  cursor: pointer;
 }
 
 .nav-links {
@@ -123,14 +110,5 @@ footer {
 
   .cards, .grid {
     flex-direction: column;
-  }
-
-  a.notice-link {
-  text-decoration: none !important;
-  color: inherit !important;
-  }
-
-  a.notice-link * {
-  text-decoration: none !important;
   }
 }
