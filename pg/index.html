@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postgraduate Studies — Dept. of Chemical Engineering, BUET</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A2240;
+    --navy-mid: #123462;
+    --gold: #B8972A;
+    --gold-light: #D4AF50;
+    --cream: #F7F4EE;
+    --white: #FFFFFF;
+    --muted: #6B7280;
+    --border: #DDD8CC;
+    --accent: #1A4A7A;
+    --text: #1C1C1E;
+    --section-gap: 4rem;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ─── TOP BAR ─── */
+  .topbar {
+    background: var(--navy);
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    padding: 6px 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 0.02em;
+  }
+  .topbar a { color: var(--gold-light); text-decoration: none; }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--navy);
+    padding: 1.5rem 2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .buet-crest {
+    width: 56px;
+    height: 56px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    flex-shrink: 0;
+    letter-spacing: -1px;
+  }
+  .header-titles h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .header-titles p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  nav {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    overflow-x: auto;
+  }
+  nav a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav a:hover, nav a.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1A5276 100%);
+    color: white;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 40px solid rgba(184,151,42,0.1);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 10%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 30px solid rgba(184,151,42,0.07);
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(184,151,42,0.2);
+    border: 1px solid rgba(184,151,42,0.4);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+  .hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .hero h2 em {
+    font-style: normal;
+    color: var(--gold-light);
+  }
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-stat .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold-light);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  section {
+    padding: var(--section-gap) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+
+  /* ─── NOTICES ─── */
+  .notice-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .notice-item {
+    background: var(--white);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+  .notice-item:hover { background: #F0EDE4; }
+  .notice-date {
+    background: var(--navy);
+    color: white;
+    border-radius: 4px;
+    padding: 6px 10px;
+    text-align: center;
+    flex-shrink: 0;
+    min-width: 52px;
+  }
+  .notice-date .day { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; line-height: 1; }
+  .notice-date .mon { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+  .notice-body .title { font-weight: 500; font-size: 14px; color: var(--text); }
+  .notice-body .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .notice-tag {
+    margin-left: auto;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  .tag-new { background: #DCFCE7; color: #166534; }
+  .tag-exam { background: #DBEAFE; color: #1e40af; }
+  .tag-routine { background: #FEF3C7; color: #92400e; }
+  .tag-admit { background: #FCE7F3; color: #9d174d; }
+
+  /* ─── PROGRAMS ─── */
+  .prog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .prog-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-top: 3px solid var(--navy);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .prog-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .prog-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--navy); margin-bottom: 0.5rem; }
+  .prog-card .degree { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .prog-card p { font-size: 13.5px; color: var(--muted); margin-bottom: 1rem; line-height: 1.65; }
+  .prog-detail { font-size: 12.5px; display: flex; flex-direction: column; gap: 5px; }
+  .prog-detail span { display: flex; gap: 8px; }
+  .prog-detail .k { color: var(--muted); min-width: 100px; }
+  .prog-detail .v { font-weight: 500; color: var(--text); }
+
+  /* ─── ADMISSION ─── */
+  .admission-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media (max-width: 680px) { .admission-cols { grid-template-columns: 1fr; } }
+  .info-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .info-box h4 { font-weight: 600; font-size: 14px; color: var(--navy); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); letter-spacing: 0.03em; }
+  .info-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .info-list li { font-size: 13.5px; color: var(--text); display: flex; gap: 10px; align-items: flex-start; }
+  .info-list li::before { content: '—'; color: var(--gold); font-weight: 600; flex-shrink: 0; }
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+  .tl-item .tl-txt .date { font-size: 11px; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .tl-item .tl-txt .event { font-size: 13.5px; color: var(--text); font-weight: 500; }
+
+  /* ─── ROUTINES & FORMS ─── */
+  .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .resource-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .resource-card:hover { background: var(--navy); color: white; border-color: var(--navy); }
+  .resource-card:hover .rc-icon { background: rgba(255,255,255,0.15); color: var(--gold-light); }
+  .resource-card:hover .rc-sub { color: rgba(255,255,255,0.6); }
+  .rc-icon {
+    width: 42px; height: 42px;
+    background: #EEE9DC;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    color: var(--navy);
+    transition: all 0.15s;
+  }
+  .rc-name { font-size: 13.5px; font-weight: 500; }
+  .rc-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; transition: all 0.15s; }
+
+  /* ─── SUPERVISOR ─── */
+  .supervisor-banner {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .supervisor-banner h3 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 22px;
+    margin-bottom: 0.5rem;
+  }
+  .supervisor-banner p { color: rgba(255,255,255,0.65); font-size: 13.5px; max-width: 460px; line-height: 1.7; }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .faculty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .faculty-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .faculty-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 0.75rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+  .faculty-card .name { font-weight: 600; font-size: 13.5px; color: var(--navy); }
+  .faculty-card .designation { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+  .faculty-card .research { font-size: 11px; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; }
+
+  /* ─── FEES ─── */
+  .fees-table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead th { background: var(--navy); color: white; padding: 0.75rem 1rem; text-align: left; font-weight: 500; font-size: 12.5px; letter-spacing: 0.04em; }
+  tbody tr:nth-child(even) { background: var(--white); }
+  tbody tr:nth-child(odd) { background: var(--cream); }
+  tbody td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  tbody td:last-child { font-weight: 600; color: var(--navy); }
+
+  /* ─── CONTACT ─── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-block { display: flex; flex-direction: column; gap: 0.5rem; }
+  .contact-block .clabel { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--gold); }
+  .contact-block .cval { font-size: 14px; color: var(--text); }
+  .contact-block a { color: var(--accent); text-decoration: none; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    padding: 2rem;
+    text-align: center;
+    font-size: 12.5px;
+    line-height: 1.8;
+  }
+  footer a { color: var(--gold-light); text-decoration: none; }
+
+  /* ─── UTILITY ─── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .chip {
+    display: inline-block;
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #EEE9DC;
+    color: var(--navy);
+    border-radius: 3px;
+    padding: 3px 8px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 700px) {
+    nav a { padding: 0.65rem 0.75rem; font-size: 11px; }
+    .hero-stats { gap: 1.5rem; }
+    .prog-grid { grid-template-columns: 1fr; }
+    .supervisor-banner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>Bangladesh University of Engineering &amp; Technology — Est. 1962</span>
+  <span>Academic Year 2024–2025 &nbsp;|&nbsp; <a href="https://www.buet.ac.bd" target="_blank">buet.ac.bd</a></span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="buet-crest">বু.প্র</div>
+      <div class="header-titles">
+        <h1>Department of Chemical Engineering</h1>
+        <p>Bangladesh University of Engineering &amp; Technology &nbsp;·&nbsp; Postgraduate Studies</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#notices" class="active">Notices</a>
+      <a href="#programs">Programs</a>
+      <a href="#admission">Admission</a>
+      <a href="#routines">Routines</a>
+      <a href="#forms">Forms</a>
+      <a href="#supervisor">Supervisor</a>
+      <a href="#faculty">Faculty</a>
+      <a href="#fees">Fees</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Postgraduate Programme · MSc &amp; PhD</div>
+    <h2>Advance Your Research in<br><em>Chemical Engineering</em></h2>
+    <p>Join Bangladesh's premier chemical engineering programme and contribute to cutting-edge research in process engineering, energy, environment, and materials science.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">60+</span><span class="lbl">Years of Excellence</span></div>
+      <div class="hero-stat"><span class="num">24</span><span class="lbl">Faculty Members</span></div>
+      <div class="hero-stat"><span class="num">200+</span><span class="lbl">PG Students</span></div>
+      <div class="hero-stat"><span class="num">12</span><span class="lbl">Research Labs</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page">
+
+  <!-- ──────── NOTICES ──────── -->
+  <section id="notices">
+    <div class="section-label">Latest Updates</div>
+    <div class="section-title">Notices &amp; Announcements</div>
+    <p class="section-sub">Official notices from the postgraduate committee and academic division. Check regularly for updates on exams, thesis, and enrolment.</p>
+    <div class="notice-grid">
+      <div class="notice-item">
+        <div class="notice-date"><div class="day">14</div><div class="mon">Jul</div></div>
+        <div class="notice-body">
+          <div class="title">MSc Thesis Submission Deadline — July 2025 Term</div>
+          <div class="sub">All MSc students completing thesis must submit three bound copies to the department office by 5 PM.</div>
+        </div>
+        <span class="notice-tag tag-new">New</span>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><div class="day">10</div><div class="mon">Jul</div></div>
+        <div class="notice-body">
+          <div class="title">PhD Qualifying Examination Schedule — Semester 2, 2024–25</div>
+          <div class="sub">Examination will be held in Room 301, ChE Building. See routine section for detailed schedule.</div>
+        </div>
+        <span class="notice-tag tag-exam">Exam</span>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><div class="day">05</div><div class="mon">Jul</div></div>
+        <div class="notice-body">
+          <div class="title">Class Routine for MSc 1st Semester — July 2025 Session Published</div>
+          <div class="sub">Download the updated class routine from the Routines section below. Subject to minor changes.</div>
+        </div>
+        <span class="notice-tag tag-routine">Routine</span>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><div class="day">28</div><div class="mon">Jun</div></div>
+        <div class="notice-body">
+          <div class="title">Admit Card Distribution for MSc Final Examination — June 2025</div>
+          <div class="sub">Students must collect admit cards from the department office. Bring student ID.</div>
+        </div>
+        <span class="notice-tag tag-admit">Admit</span>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><div class="day">20</div><div class="mon">Jun</div></div>
+        <div class="notice-body">
+          <div class="title">PhD Progress Report Seminar Schedule — June 2025</div>
+          <div class="sub">All PhD students in their 2nd year and beyond must present progress reports. Room 408, 10:00 AM onward.</div>
+        </div>
+        <span class="notice-tag tag-exam">Seminar</span>
+      </div>
+      <div class="notice-item">
+        <div class="notice-date"><div class="day">12</div><div class="mon">Jun</div></div>
+        <div class="notice-body">
+          <div class="title">Admission Test Result — MSc July 2025 Intake</div>
+          <div class="sub">Results published on BUET website. Provisionally selected candidates must submit documents within 7 days.</div>
+        </div>
+        <span class="notice-tag tag-new">Result</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────── PROGRAMS ──────── -->
+  <section id="programs">
+    <div class="section-label">Academic Offerings</div>
+    <div class="section-title">Postgraduate Programmes</div>
+    <p class="section-sub">The department offers research-oriented postgraduate programmes leading to the degrees of Master of Science and Doctor of Philosophy in Chemical Engineering.</p>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="degree">MSc · 2 Years</div>
+        <h3>Master of Science in Chemical Engineering</h3>
+        <p>A research-based programme combining advanced coursework with independent thesis research under the guidance of a faculty supervisor.</p>
+        <div class="prog-detail">
+          <span><span class="k">Duration</span><span class="v">4 Semesters (2 Years)</span></span>
+          <span><span class="k">Credit Hours</span><span class="v">36 Credits (min.)</span></span>
+          <span><span class="k">Thesis</span><span class="v">Required (18 Credits)</span></span>
+          <span><span class="k">Mode</span><span class="v">Full-time / Part-time</span></span>
+          <span><span class="k">Seats</span><span class="v">20 (approx.) per session</span></span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="degree">PhD · 4 Years</div>
+        <h3>Doctor of Philosophy in Chemical Engineering</h3>
+        <p>A full research degree requiring original contribution to knowledge, culminating in a comprehensive doctoral dissertation and public defence.</p>
+        <div class="prog-detail">
+          <span><span class="k">Duration</span><span class="v">4–6 Years</span></span>
+          <span><span class="k">Credit Hours</span><span class="v">60 Credits (min.)</span></span>
+          <span><span class="k">Qualifying Exam</span><span class="v">After 2nd semester</span></span>
+          <span><span class="k">Proposal Defence</span><span class="v">Required</span></span>
+          <span><span class="k">Seats</span><span class="v">10 (approx.) per session</span></span>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="degree">Research Areas</div>
+        <h3>Focus Areas &amp; Specialisations</h3>
+        <p>Students may pursue research in one of several active areas depending on faculty availability and funding.</p>
+        <div style="margin-top: 0.75rem;">
+          <span class="chip">Process Engineering</span>
+          <span class="chip">Petroleum &amp; Gas</span>
+          <span class="chip">Environmental Engineering</span>
+          <span class="chip">Polymer Science</span>
+          <span class="chip">Energy Technology</span>
+          <span class="chip">Biochemical Engineering</span>
+          <span class="chip">Thermodynamics</span>
+          <span class="chip">Mass Transfer</span>
+          <span class="chip">Reaction Engineering</span>
+          <span class="chip">Materials Science</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────── ADMISSION ──────── -->
+  <section id="admission">
+    <div class="section-label">Joining the Programme</div>
+    <div class="section-title">Admission Information</div>
+    <p class="section-sub">Applications are accepted twice a year — January and July sessions. The process is competitive and merit-based.</p>
+    <div class="admission-cols">
+      <div>
+        <div class="info-box" style="margin-bottom: 1.25rem;">
+          <h4>Eligibility — MSc</h4>
+          <ul class="info-list">
+            <li>BSc in Chemical Engineering or closely related discipline from a recognised university</li>
+            <li>Minimum CGPA of 2.5 out of 4.0 (or equivalent) in undergraduate studies</li>
+            <li>Written admission test: Mathematics, Chemical Engineering fundamentals</li>
+            <li>Viva-voce examination by department committee</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>Eligibility — PhD</h4>
+          <ul class="info-list">
+            <li>MSc in Chemical Engineering or equivalent from a recognised institution</li>
+            <li>Minimum CGPA of 3.0 out of 4.0 in MSc or BSc with strong research record</li>
+            <li>Statement of research intent and proposed topic</li>
+            <li>Prior identification of a willing faculty supervisor is strongly recommended</li>
+            <li>Approval from BUET Postgraduate Committee</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="info-box" style="margin-bottom: 1.25rem;">
+          <h4>Application Timeline — July 2025 Session</h4>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-txt">
+                <div class="date">01 May – 31 May 2025</div>
+                <div class="event">Online Application Window Open</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-txt">
+                <div class="date">12 June 2025</div>
+                <div class="event">Written Admission Test</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-txt">
+                <div class="date">18 June 2025</div>
+                <div class="event">Viva-voce Examination</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-txt">
+                <div class="date">25 June 2025</div>
+                <div class="event">Results Published</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-txt">
+                <div class="date">01 – 15 July 2025</div>
+                <div class="event">Enrolment &amp; Document Submission</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-txt">
+                <div class="date">20 July 2025</div>
+                <div class="event">Classes Begin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info-box">
+          <h4>Required Documents at Enrolment</h4>
+          <ul class="info-list">
+            <li>Attested copies of all academic transcripts and certificates</li>
+            <li>National ID card / Passport copy</li>
+            <li>Three passport-size photographs (recent)</li>
+            <li>No-objection certificate (for service holders)</li>
+            <li>Completed enrolment form (see Forms section)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────── ROUTINES ──────── -->
+  <section id="routines">
+    <div class="section-label">Academic Schedule</div>
+    <div class="section-title">Class &amp; Exam Routines</div>
+    <p class="section-sub">Download the latest routines for ongoing semesters. PDF files open in a new tab. Routines are updated at the start of each semester.</p>
+    <div class="resources-grid">
+      <a href="#" class="resource-card" onclick="alert('Routine PDF would open here'); return false;">
+        <div class="rc-icon">📅</div>
+        <div>
+          <div class="rc-name">MSc 1st Sem Routine</div>
+          <div class="rc-sub">July 2025 · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Routine PDF would open here'); return false;">
+        <div class="rc-icon">📅</div>
+        <div>
+          <div class="rc-name">MSc 2nd Sem Routine</div>
+          <div class="rc-sub">Jan 2025 · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Routine PDF would open here'); return false;">
+        <div class="rc-icon">📅</div>
+        <div>
+          <div class="rc-name">MSc 3rd Sem Routine</div>
+          <div class="rc-sub">July 2024 · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Routine PDF would open here'); return false;">
+        <div class="rc-icon">📋</div>
+        <div>
+          <div class="rc-name">PhD Qualifying Exam</div>
+          <div class="rc-sub">Semester 2, 2024–25 · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Routine PDF would open here'); return false;">
+        <div class="rc-icon">🗓️</div>
+        <div>
+          <div class="rc-name">Final Exam Schedule</div>
+          <div class="rc-sub">MSc · June 2025 · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Routine PDF would open here'); return false;">
+        <div class="rc-icon">🗓️</div>
+        <div>
+          <div class="rc-name">Academic Calendar 2024–25</div>
+          <div class="rc-sub">Full Year · PDF</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ──────── FORMS ──────── -->
+  <section id="forms">
+    <div class="section-label">Download &amp; Submit</div>
+    <div class="section-title">Forms &amp; Applications</div>
+    <p class="section-sub">Download official forms as PDF. Complete, sign, and submit to the department office as instructed on each form.</p>
+    <div class="resources-grid">
+      <a href="#" class="resource-card" onclick="alert('Fellowship Application Form PDF'); return false;">
+        <div class="rc-icon">🎓</div>
+        <div>
+          <div class="rc-name">Fellowship Application</div>
+          <div class="rc-sub">BUET Research Fellowship · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Departmental Clearance Form PDF'); return false;">
+        <div class="rc-icon">✅</div>
+        <div>
+          <div class="rc-name">Departmental Clearance</div>
+          <div class="rc-sub">MSc / PhD Completion · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Library Clearance Form PDF'); return false;">
+        <div class="rc-icon">📚</div>
+        <div>
+          <div class="rc-name">Library Clearance</div>
+          <div class="rc-sub">Graduation Requirement · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Thesis Submission Form PDF'); return false;">
+        <div class="rc-icon">📝</div>
+        <div>
+          <div class="rc-name">Thesis Submission Form</div>
+          <div class="rc-sub">MSc / PhD Thesis · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Enrolment Form PDF'); return false;">
+        <div class="rc-icon">📄</div>
+        <div>
+          <div class="rc-name">Enrolment Form</div>
+          <div class="rc-sub">New &amp; Continuing Students · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Leave Application Form PDF'); return false;">
+        <div class="rc-icon">📄</div>
+        <div>
+          <div class="rc-name">Leave Application</div>
+          <div class="rc-sub">Research Leave / Extension · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Progress Report Form PDF'); return false;">
+        <div class="rc-icon">📊</div>
+        <div>
+          <div class="rc-name">PhD Progress Report</div>
+          <div class="rc-sub">Bi-annual Submission · PDF</div>
+        </div>
+      </a>
+      <a href="#" class="resource-card" onclick="alert('Supervisor Change Form PDF'); return false;">
+        <div class="rc-icon">🔄</div>
+        <div>
+          <div class="rc-name">Supervisor Change Request</div>
+          <div class="rc-sub">Special Cases Only · PDF</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ──────── SUPERVISOR SELECTION ──────── -->
+  <section id="supervisor">
+    <div class="section-label">Research Mentorship</div>
+    <div class="section-title">Supervisor Selection</div>
+    <p class="section-sub">All MSc and PhD students must identify and confirm a faculty supervisor within the first semester. Selection is subject to faculty availability and research alignment.</p>
+    <div class="supervisor-banner">
+      <div>
+        <h3>Supervisor Selection Portal</h3>
+        <p>Submit your supervisor preference through the official online portal. New students should consult with the postgraduate coordinator before submitting. Deadline for July 2025 intake: <strong style="color: var(--gold-light);">31 August 2025.</strong></p>
+      </div>
+      <a href="https://www.buet.ac.bd" target="_blank" class="btn-gold">Open Portal →</a>
+    </div>
+    <div style="margin-top: 1.5rem;">
+      <div class="info-box">
+        <h4>Supervisor Selection Guidelines</h4>
+        <ul class="info-list">
+          <li>Review research areas of all faculty members in the Faculty section below before submitting</li>
+          <li>You may list up to 3 preferences in order of priority; the committee will try to accommodate the first choice</li>
+          <li>Contact prospective supervisors by email to discuss research compatibility before the portal deadline</li>
+          <li>PhD students must include a 1-page research proposal aligned with the supervisor's area</li>
+          <li>Final allocation is done by the Postgraduate Committee and is binding</li>
+          <li>Supervisor changes after allocation are exceptional and require written justification</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────── FACULTY ──────── -->
+  <section id="faculty">
+    <div class="section-label">Academic Staff</div>
+    <div class="section-title">Faculty &amp; Research Supervisors</div>
+    <p class="section-sub">All listed faculty members are available as postgraduate supervisors. Contact them directly to discuss research interests before submitting a supervisor preference.</p>
+    <div class="faculty-grid">
+      <div class="faculty-card">
+        <div class="faculty-avatar">MA</div>
+        <div class="name">Prof. Dr. M. A. Islam</div>
+        <div class="designation">Professor &amp; Head</div>
+        <div class="research">Process Engineering</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">RK</div>
+        <div class="name">Prof. Dr. Rowshan Ara</div>
+        <div class="designation">Professor</div>
+        <div class="research">Polymer Science</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">ZH</div>
+        <div class="name">Prof. Dr. Zahir Hossain</div>
+        <div class="designation">Professor</div>
+        <div class="research">Environmental Eng.</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">SM</div>
+        <div class="name">Dr. Sumaiya Maliha</div>
+        <div class="designation">Associate Professor</div>
+        <div class="research">Energy Technology</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">TA</div>
+        <div class="name">Dr. Tanvir Ahmed</div>
+        <div class="designation">Associate Professor</div>
+        <div class="research">Petroleum &amp; Gas</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">NR</div>
+        <div class="name">Dr. Nusrat Rahman</div>
+        <div class="designation">Assistant Professor</div>
+        <div class="research">Biochemical Eng.</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">FK</div>
+        <div class="name">Dr. Fahim Khan</div>
+        <div class="designation">Assistant Professor</div>
+        <div class="research">Reaction Engineering</div>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-avatar">SB</div>
+        <div class="name">Dr. Sabrina Begum</div>
+        <div class="designation">Lecturer</div>
+        <div class="research">Materials Science</div>
+      </div>
+    </div>
+    <p style="margin-top: 1.25rem; font-size: 12.5px; color: var(--muted);">* Faculty names and designations are representative placeholders. Please refer to the official BUET website for the current list.</p>
+  </section>
+
+  <!-- ──────── FEES ──────── -->
+  <section id="fees">
+    <div class="section-label">Financial Information</div>
+    <div class="section-title">Tuition &amp; Fees Structure</div>
+    <p class="section-sub">Fees are payable each semester at the BUET accounts office. Fellowship holders may have partial or full fee waivers depending on the fellowship terms.</p>
+    <div class="fees-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fee Category</th>
+            <th>MSc (per semester)</th>
+            <th>PhD (per semester)</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tuition Fee</td>
+            <td>BDT 4,500</td>
+            <td>BDT 6,000</td>
+            <td>Payable each semester</td>
+          </tr>
+          <tr>
+            <td>Registration Fee</td>
+            <td>BDT 2,000</td>
+            <td>BDT 2,500</td>
+            <td>First semester only</td>
+          </tr>
+          <tr>
+            <td>Thesis / Research Fee</td>
+            <td>BDT 1,500</td>
+            <td>BDT 2,000</td>
+            <td>From thesis semester</td>
+          </tr>
+          <tr>
+            <td>Library Fee</td>
+            <td>BDT 500</td>
+            <td>BDT 500</td>
+            <td>Per semester</td>
+          </tr>
+          <tr>
+            <td>Exam Fee (per course)</td>
+            <td>BDT 300</td>
+            <td>BDT 300</td>
+            <td>Per enrolled course</td>
+          </tr>
+          <tr>
+            <td>Thesis Binding &amp; Submission</td>
+            <td>BDT 2,500 (one-time)</td>
+            <td>BDT 4,000 (one-time)</td>
+            <td>At final submission</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top: 1rem; font-size: 12.5px; color: var(--muted);">* Fees are indicative and subject to revision by BUET administration. Confirm current amounts at the Accounts Office before payment.</p>
+    <div style="margin-top: 1.5rem;">
+      <div class="info-box">
+        <h4>Fellowship &amp; Funding Opportunities</h4>
+        <ul class="info-list">
+          <li><strong>BUET Research Fellowship:</strong> Available to PhD students with strong academic records. Covers tuition and provides a monthly stipend. Apply using the Fellowship Application Form.</li>
+          <li><strong>NST Fellowship (Ministry of Science):</strong> National Science &amp; Technology Fellowship, open to MSc and PhD students in science and engineering. Apply through the Ministry website.</li>
+          <li><strong>Supervisor-funded Research:</strong> Some faculty members can fund students through research grants. Discuss with your supervisor.</li>
+          <li><strong>ICTD / Industry Scholarships:</strong> Occasionally available through BUET Industry partnerships. Announced via notice board.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────── CONTACT ──────── -->
+  <section id="contact">
+    <div class="section-label">Get in Touch</div>
+    <div class="section-title">Contact &amp; Office Information</div>
+    <p class="section-sub">For postgraduate-related queries, contact the department office or the Postgraduate Coordinator directly. Office hours: Sunday–Thursday, 9:00 AM – 4:00 PM.</p>
+    <div class="contact-grid">
+      <div>
+        <div class="info-box">
+          <h4>Department Office</h4>
+          <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 0.5rem;">
+            <div class="contact-block">
+              <div class="clabel">Address</div>
+              <div class="cval">Department of Chemical Engineering<br>Room 101, ChE Building<br>BUET, Dhaka-1000, Bangladesh</div>
+            </div>
+            <div class="contact-block">
+              <div class="clabel">Phone</div>
+              <div class="cval"><a href="tel:+880255167100">+880-2-55167100 Ext. 7870</a></div>
+            </div>
+            <div class="contact-block">
+              <div class="clabel">Email</div>
+              <div class="cval"><a href="mailto:che@buet.ac.bd">che@buet.ac.bd</a></div>
+            </div>
+            <div class="contact-block">
+              <div class="clabel">PG Coordinator Email</div>
+              <div class="cval"><a href="mailto:pg.che@buet.ac.bd">pg.che@buet.ac.bd</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="info-box">
+          <h4>Useful Links</h4>
+          <ul class="info-list">
+            <li><a href="https://www.buet.ac.bd" target="_blank">BUET Official Website</a></li>
+            <li><a href="https://www.buet.ac.bd/web/#/academic/postgraduate" target="_blank">BUET Postgraduate Division</a></li>
+            <li><a href="https://www.buet.ac.bd" target="_blank">Online Admission Portal</a></li>
+            <li><a href="https://www.buet.ac.bd" target="_blank">BUET Library Portal</a></li>
+            <li><a href="https://www.buet.ac.bd" target="_blank">Student Self-Service Portal</a></li>
+            <li><a href="https://www.buet.ac.bd" target="_blank">BUET Academic Rules &amp; Regulations (PDF)</a></li>
+          </ul>
+        </div>
+        <div class="info-box" style="margin-top: 1.25rem;">
+          <h4>Office Hours</h4>
+          <ul class="info-list">
+            <li>Sunday – Thursday: 9:00 AM – 4:00 PM</li>
+            <li>Friday – Saturday: Closed (Government Holidays)</li>
+            <li>Public Holidays: Closed as per BUET calendar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family: 'Playfair Display', serif; font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 0.5rem;">Department of Chemical Engineering, BUET</p>
+  <p>Postgraduate Studies Portal &nbsp;·&nbsp; Bangladesh University of Engineering &amp; Technology</p>
+  <p style="margin-top: 0.5rem;">Dhaka-1000, Bangladesh &nbsp;|&nbsp; <a href="mailto:che@buet.ac.bd">che@buet.ac.bd</a> &nbsp;|&nbsp; <a href="https://www.buet.ac.bd" target="_blank">www.buet.ac.bd</a></p>
+  <p style="margin-top: 1rem; font-size: 11px; color: rgba(255,255,255,0.3);">This page is maintained by the Department of Chemical Engineering. For corrections, contact the department office.</p>
+</footer>
+
+<script>
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
