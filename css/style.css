@@ -1,9 +1,12 @@
+/* Base Styles */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   color: #333;
+  line-height: 1.6;
 }
 
+/* Layout */
 .container {
   width: 85%;
   margin: auto;
@@ -16,6 +19,7 @@ body {
   align-items: center;
 }
 
+/* Header */
 .header {
   background: #002147;
   color: white;
@@ -29,18 +33,12 @@ body {
   border-radius: 50%;
 }
 
-.notice-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.supervisor-banner a {
-  color: white !important;
-}
-
+/* Navigation */
 .nav-links {
   list-style: none;
   display: flex;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-links li {
@@ -53,6 +51,17 @@ body {
   font-weight: 500;
 }
 
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Links (general reset) */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Hero Section */
 .hero {
   background: linear-gradient(to right, #003366, #0055a5);
   color: white;
@@ -60,16 +69,22 @@ body {
   padding: 80px 20px;
 }
 
+/* Buttons */
 .btn {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 20px;
   background: #ffcc00;
   color: black;
-  text-decoration: none;
   border-radius: 5px;
+  font-weight: 500;
 }
 
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Cards */
 .cards {
   display: flex;
   gap: 20px;
@@ -81,24 +96,57 @@ body {
   padding: 20px;
   border-radius: 8px;
   flex: 1;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
 }
 
+/* Grid */
 .grid {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
 }
 
+/* Highlight Section */
 .highlight {
   background: #eef3f9;
   padding: 40px 0;
 }
 
+/* Supervisor Banner */
+.supervisor-banner {
+  background: #003366;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.supervisor-banner a,
+.supervisor-banner a:visited,
+.supervisor-banner a:hover,
+.supervisor-banner a:active {
+  color: white;
+  text-decoration: none;
+}
+
+/* Info Box */
+.info-box {
+  background: #f9fbfd;
+  border-left: 4px solid #0055a5;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+
+.info-list {
+  margin: 10px 0 0;
+  padding-left: 20px;
+}
+
+/* Footer */
 footer {
   background: #002147;
   color: white;
@@ -110,9 +158,20 @@ footer {
 @media (max-width: 768px) {
   .flex {
     flex-direction: column;
+    text-align: center;
   }
 
-  .cards, .grid {
+  .nav-links {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .cards,
+  .grid {
     flex-direction: column;
   }
 }
