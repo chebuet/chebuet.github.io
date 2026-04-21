@@ -1,1000 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChE BUET</title>
-<meta name="description" content="Department of Chemical Engineering, Bangladesh University of Engineering and Technology (BUET) – pioneering research, academic excellence, and innovation.">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --buet-navy: #002147;
-    --buet-gold: #C9A94B;
-    --buet-gold-light: #E8D08A;
-    --accent-red: #C0392B;
-    --text-dark: #1a1a1a;
-    --text-mid: #444;
-    --text-light: #888;
-    --bg-cream: #FAF8F4;
-    --bg-white: #ffffff;
-    --border: #E0D8CC;
-    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Department of Chemical Engineering — BUET</title>
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text-dark);
-    background: var(--bg-cream);
-    overflow-x: hidden;
-  }
-
-  a { text-decoration: none; color: inherit; }
-
-  /* ============ TOP BAR ============ */
-  .top-bar {
-    background: var(--buet-navy);
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    padding: 6px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .top-bar a { color: var(--buet-gold-light); margin-left: 18px; transition: color var(--transition); }
-  .top-bar a:hover { color: #fff; }
-
-  /* ============ HEADER / NAV ============ */
-  header {
-    background: var(--bg-white);
-    border-bottom: 3px solid var(--buet-gold);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,33,71,0.08);
-  }
-
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    height: 72px;
-  }
-
-  .logo-area {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-  }
-  .logo-dept {
-    font-family: 'EB Garamond', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--buet-navy);
-    letter-spacing: -0.01em;
-  }
-  .logo-univ {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--buet-gold);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-top: 1px;
-  }
-
-  /* Desktop Navigation */
-  .desktop-nav { display: flex; align-items: center; gap: 4px; }
-  
-  /* Mobile Menu Button */
-  .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: var(--buet-navy);
-    padding: 8px;
-  }
-
-  /* Mobile Navigation (hidden by default) */
-  .mobile-nav {
-    display: none;
-    flex-direction: column;
-    background: var(--bg-white);
-    border-top: 1px solid var(--border);
-    padding: 16px 20px;
-    width: 100%;
-  }
-  .mobile-nav.open { display: flex; }
-  .mobile-nav-item {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-weight: 500;
-  }
-  .mobile-nav-item .dropdown {
-    position: static;
-    box-shadow: none;
-    border: none;
-    padding-left: 16px;
-    margin-top: 8px;
-    display: none;
-  }
-  .mobile-nav-item.open .dropdown { display: block; }
-  .mobile-dropdown-toggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
-  .mobile-nav-cta {
-    background: var(--buet-navy);
-    color: #fff;
-    text-align: center;
-    padding: 12px;
-    border-radius: 4px;
-    margin-top: 12px;
-  }
-
-  .nav-item {
-    position: relative;
-  }
-
-  .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 14px;
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--text-dark);
-    border-radius: 4px;
-    transition: background var(--transition), color var(--transition);
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .nav-link:hover, .nav-link.active { background: var(--bg-cream); color: var(--buet-navy); }
-  .nav-link .arrow { font-size: 9px; opacity: 0.5; }
-
-  .dropdown {
-    display: none;
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    background: var(--bg-white);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--buet-gold);
-    box-shadow: 0 8px 32px rgba(0,33,71,0.12);
-    min-width: 210px;
-    z-index: 200;
-    border-radius: 0 0 6px 6px;
-    overflow: hidden;
-  }
-  .nav-item:hover .dropdown { display: block; }
-  .dropdown a {
-    display: block;
-    padding: 10px 18px;
-    font-size: 13px;
-    color: var(--text-mid);
-    border-bottom: 1px solid var(--border);
-    transition: background var(--transition), color var(--transition);
-  }
-  .dropdown a:last-child { border-bottom: none; }
-  .dropdown a:hover { background: var(--bg-cream); color: var(--buet-navy); padding-left: 24px; }
-
-  .nav-cta {
-    background: var(--buet-navy);
-    color: #fff !important;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 13px;
-    margin-left: 8px;
-    transition: background var(--transition) !important;
-  }
-  .nav-cta:hover { background: var(--buet-gold) !important; color: var(--buet-navy) !important; }
-
-  /* ============ HERO SLIDER ============ */
-  .hero {
-    position: relative;
-    height: 580px;
-    overflow: hidden;
-    background: var(--buet-navy);
-  }
-
-  .hero-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 1s ease;
-    display: flex;
-    align-items: flex-end;
-  }
-  .hero-slide.active { opacity: 1; }
-
-  .hero-slide .bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.45);
-  }
-
-  .slide-bg-1 { background: linear-gradient(135deg, #001530 0%, #003070 50%, #001530 100%); }
-  .slide-bg-2 { background: linear-gradient(135deg, #0a0a1a 0%, #1a0a30 50%, #0a0a1a 100%); }
-  .slide-bg-3 { background: linear-gradient(135deg, #001520 0%, #003040 50%, #001520 100%); }
-
-  .hero-overlay-svg {
-    position: absolute;
-    inset: 0;
-    opacity: 0.15;
-    pointer-events: none;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 60px 60px;
-    max-width: 700px;
-  }
-  .hero-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--buet-gold);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: block;
-  }
-  .hero-title {
-    font-family: 'EB Garamond', serif;
-    font-size: clamp(32px, 4.5vw, 54px);
-    color: #fff;
-    font-weight: 600;
-    line-height: 1.15;
-    margin-bottom: 20px;
-  }
-  .hero-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--buet-gold);
-    color: var(--buet-navy);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    padding: 12px 24px;
-    border-radius: 2px;
-    transition: background var(--transition), transform var(--transition);
-    text-transform: uppercase;
-  }
-  .hero-link:hover { background: #fff; transform: translateY(-2px); }
-
-  .hero-dots {
-    position: absolute;
-    bottom: 24px;
-    right: 40px;
-    display: flex;
-    gap: 8px;
-    z-index: 3;
-  }
-  .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.35);
-    cursor: pointer;
-    transition: background var(--transition);
-  }
-  .dot.active { background: var(--buet-gold); }
-
-  /* ============ NEWS TICKER ============ */
-  .ticker {
-    background: var(--buet-navy);
-    color: #fff;
-    padding: 12px 0;
-    overflow: hidden;
-  }
-  .ticker-inner {
-    display: flex;
-    align-items: center;
-  }
-  .ticker-label {
-    background: var(--buet-gold);
-    color: var(--buet-navy);
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 16px;
-    margin-right: 20px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .ticker-track {
-    overflow: hidden;
-    flex: 1;
-  }
-  .ticker-content {
-    display: flex;
-    gap: 60px;
-    animation: ticker-scroll 40s linear infinite;
-    white-space: nowrap;
-  }
-  .ticker-content span {
-    font-size: 13px;
-    opacity: 0.9;
-    flex-shrink: 0;
-  }
-  .ticker-content span::before {
-    content: '◆';
-    color: var(--buet-gold);
-    margin-right: 10px;
-    font-size: 8px;
-  }
-  @keyframes ticker-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ============ STATS BAR ============ */
-  .stats-bar {
-    background: var(--bg-white);
-    border-bottom: 1px solid var(--border);
-    padding: 0 40px;
-  }
-  .stats-inner {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    divide-x: 1px solid var(--border);
-  }
-  .stat-item {
-    padding: 24px 30px;
-    border-right: 1px solid var(--border);
-    text-align: center;
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-number {
-    font-family: 'EB Garamond', serif;
-    font-size: 42px;
-    font-weight: 600;
-    color: var(--buet-navy);
-    line-height: 1;
-    display: block;
-  }
-  .stat-number span { font-size: 24px; color: var(--buet-gold); }
-  .stat-label {
-    font-size: 12px;
-    color: var(--text-light);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  /* ============ MAIN GRID ============ */
-  .main-content {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 60px 40px;
-  }
-
-  .section-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--buet-navy);
-    margin-bottom: 8px;
-  }
-  .section-subtitle {
-    font-size: 14px;
-    color: var(--text-light);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    margin-bottom: 32px;
-  }
-
-  .news-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin-bottom: 60px;
-  }
-
-  .news-card {
-    background: var(--bg-white);
-    position: relative;
-    overflow: hidden;
-    transition: transform var(--transition);
-  }
-  .news-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,33,71,0.1); z-index: 1; }
-
-  .news-card-img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    display: block;
-  }
-  .news-card.featured .news-card-img { height: 320px; }
-
-  .news-card-body {
-    padding: 20px 22px;
-  }
-  .news-card-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--buet-gold);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    display: block;
-  }
-  .news-card-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.35;
-    color: var(--buet-navy);
-    margin-bottom: 12px;
-  }
-  .news-card.featured .news-card-title { font-size: 24px; }
-  .news-card-meta {
-    font-size: 12px;
-    color: var(--text-light);
-  }
-  .read-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--buet-navy);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    margin-top: 12px;
-    border-bottom: 2px solid var(--buet-gold);
-    padding-bottom: 2px;
-    transition: color var(--transition), border-color var(--transition);
-  }
-  .read-more:hover { color: var(--buet-gold); }
-
-  /* Research areas */
-  .research-section { margin-bottom: 60px; }
-  .research-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .research-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    background: var(--buet-navy);
-    cursor: pointer;
-    aspect-ratio: 4/3;
-  }
-  .research-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    transition: opacity var(--transition);
-  }
-  .research-card:hover::before { opacity: 0.7; }
-  .rc-1::before { background: linear-gradient(135deg, rgba(0,33,71,0.85), rgba(201,169,75,0.6)); }
-  .rc-2::before { background: linear-gradient(135deg, rgba(0,33,71,0.85), rgba(30,100,60,0.6)); }
-  .rc-3::before { background: linear-gradient(135deg, rgba(0,33,71,0.85), rgba(100,30,30,0.6)); }
-  .rc-4::before { background: linear-gradient(135deg, rgba(0,33,71,0.85), rgba(30,60,100,0.6)); }
-  .rc-5::before { background: linear-gradient(135deg, rgba(0,33,71,0.85), rgba(80,30,100,0.6)); }
-  .rc-6::before { background: linear-gradient(135deg, rgba(0,33,71,0.85), rgba(20,80,80,0.6)); }
-
-  .research-card-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    transform: scale(1);
-    transition: transform 0.6s ease;
-  }
-  .research-card:hover .research-card-bg { transform: scale(1.06); }
-
-  .research-card-content {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px;
-  }
-  .research-explore {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--buet-gold-light);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .research-name {
-    font-family: 'EB Garamond', serif;
-    font-size: 22px;
-    color: #fff;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-  .research-arrow {
-    margin-top: 12px;
-    width: 32px;
-    height: 2px;
-    background: var(--buet-gold);
-    position: relative;
-    transition: width var(--transition);
-  }
-  .research-card:hover .research-arrow { width: 48px; }
-  .research-arrow::after {
-    content: '';
-    position: absolute;
-    right: -4px;
-    top: -3px;
-    border: 4px solid transparent;
-    border-left: 6px solid var(--buet-gold);
-  }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 60px;
-  }
-
-  .event-item {
-    display: flex;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-    transition: background var(--transition);
-  }
-  .event-item:first-child { padding-top: 0; }
-  .event-date {
-    flex-shrink: 0;
-    text-align: center;
-    background: var(--buet-navy);
-    color: #fff;
-    width: 56px;
-    height: 56px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2px;
-  }
-  .event-day {
-    font-family: 'EB Garamond', serif;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1;
-  }
-  .event-month {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: var(--buet-gold-light);
-    text-transform: uppercase;
-  }
-  .event-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--buet-navy);
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-  .event-meta { font-size: 12px; color: var(--text-light); }
-
-  .announcement {
-    padding: 18px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .announcement:first-child { padding-top: 0; }
-  .ann-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    padding: 2px 8px;
-    border-radius: 2px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    display: inline-block;
-  }
-  .tag-notice { background: rgba(201,169,75,0.15); color: #8a6800; }
-  .tag-award { background: rgba(192,57,43,0.1); color: var(--accent-red); }
-  .tag-job { background: rgba(0,33,71,0.08); color: var(--buet-navy); }
-  .ann-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--buet-navy);
-    line-height: 1.3;
-    margin-bottom: 4px;
-  }
-  .ann-meta { font-size: 12px; color: var(--text-light); }
-
-  .quick-links {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 60px;
-  }
-  .quick-link {
-    background: var(--bg-white);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--buet-navy);
-    padding: 28px 24px;
-    text-align: center;
-    border-radius: 0 0 4px 4px;
-    transition: box-shadow var(--transition), transform var(--transition);
-    cursor: pointer;
-  }
-  .quick-link:hover { box-shadow: 0 8px 24px rgba(0,33,71,0.1); transform: translateY(-3px); border-top-color: var(--buet-gold); }
-  .ql-icon { font-size: 32px; margin-bottom: 12px; }
-  .ql-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--buet-navy);
-    margin-bottom: 6px;
-  }
-  .ql-desc { font-size: 12.5px; color: var(--text-light); line-height: 1.5; }
-
-  footer {
-    background: var(--buet-navy);
-    color: rgba(255,255,255,0.75);
-    padding: 60px 40px 30px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 48px;
-  }
-  .footer-brand {}
-  .footer-logo {
-    font-family: 'EB Garamond', serif;
-    font-size: 24px;
-    color: #fff;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .footer-sub {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--buet-gold);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  .footer-address { font-size: 13px; line-height: 1.8; }
-  .footer-col-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--buet-gold);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    font-weight: 700;
-  }
-  .footer-col a {
-    display: block;
-    font-size: 13px;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 8px;
-    transition: color var(--transition);
-  }
-  .footer-col a:hover { color: var(--buet-gold-light); padding-left: 4px; }
-  .footer-social { display: flex; gap: 12px; margin-top: 24px; }
-  .social-btn {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: rgba(255,255,255,0.65);
-    transition: border-color var(--transition), color var(--transition), background var(--transition);
-    cursor: pointer;
-  }
-  .social-btn:hover { border-color: var(--buet-gold); color: var(--buet-gold); background: rgba(201,169,75,0.1); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    flex-wrap: wrap;
-  }
-  .footer-bottom a { color: rgba(255,255,255,0.5); margin-left: 16px; transition: color var(--transition); }
-  .footer-bottom a:hover { color: var(--buet-gold-light); }
-
-  /* ============ MOBILE ============ */
-  @media (max-width: 900px) {
-    .top-bar { display: none; }
-    .header-inner { padding: 0 20px; }
-    .desktop-nav { display: none; }
-    .menu-toggle { display: block; }
-    .hero { height: 420px; }
-    .hero-content { padding: 0 24px 40px; }
-    .stats-inner { grid-template-columns: repeat(2, 1fr); }
-    .main-content { padding: 40px 20px; }
-    .news-grid { grid-template-columns: 1fr; }
-    .research-grid { grid-template-columns: 1fr 1fr; }
-    .two-col { grid-template-columns: 1fr; }
-    .quick-links { grid-template-columns: repeat(2, 1fr); }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-  }
-
-  .view-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--buet-navy);
-    border-bottom: 1px solid var(--buet-gold);
-    padding-bottom: 2px;
-    transition: color var(--transition);
-    float: right;
-    margin-top: -40px;
-  }
-  .view-all:hover { color: var(--buet-gold); }
-
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, var(--buet-gold) 0%, transparent 100%);
-    margin: 8px 0 28px;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .news-card, .research-card, .quick-link, .event-item, .announcement {
-    animation: fadeUp 0.5s ease both;
-  }
-</style>
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
+<!-- TOP BAR -->
 <div class="top-bar">
-  <span>Bangladesh University of Engineering & Technology — Dhaka 1000, Bangladesh</span>
-  <span>
-    <a href="#">MyBUET</a>
-    <a href="#">Library</a>
-    <a href="#">Webmail</a>
-    <a href="contact.html">Contact</a>
-  </span>
+  <div class="container">
+    <span>Bangladesh University of Engineering and Technology</span>
+  </div>
 </div>
 
-<header>
-  <div class="header-inner">
-    <a href="index.html" class="logo-area">
-      <span class="logo-dept">Chemical Engineering</span>
-      <span class="logo-univ">Bangladesh University of Engineering & Technology</span>
-    </a>
-    <nav class="desktop-nav">
-      <div class="nav-item">
-        <a class="nav-link" href="about.html">About <span class="arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="about.html#mission">Mission & Vision</a>
-          <a href="about.html#history">History</a>
-          <a href="about.html#community">Department Community</a>
-          <a href="about.html#positions">Open Positions</a>
-          <a href="gallery.html">Photo Gallery</a>
-        </div>
+<!-- HEADER -->
+<header class="header">
+  <div class="container nav-container">
+
+    <div class="logo">
+      <img src="images/logo-che.png" alt="CHE BUET">
+      <div>
+        <div class="logo-title">Chemical Engineering</div>
+        <div class="logo-sub">BUET</div>
       </div>
-      <div class="nav-item">
-        <a class="nav-link" href="people.html">People <span class="arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="people.html#faculty">Faculty</a>
-          <a href="people.html#grad">Graduate Students</a>
-          <a href="people.html#staff">Staff</a>
-          <a href="alumni.html">Alumni</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a class="nav-link" href="academics.html">Academics <span class="arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="academics.html#ug">Undergraduate Program</a>
-          <a href="academics.html#ms">Graduate Program (M.Sc.)</a>
-          <a href="academics.html#phd">Ph.D. Program</a>
-          <a href="academics.html#schedule">Course Schedule</a>
-          <a href="academics.html#admission">Admission Info</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a class="nav-link" href="research.html">Research <span class="arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="research.html#process">Process Engineering</a>
-          <a href="research.html#environmental">Environmental Engineering</a>
-          <a href="research.html#energy">Energy & Fuels</a>
-          <a href="research.html#bioprocess">Bioprocess Technology</a>
-          <a href="research.html#materials">Materials & Nanotechnology</a>
-          <a href="research.html#computational">Computational Methods</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a class="nav-link" href="news.html">News & Events <span class="arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="news.html#latest">Latest News</a>
-          <a href="news.html#upcoming">Upcoming Events</a>
-          <a href="news.html#seminar">Seminar Series</a>
-          <a href="news.html#notices">Notices</a>
-        </div>
-      </div>
-      <div class="nav-item">
-        <a class="nav-link" href="resources.html">Resources <span class="arrow">▾</span></a>
-        <div class="dropdown">
-          <a href="resources.html#students">Student Resources</a>
-          <a href="resources.html#labs">Lab Facilities</a>
-          <a href="resources.html#computing">Computing Support</a>
-          <a href="resources.html#career">Career Guidance</a>
-          <a href="resources.html#admin">Administrative</a>
-        </div>
-      </div>
-      <a class="nav-link nav-cta" href="apply.html">Apply Now</a>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="people.html" class="nav-link">People</a>
+      <a href="academics.html" class="nav-link">Academics</a>
+      <a href="research.html" class="nav-link">Research</a>
+      <a href="news.html" class="nav-link">News & Events</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="brtc.html" class="nav-link">BRTC</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
-  </div>
-  <div class="mobile-nav" id="mobileNav">
-    <div class="mobile-nav-item">
-      <div class="mobile-dropdown-toggle">About <span>▾</span></div>
-      <div class="dropdown">
-        <a href="about.html#mission">Mission & Vision</a>
-        <a href="about.html#history">History</a>
-        <a href="about.html#community">Department Community</a>
-        <a href="about.html#positions">Open Positions</a>
-        <a href="gallery.html">Photo Gallery</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <div class="mobile-dropdown-toggle">People <span>▾</span></div>
-      <div class="dropdown">
-        <a href="people.html#faculty">Faculty</a>
-        <a href="people.html#grad">Graduate Students</a>
-        <a href="people.html#staff">Staff</a>
-        <a href="alumni.html">Alumni</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <div class="mobile-dropdown-toggle">Academics <span>▾</span></div>
-      <div class="dropdown">
-        <a href="academics.html#ug">Undergraduate Program</a>
-        <a href="academics.html#ms">Graduate Program (M.Sc.)</a>
-        <a href="academics.html#phd">Ph.D. Program</a>
-        <a href="academics.html#schedule">Course Schedule</a>
-        <a href="academics.html#admission">Admission Info</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <div class="mobile-dropdown-toggle">Research <span>▾</span></div>
-      <div class="dropdown">
-        <a href="research.html#process">Process Engineering</a>
-        <a href="research.html#environmental">Environmental Engineering</a>
-        <a href="research.html#energy">Energy & Fuels</a>
-        <a href="research.html#bioprocess">Bioprocess Technology</a>
-        <a href="research.html#materials">Materials & Nanotechnology</a>
-        <a href="research.html#computational">Computational Methods</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <div class="mobile-dropdown-toggle">News & Events <span>▾</span></div>
-      <div class="dropdown">
-        <a href="news.html#latest">Latest News</a>
-        <a href="news.html#upcoming">Upcoming Events</a>
-        <a href="news.html#seminar">Seminar Series</a>
-        <a href="news.html#notices">Notices</a>
-      </div>
-    </div>
-    <div class="mobile-nav-item">
-      <div class="mobile-dropdown-toggle">Resources <span>▾</span></div>
-      <div class="dropdown">
-        <a href="resources.html#students">Student Resources</a>
-        <a href="resources.html#labs">Lab Facilities</a>
-        <a href="resources.html#computing">Computing Support</a>
-        <a href="resources.html#career">Career Guidance</a>
-        <a href="resources.html#admin">Administrative</a>
-      </div>
-    </div>
-    <a href="apply.html" class="mobile-nav-cta">Apply Now</a>
+
   </div>
 </header>
 
-<!-- Hero slider (same as your original, shortened for brevity) -->
-<section class="hero" id="hero">
-  <div class="hero-slide active" id="slide-0">
-    <div class="bg slide-bg-1"></div>
-    <svg class="hero-overlay-svg" viewBox="0 0 1200 580" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="900" cy="150" r="300" fill="none" stroke="#C9A94B" stroke-width="1" opacity="0.4"/>
-      <circle cx="900" cy="150" r="200" fill="none" stroke="#C9A94B" stroke-width="0.5" opacity="0.3"/>
-      <circle cx="900" cy="150" r="100" fill="none" stroke="#C9A94B" stroke-width="0.5" opacity="0.2"/>
-    </svg>
-    <div class="hero-content">
-      <span class="hero-tag">BUET ChemE Featured</span>
-      <h1 class="hero-title">Engineering Solutions for a Cleaner, Greener Bangladesh</h1>
-      <a class="hero-link" href="research.html">Explore Research →</a>
-    </div>
-  </div>
-  <div class="hero-slide" id="slide-1">
-    <div class="bg slide-bg-2"></div>
-    <div class="hero-content">
-      <span class="hero-tag">Graduate Excellence</span>
-      <h1 class="hero-title">Shaping the Next Generation of Chemical Engineers</h1>
-      <a class="hero-link" href="academics.html#ms">Graduate Programs →</a>
-    </div>
-  </div>
-  <div class="hero-slide" id="slide-2">
-    <div class="bg slide-bg-3"></div>
-    <div class="hero-content">
-      <span class="hero-tag">Innovation Hub</span>
-      <h1 class="hero-title">Pioneering Process Technology for Industry & Society</h1>
-      <a class="hero-link" href="research.html#labs">Our Laboratories →</a>
-    </div>
-  </div>
-  <div class="hero-dots">
-    <div class="dot active" data-slide="0"></div>
-    <div class="dot" data-slide="1"></div>
-    <div class="dot" data-slide="2"></div>
-  </div>
-</section>
+<!-- MAIN CONTENT -->
+<main>
 
-<!-- Ticker, Stats, News Grid, Research, Events, Announcements, Quick Links, Footer (same as yours) -->
-<!-- ... (I'll keep the rest identical to your original to save space, but all links now point to real pages) ... -->
+  <!-- HERO -->
+  <section class="hero">
 
-<script>
-  // Mobile menu toggle
-  const menuToggle = document.getElementById('menuToggle');
-  const mobileNav = document.getElementById('mobileNav');
-  menuToggle.addEventListener('click', () => {
-    mobileNav.classList.toggle('open');
-  });
-  // Mobile dropdowns
-  document.querySelectorAll('.mobile-nav-item').forEach(item => {
-    const toggle = item.querySelector('.mobile-dropdown-toggle');
-    toggle.addEventListener('click', () => {
-      item.classList.toggle('open');
-    });
-  });
+    <div class="hero-overlay"></div>
 
-  // Hero slider
-  let current = 0;
-  const slides = document.querySelectorAll('.hero-slide');
-  const dots = document.querySelectorAll('.dot');
-  function goToSlide(n) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = n;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-  dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => goToSlide(idx));
-  });
-  setInterval(() => {
-    goToSlide((current + 1) % slides.length);
-  }, 5000);
-</script>
+    <div class="hero-content container">
+      <h1>Department of Chemical Engineering</h1>
+      <p>Advancing science, engineering, and innovation for a sustainable future.</p>
+      <a href="academics.html" class="btn-primary">Explore Programs</a>
+    </div>
+
+  </section>
+
+  <!-- INTRO -->
+  <section class="section container">
+    <div class="section-subtitle">Welcome</div>
+    <h2 class="section-title">Excellence in Chemical Engineering Education</h2>
+    <div class="divider"></div>
+
+    <p class="section-text">
+      The Department of Chemical Engineering at BUET stands as a leading institution in engineering education and research in Bangladesh. 
+      With a strong foundation in science and engineering principles, the department fosters innovation, sustainability, and interdisciplinary collaboration.
+    </p>
+  </section>
+
+  <!-- QUICK LINKS -->
+  <section class="section container">
+    <div class="grid-3">
+
+      <a href="academics.html" class="card-link">
+        <div class="card-title">Academic Programs</div>
+        <div class="card-desc">Explore undergraduate and postgraduate programs.</div>
+      </a>
+
+      <a href="research.html" class="card-link">
+        <div class="card-title">Research</div>
+        <div class="card-desc">Discover research areas and laboratory facilities.</div>
+      </a>
+
+      <a href="people.html" class="card-link">
+        <div class="card-title">People</div>
+        <div class="card-desc">Meet faculty members and researchers.</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH HIGHLIGHTS -->
+  <section class="section container">
+    <div class="section-subtitle">Research</div>
+    <h2 class="section-title">Key Research Areas</h2>
+    <div class="divider"></div>
+
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-title">Energy & Environment</div>
+        <div class="card-desc">Sustainable energy systems, emissions control, and climate solutions.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Process Engineering</div>
+        <div class="card-desc">Advanced modeling, simulation, and optimization of chemical processes.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Biochemical Engineering</div>
+        <div class="card-desc">Bioprocessing, biofuels, and environmental biotechnology.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="section container">
+    <div class="section-subtitle">Updates</div>
+    <h2 class="section-title">News & Events</h2>
+    <div class="divider"></div>
+
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-title">Seminar on Sustainable Energy</div>
+        <div class="card-desc">A departmental seminar discussing future energy systems.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">New Research Grant Awarded</div>
+        <div class="card-desc">Faculty members receive international funding support.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Student Competition Success</div>
+        <div class="card-desc">CHE BUET students win national engineering challenge.</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div>
+      <h3>Contact</h3>
+      <p>Department of Chemical Engineering<br>BUET, Dhaka 1000</p>
+      <p>Email: info@che.buet.ac.bd</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="academics.html">Programs</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="resources.html">Resources</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Follow</h3>
+      <p>Stay connected with departmental activities.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Department of Chemical Engineering, BUET
+  </div>
+</footer>
+
 </body>
 </html>
