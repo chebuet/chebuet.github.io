@@ -1,187 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Department of Chemical Engineering — BUET</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Main Styles -->
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department of Chemical Engineering | BUET</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  <div class="container">
-    <span>Bangladesh University of Engineering and Technology</span>
-  </div>
-</div>
-
-<!-- HEADER -->
-<header class="header">
-  <div class="container nav-container">
-
-    <div class="logo">
-      <img src="images/logo-che.png" alt="CHE BUET">
-      <div>
-        <div class="logo-title">Chemical Engineering</div>
-        <div class="logo-sub">BUET</div>
-      </div>
-    </div>
-
-    <nav class="nav">
-      <a href="index.html" class="nav-link active">Home</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="people.html" class="nav-link">People</a>
-      <a href="academics.html" class="nav-link">Academics</a>
-      <a href="research.html" class="nav-link">Research</a>
-      <a href="news.html" class="nav-link">News & Events</a>
-      <a href="resources.html" class="nav-link">Resources</a>
-      <a href="brtc.html" class="nav-link">BRTC</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+    <nav>
+        <div class="logo-container">
+            <a href="index.html">ChE BUET</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about/index.html">About</a></li>
+            <li><a href="people/faculty.html">People</a></li>
+            <li><a href="academics/undergraduate.html">Academics</a></li>
+            <li><a href="research/index.html">Research</a></li>
+            <li><a href="contact/index.html">Contact</a></li>
+        </ul>
     </nav>
 
-  </div>
-</header>
+    <header class="hero">
+        <h1>Department of Chemical Engineering</h1>
+        <p>Bangladesh University of Engineering and Technology</p>
+    </header>
 
-<!-- MAIN CONTENT -->
-<main>
+    <main class="container">
+        <section>
+            <h2 class="section-title">Academic Programs</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Undergraduate</h3>
+                    <p>Our B.Sc. program provides a rigorous foundation in chemical process design and thermodynamics.</p>
+                    <a href="academics/undergraduate.html" class="btn">Learn More</a>
+                </div>
+                <div class="card">
+                    <h3>Postgraduate</h3>
+                    <p>Advance your career with our M.Sc. and Ph.D. programs focusing on cutting-edge research.</p>
+                    <a href="academics/postgraduate.html" class="btn">Learn More</a>
+                </div>
+                <div class="card">
+                    <h3>BRTC</h3>
+                    <p>Consultancy services and industrial testing for the national chemical sector.</p>
+                    <a href="brtc/index.html" class="btn">Services</a>
+                </div>
+            </div>
+        </section>
 
-  <!-- HERO -->
-  <section class="hero">
+        <section style="margin-top: 60px;">
+            <div class="grid">
+                <div class="news-section">
+                    <h2 class="serif">Latest News</h2>
+                    <hr>
+                    <article style="margin: 20px 0;">
+                        <small>October 24, 2023</small>
+                        <h4>International Conference on Chemical Engineering 2024</h4>
+                        <p>Call for papers is now open for the upcoming ICChE...</p>
+                    </article>
+                </div>
+                <div class="notice-section">
+                    <h2 class="serif">Notices</h2>
+                    <hr>
+                    <ul style="list-style: none; margin-top: 20px;">
+                        <li>📅 <a href="#">Term Final Examination Routine - Level 4</a></li>
+                        <li>📅 <a href="#">Scholarship Opportunities for Graduate Students</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <div class="hero-overlay"></div>
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>Contact Us</h3>
+                <p>Department of Chemical Engineering<br>
+                BUET, Dhaka-1000, Bangladesh</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <p><a href="#" style="color:white">BUET Home</a></p>
+                <p><a href="#" style="color:white">Library</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Department of Chemical Engineering, BUET. All Rights Reserved.
+        </div>
+    </footer>
 
-    <div class="hero-content container">
-      <h1>Department of Chemical Engineering</h1>
-      <p>Advancing science, engineering, and innovation for a sustainable future.</p>
-      <a href="academics.html" class="btn-primary">Explore Programs</a>
-    </div>
-
-  </section>
-
-  <!-- INTRO -->
-  <section class="section container">
-    <div class="section-subtitle">Welcome</div>
-    <h2 class="section-title">Excellence in Chemical Engineering Education</h2>
-    <div class="divider"></div>
-
-    <p class="section-text">
-      The Department of Chemical Engineering at BUET stands as a leading institution in engineering education and research in Bangladesh. 
-      With a strong foundation in science and engineering principles, the department fosters innovation, sustainability, and interdisciplinary collaboration.
-    </p>
-  </section>
-
-  <!-- QUICK LINKS -->
-  <section class="section container">
-    <div class="grid-3">
-
-      <a href="academics.html" class="card-link">
-        <div class="card-title">Academic Programs</div>
-        <div class="card-desc">Explore undergraduate and postgraduate programs.</div>
-      </a>
-
-      <a href="research.html" class="card-link">
-        <div class="card-title">Research</div>
-        <div class="card-desc">Discover research areas and laboratory facilities.</div>
-      </a>
-
-      <a href="people.html" class="card-link">
-        <div class="card-title">People</div>
-        <div class="card-desc">Meet faculty members and researchers.</div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- RESEARCH HIGHLIGHTS -->
-  <section class="section container">
-    <div class="section-subtitle">Research</div>
-    <h2 class="section-title">Key Research Areas</h2>
-    <div class="divider"></div>
-
-    <div class="grid-3">
-
-      <div class="card">
-        <div class="card-title">Energy & Environment</div>
-        <div class="card-desc">Sustainable energy systems, emissions control, and climate solutions.</div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Process Engineering</div>
-        <div class="card-desc">Advanced modeling, simulation, and optimization of chemical processes.</div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Biochemical Engineering</div>
-        <div class="card-desc">Bioprocessing, biofuels, and environmental biotechnology.</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- NEWS -->
-  <section class="section container">
-    <div class="section-subtitle">Updates</div>
-    <h2 class="section-title">News & Events</h2>
-    <div class="divider"></div>
-
-    <div class="grid-3">
-
-      <div class="card">
-        <div class="card-title">Seminar on Sustainable Energy</div>
-        <div class="card-desc">A departmental seminar discussing future energy systems.</div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">New Research Grant Awarded</div>
-        <div class="card-desc">Faculty members receive international funding support.</div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Student Competition Success</div>
-        <div class="card-desc">CHE BUET students win national engineering challenge.</div>
-      </div>
-
-    </div>
-  </section>
-
-</main>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container footer-grid">
-
-    <div>
-      <h3>Contact</h3>
-      <p>Department of Chemical Engineering<br>BUET, Dhaka 1000</p>
-      <p>Email: info@che.buet.ac.bd</p>
-    </div>
-
-    <div>
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="academics.html">Programs</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="resources.html">Resources</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h3>Follow</h3>
-      <p>Stay connected with departmental activities.</p>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    © 2026 Department of Chemical Engineering, BUET
-  </div>
-</footer>
-
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
