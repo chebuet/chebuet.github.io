@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us – Department of Chemical Engineering, BUET</title>
+<meta name="description" content="Learn about the Department of Chemical Engineering at BUET – our mission, history, community, and open positions.">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ COPY ALL STYLES FROM INDEX.HTML HERE ============ */
+  /* For brevity, I'm indicating this. In production, you'd link an external CSS file */
+  :root {
+    --buet-navy: #002147;
+    --buet-gold: #C9A94B;
+    --buet-gold-light: #E8D08A;
+    --accent-red: #C0392B;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --text-light: #888;
+    --bg-cream: #FAF8F4;
+    --bg-white: #ffffff;
+    --border: #E0D8CC;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-cream);
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+  .top-bar {
+    background: var(--buet-navy);
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 6px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .top-bar a { color: var(--buet-gold-light); margin-left: 18px; transition: color var(--transition); }
+  .top-bar a:hover { color: #fff; }
+  header {
+    background: var(--bg-white);
+    border-bottom: 3px solid var(--buet-gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,33,71,0.08);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 72px;
+  }
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .logo-dept {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--buet-navy);
+    letter-spacing: -0.01em;
+  }
+  .logo-univ {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--buet-gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+  .desktop-nav { display: flex; align-items: center; gap: 4px; }
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--buet-navy);
+    padding: 8px;
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--bg-white);
+    border-top: 1px solid var(--border);
+    padding: 16px 20px;
+    width: 100%;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .mobile-nav-item .dropdown {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding-left: 16px;
+    margin-top: 8px;
+    display: none;
+  }
+  .mobile-nav-item.open .dropdown { display: block; }
+  .mobile-dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .mobile-nav-cta {
+    background: var(--buet-navy);
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 12px;
+  }
+  .nav-item { position: relative; }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-dark);
+    border-radius: 4px;
+    transition: background var(--transition), color var(--transition);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .nav-link:hover, .nav-link.active { background: var(--bg-cream); color: var(--buet-navy); }
+  .nav-link .arrow { font-size: 9px; opacity: 0.5; }
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--buet-gold);
+    box-shadow: 0 8px 32px rgba(0,33,71,0.12);
+    min-width: 210px;
+    z-index: 200;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+  .nav-item:hover .dropdown { display: block; }
+  .dropdown a {
+    display: block;
+    padding: 10px 18px;
+    font-size: 13px;
+    color: var(--text-mid);
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition), color var(--transition);
+  }
+  .dropdown a:last-child { border-bottom: none; }
+  .dropdown a:hover { background: var(--bg-cream); color: var(--buet-navy); padding-left: 24px; }
+  .nav-cta {
+    background: var(--buet-navy);
+    color: #fff !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 8px;
+    transition: background var(--transition) !important;
+  }
+  .nav-cta:hover { background: var(--buet-gold) !important; color: var(--buet-navy) !important; }
+  .page-hero {
+    background: linear-gradient(135deg, var(--buet-navy) 0%, #003070 100%);
+    padding: 60px 40px;
+    text-align: center;
+    color: #fff;
+  }
+  .page-hero h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .page-hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+  .main-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+  .section-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--buet-navy);
+    margin-bottom: 24px;
+  }
+  .section-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--buet-gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .divider {
+    height: 2px;
+    background: var(--buet-gold);
+    width: 60px;
+    margin: 16px 0 32px;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+  .about-text p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+  }
+  .about-stats {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    padding: 28px;
+    border-radius: 8px;
+  }
+  .stat-big {
+    font-family: 'EB Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--buet-navy);
+  }
+  .history-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 24px;
+    padding: 20px;
+    background: var(--bg-white);
+    border-left: 4px solid var(--buet-gold);
+  }
+  .timeline-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--buet-gold);
+    min-width: 100px;
+  }
+  .positions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .position-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    padding: 24px;
+    border-radius: 8px;
+    transition: transform var(--transition);
+  }
+  .position-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,33,71,0.1); }
+  .position-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--buet-navy);
+    margin-bottom: 8px;
+  }
+  .position-deadline {
+    font-size: 12px;
+    color: var(--accent-red);
+    margin-bottom: 12px;
+  }
+  .btn-outline {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid var(--buet-gold);
+    color: var(--buet-navy);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 12px;
+    transition: all var(--transition);
+  }
+  .btn-outline:hover { background: var(--buet-gold); color: var(--buet-navy); }
+  footer {
+    background: var(--buet-navy);
+    color: rgba(255,255,255,0.75);
+    padding: 60px 40px 30px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+  .footer-logo {
+    font-family: 'EB Garamond', serif;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .footer-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--buet-gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .footer-address { font-size: 13px; line-height: 1.8; }
+  .footer-col-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--buet-gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 8px;
+    transition: color var(--transition);
+  }
+  .footer-col a:hover { color: var(--buet-gold-light); padding-left: 4px; }
+  .footer-social { display: flex; gap: 12px; margin-top: 24px; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .social-btn:hover { border-color: var(--buet-gold); color: var(--buet-gold); background: rgba(201,169,75,0.1); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 900px) {
+    .top-bar { display: none; }
+    .header-inner { padding: 0 20px; }
+    .desktop-nav { display: none; }
+    .menu-toggle { display: block; }
+    .about-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .main-content { padding: 40px 20px; }
+    .page-hero { padding: 40px 20px; }
+    .page-hero h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>Bangladesh University of Engineering & Technology — Dhaka 1000, Bangladesh</span>
+  <span>
+    <a href="#">MyBUET</a>
+    <a href="#">Library</a>
+    <a href="#">Webmail</a>
+    <a href="contact.html">Contact</a>
+  </span>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <span class="logo-dept">Chemical Engineering</span>
+      <span class="logo-univ">Bangladesh University of Engineering & Technology</span>
+    </a>
+    <nav class="desktop-nav">
+      <div class="nav-item"><a class="nav-link active" href="about.html">About <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#mission">Mission & Vision</a><a href="#history">History</a>
+          <a href="#community">Department Community</a><a href="#positions">Open Positions</a>
+          <a href="gallery.html">Photo Gallery</a>
+        </div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="people.html">People <span class="arrow">▾</span></a>
+        <div class="dropdown"><a href="people.html#faculty">Faculty</a><a href="people.html#grad">Graduate Students</a><a href="people.html#staff">Staff</a><a href="alumni.html">Alumni</a></div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="academics.html">Academics <span class="arrow">▾</span></a>
+        <div class="dropdown"><a href="academics.html#ug">Undergraduate</a><a href="academics.html#ms">M.Sc.</a><a href="academics.html#phd">Ph.D.</a><a href="academics.html#schedule">Course Schedule</a><a href="academics.html#admission">Admission</a></div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="research.html">Research <span class="arrow">▾</span></a>
+        <div class="dropdown"><a href="research.html#process">Process Engineering</a><a href="research.html#environmental">Environmental</a><a href="research.html#energy">Energy & Fuels</a><a href="research.html#bioprocess">Bioprocess</a><a href="research.html#materials">Materials & Nano</a><a href="research.html#computational">Computational</a></div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="news.html">News & Events <span class="arrow">▾</span></a>
+        <div class="dropdown"><a href="news.html#latest">Latest News</a><a href="news.html#upcoming">Upcoming Events</a><a href="news.html#seminar">Seminars</a><a href="news.html#notices">Notices</a></div>
+      </div>
+      <div class="nav-item"><a class="nav-link" href="resources.html">Resources <span class="arrow">▾</span></a>
+        <div class="dropdown"><a href="resources.html#students">Student Resources</a><a href="resources.html#labs">Lab Facilities</a><a href="resources.html#computing">Computing</a><a href="resources.html#career">Career</a></div>
+      </div>
+      <a class="nav-link nav-cta" href="apply.html">Apply Now</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-item"><div class="mobile-dropdown-toggle">About ▾</div><div class="dropdown"><a href="#mission">Mission & Vision</a><a href="#history">History</a><a href="#community">Community</a><a href="#positions">Open Positions</a></div></div>
+    <div class="mobile-nav-item"><div class="mobile-dropdown-toggle">People ▾</div><div class="dropdown"><a href="people.html#faculty">Faculty</a><a href="people.html#grad">Graduate Students</a><a href="people.html#staff">Staff</a><a href="alumni.html">Alumni</a></div></div>
+    <div class="mobile-nav-item"><div class="mobile-dropdown-toggle">Academics ▾</div><div class="dropdown"><a href="academics.html#ug">Undergraduate</a><a href="academics.html#ms">M.Sc.</a><a href="academics.html#phd">Ph.D.</a></div></div>
+    <div class="mobile-nav-item"><div class="mobile-dropdown-toggle">Research ▾</div><div class="dropdown"><a href="research.html#process">Process</a><a href="research.html#environmental">Environmental</a><a href="research.html#energy">Energy</a><a href="research.html#bioprocess">Bioprocess</a></div></div>
+    <div class="mobile-nav-item"><div class="mobile-dropdown-toggle">News & Events ▾</div><div class="dropdown"><a href="news.html#latest">Latest News</a><a href="news.html#upcoming">Events</a></div></div>
+    <div class="mobile-nav-item"><div class="mobile-dropdown-toggle">Resources ▾</div><div class="dropdown"><a href="resources.html#students">Student Resources</a><a href="resources.html#labs">Lab Facilities</a></div></div>
+    <a href="apply.html" class="mobile-nav-cta">Apply Now</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>About the Department</h1>
+  <p>Excellence in chemical engineering education, research, and innovation since 1972</p>
+</section>
+
+<main class="main-content">
+  <div class="about-grid" id="mission">
+    <div class="about-text">
+      <div class="section-subtitle">Who We Are</div>
+      <h2 class="section-title">Mission & Vision</h2>
+      <div class="divider"></div>
+      <p><strong>Mission:</strong> To produce world-class chemical engineers who can address national and global challenges in energy, environment, materials, and process industries through innovative research and ethical practice.</p>
+      <p><strong>Vision:</strong> To become a leading center of excellence in chemical engineering education and research in South Asia, recognized globally for impactful contributions to sustainable development.</p>
+      <p>The Department of Chemical Engineering at BUET was established in 1972. Since then, we have produced over 3,000 graduates who now serve as leaders in academia, industry, government, and entrepreneurship across Bangladesh and around the world.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-big">50+</div>
+      <div style="margin-bottom: 20px;">Years of Excellence</div>
+      <div class="stat-big">3,000+</div>
+      <div style="margin-bottom: 20px;">Alumni Worldwide</div>
+      <div class="stat-big">15+</div>
+      <div>Active Research Labs</div>
+    </div>
+  </div>
+
+  <div id="history">
+    <div class="section-subtitle">Our Journey</div>
+    <h2 class="section-title">History</h2>
+    <div class="divider"></div>
+    <div class="history-timeline">
+      <div class="timeline-item"><div class="timeline-year">1972</div><div><strong>Department Founded</strong> — Chemical Engineering established as a separate department at BUET, initially offering only undergraduate programs.</div></div>
+      <div class="timeline-item"><div class="timeline-year">1985</div><div><strong>First M.Sc. Program</strong> — Graduate program launched to meet growing demand for advanced education in chemical engineering.</div></div>
+      <div class="timeline-item"><div class="timeline-year">2002</div><div><strong>Ph.D. Program Introduced</strong> — Doctoral program established, enabling cutting-edge research in catalysis, environment, and energy.</div></div>
+      <div class="timeline-item"><div class="timeline-year">2018</div><div><strong>New Research Building</strong> — State-of-the-art research facilities inaugurated, including advanced characterization labs.</div></div>
+      <div class="timeline-item"><div class="timeline-year">2025</div><div><strong>Global Recognition</strong> — BUET ChemE ranked among top 300 chemical engineering departments worldwide by QS.</div></div>
+    </div>
+  </div>
+
+  <div id="community">
+    <div class="section-subtitle">Our People</div>
+    <h2 class="section-title">Department Community</h2>
+    <div class="divider"></div>
+    <div class="about-text">
+      <p>Our department is a vibrant community of <strong>28 full-time faculty members</strong>, over <strong>600 undergraduate and graduate students</strong>, and <strong>20+ administrative and technical staff</strong>. We pride ourselves on fostering an inclusive environment that encourages collaboration across disciplines.</p>
+      <p>Faculty members hold doctoral degrees from leading universities around the world, including MIT, Imperial College, University of Cambridge, University of Tokyo, and many others. Our students regularly win national and international awards for their research and innovation.</p>
+      <p><a href="people.html" class="btn-outline" style="margin-top: 16px;">Meet Our Faculty →</a></p>
+    </div>
+  </div>
+
+  <div id="positions">
+    <div class="section-subtitle">Join Our Team</div>
+    <h2 class="section-title">Open Positions</h2>
+    <div class="divider"></div>
+    <div class="positions-grid">
+      <div class="position-card">
+        <div class="position-title">Assistant Professor (Tenure Track)</div>
+        <div class="position-deadline">Application Deadline: May 30, 2026</div>
+        <p>Specialization in Process Systems Engineering or Computational Fluid Dynamics. Ph.D. required.</p>
+        <a href="#" class="btn-outline">View Details →</a>
+      </div>
+      <div class="position-card">
+        <div class="position-title">Postdoctoral Fellow – Environmental Engineering</div>
+        <div class="position-deadline">Application Deadline: June 15, 2026</div>
+        <p>Research on advanced water treatment technologies. 2-year position.</p>
+        <a href="#" class="btn-outline">View Details →</a>
+      </div>
+      <div class="position-card">
+        <div class="position-title">Lab Technician (Analytical Instruments)</div>
+        <div class="position-deadline">Application Deadline: May 10, 2026</div>
+        <p>Experience with GC-MS, HPLC, and spectroscopy required.</p>
+        <a href="#" class="btn-outline">View Details →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="footer-logo">Chemical Engineering</div><div class="footer-sub">Bangladesh University of Engineering & Technology</div><div class="footer-address">Polashi, Dhaka 1000, Bangladesh<br><br><strong>Phone:</strong> +880-2-9665650<br><strong>Email:</strong> head_cheme@buet.ac.bd</div><div class="footer-social"><div class="social-btn">f</div><div class="social-btn">▶</div><div class="social-btn">in</div></div></div>
+    <div class="footer-col"><div class="footer-col-title">Academics</div><a href="academics.html#ug">Undergraduate</a><a href="academics.html#ms">M.Sc. Program</a><a href="academics.html#phd">Ph.D. Program</a><a href="academics.html#schedule">Course Schedule</a></div>
+    <div class="footer-col"><div class="footer-col-title">Research</div><a href="research.html">Research Groups</a><a href="#">Publications</a><a href="#">Projects & Grants</a><a href="resources.html#labs">Lab Facilities</a></div>
+    <div class="footer-col"><div class="footer-col-title">Quick Access</div><a href="#">BUET Main Website</a><a href="#">BUET Library</a><a href="#">Student Portal</a><a href="contact.html">Contact</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Department of Chemical Engineering, BUET. All rights reserved.</span><span><a href="#">Privacy Policy</a><a href="#">Site Map</a></span></div>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  menuToggle.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  document.querySelectorAll('.mobile-nav-item').forEach(item => {
+    const toggle = item.querySelector('.mobile-dropdown-toggle');
+    toggle?.addEventListener('click', () => item.classList.toggle('open'));
+  });
+</script>
+</body>
+</html>
