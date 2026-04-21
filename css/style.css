@@ -916,3 +916,115 @@
     padding: 40px 0;
   }
 }
+
+/* =========================================
+   PAGE HERO
+========================================= */
+
+.page-hero {
+  background: var(--bg-light);
+  padding: 60px 0 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-hero h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: 40px;
+  color: var(--buet-navy);
+}
+
+.page-hero p {
+  color: var(--text-light);
+  margin-top: 8px;
+}
+
+/* =========================================
+   PEOPLE GRID
+========================================= */
+
+.people-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.faculty-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.student-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.staff-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* =========================================
+   PERSON CARD
+========================================= */
+
+.person-card {
+  border: 1px solid var(--border);
+  background: #fff;
+  transition: var(--transition);
+}
+
+.person-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* FACULTY STYLE */
+.person-card.faculty .person-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.person-info {
+  padding: 16px;
+}
+
+.person-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  color: var(--buet-navy);
+}
+
+.person-title {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin: 4px 0;
+}
+
+.person-area {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.person-email {
+  font-size: 12px;
+  margin-top: 6px;
+  color: var(--buet-navy);
+}
+
+/* STUDENTS SIMPLER */
+.person-card.student {
+  padding: 10px;
+}
+
+.person-card.staff {
+  padding: 10px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .faculty-grid,
+  .student-grid,
+  .staff-grid {
+    grid-template-columns: 1fr;
+  }
+}
