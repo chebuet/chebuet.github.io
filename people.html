@@ -1,94 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>People – Faculty & Staff – Chemical Engineering, BUET</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  /* Copy all styles from about.html (same header/footer styles) */
-  /* For production, extract to common CSS file */
-  :root { --buet-navy: #002147; --buet-gold: #C9A94B; --buet-gold-light: #E8D08A; --accent-red: #C0392B; --text-dark: #1a1a1a; --text-mid: #444; --text-light: #888; --bg-cream: #FAF8F4; --bg-white: #ffffff; --border: #E0D8CC; --transition: 0.3s cubic-bezier(0.4,0,0.2,1); }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--bg-cream); }
-  a { text-decoration: none; color: inherit; }
-  /* ... (include all header, footer, nav styles from about.html) ... */
-  /* For brevity in this response, I'll show only the unique page content structure */
-</style>
-</head>
-<body>
-<!-- Same header as about.html, with active class on People link -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>People — Chemical Engineering, BUET</title>
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<!-- HEADER (same as index) -->
+<header class="header">
+  <div class="container nav-container">
+
+    <div class="logo">
+      <img src="images/logo-che.png">
+      <div>
+        <div class="logo-title">Chemical Engineering</div>
+        <div class="logo-sub">BUET</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="people.html" class="nav-link active">People</a>
+      <a href="academics.html" class="nav-link">Academics</a>
+      <a href="research.html" class="nav-link">Research</a>
+      <a href="news.html" class="nav-link">News & Events</a>
+      <a href="resources.html" class="nav-link">Resources</a>
+      <a href="brtc.html" class="nav-link">BRTC</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+<!-- PAGE HERO -->
 <section class="page-hero">
-  <h1>People</h1>
-  <p>Meet the faculty, staff, and researchers driving innovation at ChemE BUET</p>
+  <div class="container">
+    <h1>People</h1>
+    <p>Faculty, researchers, and students of the department.</p>
+  </div>
 </section>
 
-<main class="main-content">
-  <div id="faculty">
-    <div class="section-subtitle">Our Educators & Researchers</div>
-    <h2 class="section-title">Faculty Members</h2>
-    <div class="divider"></div>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
-      <!-- Faculty Card 1 -->
-      <div style="background: var(--bg-white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
-        <div style="background: var(--buet-navy); height: 180px; display: flex; align-items: center; justify-content: center; color: var(--buet-gold); font-size: 64px;">👨‍🏫</div>
-        <div style="padding: 20px;">
-          <h3 style="font-family: 'EB Garamond'; font-size: 20px; color: var(--buet-navy);">Prof. Dr. Md. Shahinoor Islam</h3>
-          <div style="color: var(--buet-gold); font-size: 13px; margin-bottom: 8px;">Head of the Department</div>
-          <div style="font-size: 13px; color: var(--text-mid); margin-bottom: 8px;">Ph.D. (University of Cambridge) | Process Engineering, Catalysis</div>
-          <div style="font-size: 12px; color: var(--text-light);">shahinoor@che.buet.ac.bd</div>
-        </div>
-      </div>
-      
-      <div style="background: var(--bg-white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
-        <div style="background: var(--buet-navy); height: 180px; display: flex; align-items: center; justify-content: center; color: var(--buet-gold); font-size: 64px;">👩‍🔬</div>
-        <div style="padding: 20px;">
-          <h3 style="font-family: 'EB Garamond'; font-size: 20px; color: var(--buet-navy);">Prof. Dr. Rawshan Ara Begum</h3>
-          <div style="color: var(--buet-gold); font-size: 13px; margin-bottom: 8px;">Professor</div>
-          <div style="font-size: 13px; color: var(--text-mid); margin-bottom: 8px;">Ph.D. (Imperial College London) | Environmental Engineering, Water Treatment</div>
-          <div style="font-size: 12px; color: var(--text-light);">rawshan@che.buet.ac.bd</div>
-        </div>
-      </div>
-      
-      <div style="background: var(--bg-white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
-        <div style="background: var(--buet-navy); height: 180px; display: flex; align-items: center; justify-content: center; color: var(--buet-gold); font-size: 64px;">👨‍🔬</div>
-        <div style="padding: 20px;">
-          <h3 style="font-family: 'EB Garamond'; font-size: 20px; color: var(--buet-navy);">Prof. Dr. Rafiqul Islam</h3>
-          <div style="color: var(--buet-gold); font-size: 13px; margin-bottom: 8px;">Professor</div>
-          <div style="font-size: 13px; color: var(--text-mid); margin-bottom: 8px;">Ph.D. (MIT) | Catalysis, Renewable Energy, Biodiesel</div>
-          <div style="font-size: 12px; color: var(--text-light);">rafiqul@che.buet.ac.bd</div>
-        </div>
-      </div>
-      
-      <div style="background: var(--bg-white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
-        <div style="background: var(--buet-navy); height: 180px; display: flex; align-items: center; justify-content: center; color: var(--buet-gold); font-size: 64px;">👩‍🏫</div>
-        <div style="padding: 20px;">
-          <h3 style="font-family: 'EB Garamond'; font-size: 20px; color: var(--buet-navy);">Dr. Farhana Khanam</h3>
-          <div style="color: var(--buet-gold); font-size: 13px; margin-bottom: 8px;">Associate Professor</div>
-          <div style="font-size: 13px; color: var(--text-mid); margin-bottom: 8px;">Ph.D. (University of Tokyo) | Materials Science, Nanotechnology</div>
-          <div style="font-size: 12px; color: var(--text-light);">farhana@che.buet.ac.bd</div>
-        </div>
-      </div>
-      
-      <!-- Add 24+ more faculty similarly -->
-    </div>
-  </div>
+<!-- FACULTY -->
+<section class="section container">
+  <div class="section-subtitle">Academic Staff</div>
+  <h2 class="section-title">Faculty Members</h2>
+  <div class="divider"></div>
 
-  <div id="staff" style="margin-top: 60px;">
-    <div class="section-subtitle">Support Team</div>
-    <h2 class="section-title">Administrative & Technical Staff</h2>
-    <div class="divider"></div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
-      <div style="background: var(--bg-white); padding: 20px; border: 1px solid var(--border);"><strong>Md. Abdur Rahman</strong><br>Office Superintendent<br>abdur@che.buet.ac.bd</div>
-      <div style="background: var(--bg-white); padding: 20px; border: 1px solid var(--border);"><strong>Shamima Akter</strong><br>Accounts Officer<br>shamima@che.buet.ac.bd</div>
-      <div style="background: var(--bg-white); padding: 20px; border: 1px solid var(--border);"><strong>Md. Jahangir Alam</strong><br>Lab Manager (Process Lab)<br>jahangir@che.buet.ac.bd</div>
+  <div class="people-grid faculty-grid">
+
+    <!-- PERSON -->
+    <div class="person-card faculty">
+      <img src="images/faculty1.jpg" class="person-img">
+      <div class="person-info">
+        <div class="person-name">Dr. A. Rahman</div>
+        <div class="person-title">Professor</div>
+        <div class="person-area">Energy Systems, Process Modeling</div>
+        <div class="person-email">arahman@che.buet.ac.bd</div>
+      </div>
     </div>
+
+    <div class="person-card faculty">
+      <img src="images/faculty2.jpg" class="person-img">
+      <div class="person-info">
+        <div class="person-name">Dr. S. Ahmed</div>
+        <div class="person-title">Associate Professor</div>
+        <div class="person-area">Reaction Engineering, Catalysis</div>
+        <div class="person-email">sahmed@che.buet.ac.bd</div>
+      </div>
+    </div>
+
   </div>
+</section>
+
+<!-- POSTGRADUATE -->
+<section class="section container">
+  <div class="section-subtitle">Research Community</div>
+  <h2 class="section-title">Postgraduate Students</h2>
+  <div class="divider"></div>
+
+  <div class="people-grid student-grid">
+
+    <div class="person-card student">
+      <div class="person-info">
+        <div class="person-name">Abrar H.</div>
+        <div class="person-title">MSc Student</div>
+        <div class="person-area">Hydrothermal Liquefaction</div>
+      </div>
+    </div>
+
+    <div class="person-card student">
+      <div class="person-info">
+        <div class="person-name">N. Islam</div>
+        <div class="person-title">PhD Student</div>
+        <div class="person-area">Carbon Capture</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STAFF -->
+<section class="section container">
+  <div class="section-subtitle">Administration</div>
+  <h2 class="section-title">Staff</h2>
+  <div class="divider"></div>
+
+  <div class="people-grid staff-grid">
+
+    <div class="person-card staff">
+      <div class="person-info">
+        <div class="person-name">M. Karim</div>
+        <div class="person-title">Office Assistant</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 </main>
 
-<footer>...</footer>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>Contact</h3>
+      <p>Department of Chemical Engineering<br>BUET</p>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
