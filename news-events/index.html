@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News &amp; Events — Department of Chemical Engineering, BUET</title>
+  <meta name="description" content="Latest news, research highlights, and upcoming events from the Department of Chemical Engineering, BUET." />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span>Bangladesh University of Engineering and Technology (BUET)</span>
+      <nav class="topbar__links" aria-label="Quick links">
+        <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main</a>
+        <a href="../notices/index.html">Notices</a>
+        <a href="../contact/index.html">Contact</a>
+        <a href="../brtc/index.html">BRTC</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="navbar" role="banner">
+    <div class="container navbar__inner">
+
+      <a class="navbar__logo" href="../index.html" aria-label="Home — ChE BUET">
+        <div class="navbar__logo-icon" aria-hidden="true">ChE</div>
+        <div class="navbar__logo-text">
+          <span class="navbar__logo-dept">Chemical Engineering</span>
+          <span class="navbar__logo-univ">Bangladesh University of Engineering &amp; Technology</span>
+        </div>
+      </a>
+
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+
+        <div class="nav-item">
+          <a class="nav-link" href="../index.html">Home</a>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="../about/index.html" data-dropdown="about">
+            About <span class="chevron">▾</span>
+          </a>
+          <div class="dropdown">
+            <a class="dropdown__item" href="../about/index.html">About the Department</a>
+            <a class="dropdown__item" href="../about/mission-vision.html">Mission &amp; Vision</a>
+            <a class="dropdown__item" href="../about/history.html">History</a>
+            <a class="dropdown__item" href="../about/gallery.html">Gallery</a>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="../people/index.html" data-dropdown="people">
+            People <span class="chevron">▾</span>
+          </a>
+          <div class="dropdown">
+            <a class="dropdown__item" href="../people/faculty.html">Faculty</a>
+            <a class="dropdown__item" href="../people/faculty-on-leave.html">Faculty on Leave</a>
+            <a class="dropdown__item" href="../people/former-faculty.html">Former Faculty</a>
+            <a class="dropdown__item" href="../people/staff.html">Staff</a>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="../academics/index.html" data-dropdown="academics">
+            Academics <span class="chevron">▾</span>
+          </a>
+          <div class="dropdown">
+            <a class="dropdown__item" href="../academics/undergraduate.html">Undergraduate</a>
+            <a class="dropdown__item" href="../academics/postgraduate.html">Postgraduate</a>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="../research/index.html">Research</a>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link active" href="index.html">News &amp; Events</a>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="../notices/index.html">Notices</a>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="../brtc/index.html">BRTC</a>
+        </div>
+
+        <div class="nav-item">
+          <a class="nav-link" href="../contact/index.html">Contact</a>
+        </div>
+
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- PAGE BANNER -->
+    <div class="page-banner">
+      <div class="container">
+        <nav class="page-banner__breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a>
+          <span>›</span>
+          <span>News &amp; Events</span>
+        </nav>
+        <h1 class="page-banner__title">News &amp; Events</h1>
+        <p class="page-banner__subtitle">Research highlights, departmental news, and upcoming events</p>
+      </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <section class="section" aria-label="News filter and listing">
+      <div class="container">
+
+        <div class="tabs" role="tablist" aria-label="Filter news by category">
+          <button class="tab-btn active" role="tab" data-tab-group="news" data-tab="tab-all" aria-selected="true">All</button>
+          <button class="tab-btn" role="tab" data-tab-group="news" data-tab="tab-research" aria-selected="false">Research</button>
+          <button class="tab-btn" role="tab" data-tab-group="news" data-tab="tab-events" aria-selected="false">Events</button>
+          <button class="tab-btn" role="tab" data-tab-group="news" data-tab="tab-announcements" aria-selected="false">Announcements</button>
+        </div>
+
+        <!-- ALL TAB -->
+        <div class="tab-panel active" id="tab-all" data-tab-group="news" role="tabpanel">
+          <div class="news-grid">
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#d8d4cc;">
+                <img src="../assets/images/news-placeholder-1.jpg" alt="Biodiesel research"
+                     onerror="this.parentElement.style.background='#d8d4cc';this.style.display='none'" />
+              </div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--gold">Research</span>
+                  <span class="news-card__date">June 15, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">ChE Researchers Publish Breakthrough in Biodiesel Production from Local Feedstock</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  A research team led by Dr. Md. Rahman has developed a novel catalytic process
+                  that increases biodiesel yield by 34% using locally available Jatropha feedstock.
+                  The findings have been published in <em>Fuel Processing Technology</em>.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#ccc8c0;">
+                <img src="../assets/images/news-placeholder-2.jpg" alt="Annual symposium"
+                     onerror="this.parentElement.style.background='#ccc8c0';this.style.display='none'" />
+              </div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag">Event</span>
+                  <span class="news-card__date">May 28, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Annual Chemical Engineering Symposium 2025 Successfully Concluded</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  The two-day symposium brought together over 200 students, researchers, and
+                  industry professionals for paper presentations, poster sessions, and panel discussions
+                  on sustainable chemical processes.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#c4c0b8;">
+                <img src="../assets/images/news-placeholder-3.jpg" alt="HPC cluster"
+                     onerror="this.parentElement.style.background='#c4c0b8';this.style.display='none'" />
+              </div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--navy">Announcement</span>
+                  <span class="news-card__date">April 10, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Department Receives New High-Performance Computing Cluster for Simulation Research</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  Funded by the University Grants Commission, the new HPC cluster will support
+                  computational fluid dynamics and molecular simulation research across multiple ongoing projects.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#d4d0c8;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--gold">Research</span>
+                  <span class="news-card__date">March 22, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Faculty Members Present at International AIChE Annual Meeting in New Orleans</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  Three faculty members presented peer-reviewed research papers at the AIChE Annual Meeting,
+                  showcasing BUET ChE's growing presence in international chemical engineering research.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#c8c4bc;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag">Event</span>
+                  <span class="news-card__date">March 5, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Industry Lecture Series: Chevron Bangladesh Ltd. Hosts Session on LNG Process Safety</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  Senior engineers from Chevron Bangladesh delivered a seminar on LNG plant safety
+                  and process hazard analysis, attended by undergraduate and postgraduate students.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#bcb8b0;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--navy">Announcement</span>
+                  <span class="news-card__date">February 18, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">ChE Alumni Association Establishes New Scholarship Fund for Meritorious Students</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  The BUET ChE Alumni Association has launched a BDT 20 lakh scholarship fund to
+                  support financially deserving students with outstanding academic performance.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- RESEARCH TAB -->
+        <div class="tab-panel" id="tab-research" data-tab-group="news" role="tabpanel">
+          <div class="news-grid">
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#d8d4cc;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--gold">Research</span>
+                  <span class="news-card__date">June 15, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">ChE Researchers Publish Breakthrough in Biodiesel Production from Local Feedstock</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  A research team led by Dr. Md. Rahman has developed a novel catalytic process
+                  that increases biodiesel yield by 34% using locally available Jatropha feedstock.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#d4d0c8;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--gold">Research</span>
+                  <span class="news-card__date">March 22, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Faculty Members Present at International AIChE Annual Meeting in New Orleans</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  Three faculty members presented peer-reviewed research papers at the AIChE Annual Meeting,
+                  showcasing BUET ChE's growing presence in international chemical engineering research.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- EVENTS TAB -->
+        <div class="tab-panel" id="tab-events" data-tab-group="news" role="tabpanel">
+          <div class="news-grid">
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#ccc8c0;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag">Event</span>
+                  <span class="news-card__date">May 28, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Annual Chemical Engineering Symposium 2025 Successfully Concluded</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  The two-day symposium brought together over 200 students, researchers, and
+                  industry professionals for paper presentations and panel discussions.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#c8c4bc;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag">Event</span>
+                  <span class="news-card__date">March 5, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Industry Lecture Series: Chevron Bangladesh Ltd. Hosts Session on LNG Process Safety</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  Senior engineers from Chevron Bangladesh delivered a seminar on LNG plant safety
+                  and process hazard analysis, attended by undergraduate and postgraduate students.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- UPCOMING EVENTS -->
+          <div style="margin-top: var(--sp-16);">
+            <div class="section-heading">
+              <p class="section-heading__label">Calendar</p>
+              <h2 class="section-heading__title">Upcoming Events</h2>
+              <hr class="section-heading__line" />
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:var(--sp-4);">
+
+              <div style="display:flex; gap:var(--sp-6); align-items:flex-start; padding:var(--sp-6); border:1px solid var(--gray-200); border-left:4px solid var(--gold); background:var(--white);">
+                <div style="flex-shrink:0; text-align:center; background:var(--navy); color:var(--white); border-radius:3px; padding:var(--sp-2) var(--sp-4); min-width:64px;">
+                  <div style="font-family:var(--font-serif); font-size:1.6rem; font-weight:600; line-height:1;">14</div>
+                  <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:0.8;">Jul</div>
+                </div>
+                <div>
+                  <h3 style="font-family:var(--font-serif); font-size:1rem; font-weight:600; color:var(--navy); margin-bottom:var(--sp-1);">Graduate Research Colloquium — Summer 2025</h3>
+                  <p style="font-size:0.82rem; color:var(--gray-600); margin-bottom:var(--sp-2);">Postgraduate students present their ongoing thesis and dissertation research. Open to all department members.</p>
+                  <span style="font-size:0.78rem; color:var(--gold-dark); font-weight:600;">📍 Seminar Hall, ChE Building &nbsp;·&nbsp; 10:00 AM – 4:00 PM</span>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:var(--sp-6); align-items:flex-start; padding:var(--sp-6); border:1px solid var(--gray-200); border-left:4px solid var(--navy); background:var(--white);">
+                <div style="flex-shrink:0; text-align:center; background:var(--navy); color:var(--white); border-radius:3px; padding:var(--sp-2) var(--sp-4); min-width:64px;">
+                  <div style="font-family:var(--font-serif); font-size:1.6rem; font-weight:600; line-height:1;">28</div>
+                  <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:0.8;">Jul</div>
+                </div>
+                <div>
+                  <h3 style="font-family:var(--font-serif); font-size:1rem; font-weight:600; color:var(--navy); margin-bottom:var(--sp-1);">Industry–Academia Roundtable: Future of Petrochemical Sector in Bangladesh</h3>
+                  <p style="font-size:0.82rem; color:var(--gray-600); margin-bottom:var(--sp-2);">A collaborative discussion between industry leaders and academic faculty on emerging challenges and opportunities.</p>
+                  <span style="font-size:0.78rem; color:var(--gold-dark); font-weight:600;">📍 Faculty Lounge, 2nd Floor &nbsp;·&nbsp; 2:00 PM – 5:00 PM</span>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:var(--sp-6); align-items:flex-start; padding:var(--sp-6); border:1px solid var(--gray-200); border-left:4px solid var(--navy); background:var(--white);">
+                <div style="flex-shrink:0; text-align:center; background:var(--navy); color:var(--white); border-radius:3px; padding:var(--sp-2) var(--sp-4); min-width:64px;">
+                  <div style="font-family:var(--font-serif); font-size:1.6rem; font-weight:600; line-height:1;">15</div>
+                  <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; opacity:0.8;">Aug</div>
+                </div>
+                <div>
+                  <h3 style="font-family:var(--font-serif); font-size:1rem; font-weight:600; color:var(--navy); margin-bottom:var(--sp-1);">Orientation Programme for New Undergraduate Students — Batch 2025</h3>
+                  <p style="font-size:0.82rem; color:var(--gray-600); margin-bottom:var(--sp-2);">Welcome session for newly admitted B.Sc. ChE students. Includes lab tour, programme overview, and introduction to faculty.</p>
+                  <span style="font-size:0.78rem; color:var(--gold-dark); font-weight:600;">📍 Main Lecture Theatre, ChE Building &nbsp;·&nbsp; 9:00 AM</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ANNOUNCEMENTS TAB -->
+        <div class="tab-panel" id="tab-announcements" data-tab-group="news" role="tabpanel">
+          <div class="news-grid">
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#c4c0b8;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--navy">Announcement</span>
+                  <span class="news-card__date">April 10, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">Department Receives New High-Performance Computing Cluster</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  Funded by the University Grants Commission, the new HPC cluster will support
+                  computational fluid dynamics and molecular simulation research.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+            <article class="card news-card">
+              <div class="news-card__img" style="background:#bcb8b0;"></div>
+              <div class="news-card__body">
+                <div class="news-card__meta">
+                  <span class="tag tag--navy">Announcement</span>
+                  <span class="news-card__date">February 18, 2025</span>
+                </div>
+                <h2 class="news-card__title">
+                  <a href="#">ChE Alumni Association Establishes New Scholarship Fund</a>
+                </h2>
+                <p class="news-card__excerpt">
+                  The BUET ChE Alumni Association has launched a BDT 20 lakh scholarship fund to
+                  support financially deserving students with outstanding academic performance.
+                </p>
+                <a class="news-card__readmore" href="#">Read more →</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer-col">
+        <div class="footer-col__logo">
+          <div class="footer-col__logo-icon">ChE</div>
+          <div class="footer-col__logo-text">Chemical Engineering<br><small style="font-weight:400;font-size:0.75rem;opacity:0.7;">BUET</small></div>
+        </div>
+        <p class="footer-col__desc">
+          The Department of Chemical Engineering at BUET has been shaping chemical engineers
+          since 1961, producing graduates who lead industry and academia nationally and internationally.
+        </p>
+        <div class="footer-col__social" aria-label="Social media links">
+          <a class="social-link" href="#" aria-label="Facebook">f</a>
+          <a class="social-link" href="#" aria-label="LinkedIn" style="font-family:serif;">in</a>
+          <a class="social-link" href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col__title">About</h3>
+        <nav aria-label="About links">
+          <a class="footer-nav__item" href="../about/index.html">About Department</a>
+          <a class="footer-nav__item" href="../about/mission-vision.html">Mission &amp; Vision</a>
+          <a class="footer-nav__item" href="../about/history.html">History</a>
+          <a class="footer-nav__item" href="../about/gallery.html">Gallery</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col__title">Academics</h3>
+        <nav aria-label="Academics links">
+          <a class="footer-nav__item" href="../academics/undergraduate.html">Undergraduate</a>
+          <a class="footer-nav__item" href="../academics/postgraduate.html">Postgraduate</a>
+          <a class="footer-nav__item" href="../research/index.html">Research</a>
+          <a class="footer-nav__item" href="../people/faculty.html">Faculty</a>
+          <a class="footer-nav__item" href="../people/staff.html">Staff</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col__title">Contact</h3>
+        <address style="font-style:normal;font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.8;">
+          Department of Chemical Engineering<br>
+          BUET, Dhaka – 1000, Bangladesh<br>
+          <a href="tel:+8809666793777" style="color:rgba(255,255,255,0.6);">+880-9666-793777</a><br>
+          <a href="mailto:head@che.buet.ac.bd" style="color:var(--gold);">head@che.buet.ac.bd</a>
+        </address>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>&copy; 2025 Department of Chemical Engineering, BUET. All rights reserved.</span>
+      <span>
+        <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a>
+        &nbsp;·&nbsp;
+        <a href="../contact/index.html">Webmaster</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
