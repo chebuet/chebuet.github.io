@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRTC — Department of Chemical Engineering, BUET</title>
+  <meta name="description" content="Bureau of Research, Testing and Consultation (BRTC) — Chemical Engineering Department, BUET. Testing services, consultancy, and contact information." />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+  <style>
+    /* ── Page Banner ── */
+    .page-banner {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #0a3060 100%);
+      color: var(--white);
+      padding: var(--sp-16) 0 var(--sp-12);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 360px; height: 360px;
+      border: 70px solid rgba(201,169,75,0.07);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .page-banner__inner { position: relative; z-index: 1; }
+    .page-banner__breadcrumb {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: var(--sp-3);
+      letter-spacing: 0.05em;
+    }
+    .page-banner__breadcrumb a { color: var(--gold); }
+    .page-banner__breadcrumb a:hover { color: var(--gold-light); }
+    .page-banner__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: var(--sp-3);
+    }
+    .page-banner__title span { color: var(--gold); }
+    .page-banner__subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* ── Contact Cards ── */
+    .contact-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+      margin-bottom: var(--sp-12);
+    }
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-top: 4px solid var(--gold);
+      border-radius: 4px;
+      padding: var(--sp-8);
+      transition: box-shadow var(--ease), transform var(--ease);
+    }
+    .contact-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .contact-card__icon {
+      width: 48px; height: 48px;
+      background: rgba(201,169,75,0.12);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: var(--sp-4);
+    }
+    .contact-card__title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: var(--sp-1);
+    }
+    .contact-card__subtitle {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: var(--sp-4);
+    }
+    .contact-card__info {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      line-height: 2;
+    }
+    .contact-card__info a {
+      color: var(--navy);
+      font-weight: 500;
+    }
+    .contact-card__info a:hover { color: var(--gold-dark); }
+    .contact-card__info strong {
+      display: block;
+      color: var(--gray-800);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: var(--sp-3);
+      margin-bottom: var(--sp-1);
+      border-top: 1px solid var(--gray-200);
+      padding-top: var(--sp-2);
+    }
+    .contact-card__info strong:first-child {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    /* ── Services Table ── */
+    .services-intro {
+      background: var(--off-white);
+      border-left: 4px solid var(--gold);
+      padding: var(--sp-6) var(--sp-8);
+      margin-bottom: var(--sp-8);
+      font-size: 0.92rem;
+      color: var(--gray-600);
+      line-height: 1.8;
+    }
+    .services-intro p + p { margin-top: var(--sp-3); }
+
+    .services-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      margin-bottom: var(--sp-6);
+    }
+    .services-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .services-table thead {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .services-table thead th {
+      padding: var(--sp-4) var(--sp-6);
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .services-table thead th:last-child { text-align: right; }
+    .services-table tbody tr {
+      border-bottom: 1px solid var(--gray-200);
+      transition: background var(--ease);
+    }
+    .services-table tbody tr:last-child { border-bottom: none; }
+    .services-table tbody tr:hover { background: rgba(201,169,75,0.05); }
+    .services-table td {
+      padding: var(--sp-4) var(--sp-6);
+      color: var(--gray-800);
+      vertical-align: top;
+    }
+    .services-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .services-table .group-row td {
+      background: var(--gray-100);
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      padding: var(--sp-3) var(--sp-6);
+      border-top: 2px solid var(--gray-200);
+    }
+    .services-table .note {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* ── PDF Download block ── */
+    .pdf-download-block {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-6);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      padding: var(--sp-6) var(--sp-8);
+      margin-top: var(--sp-6);
+    }
+    .pdf-download-block__icon {
+      width: 56px; height: 56px;
+      background: #e53e3e;
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      color: var(--white);
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .pdf-download-block__text h4 {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: var(--sp-1);
+    }
+    .pdf-download-block__text p {
+      font-size: 0.82rem;
+      color: var(--gray-600);
+    }
+    .pdf-download-block .btn { margin-left: auto; flex-shrink: 0; }
+
+    /* ── How to Apply ── */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-4);
+      margin-top: var(--sp-8);
+      counter-reset: steps;
+    }
+    .process-step {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      padding: var(--sp-6);
+      text-align: center;
+      position: relative;
+    }
+    .process-step::before {
+      counter-increment: steps;
+      content: counter(steps);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 50%;
+      margin: 0 auto var(--sp-4);
+    }
+    .process-step__title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: var(--sp-2);
+    }
+    .process-step__text {
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .contact-cards-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .pdf-download-block { flex-direction: column; text-align: center; }
+      .pdf-download-block .btn { margin-left: 0; width: 100%; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span>Bangladesh University of Engineering and Technology (BUET)</span>
+      <nav class="topbar__links" aria-label="Quick links">
+        <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main</a>
+        <a href="../notices/index.html">Notices</a>
+        <a href="../contact/index.html">Contact</a>
+        <a href="../brtc/index.html">BRTC</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="navbar" role="banner">
+    <div class="container navbar__inner">
+      <a class="navbar__logo" href="../index.html" aria-label="Home — ChE BUET">
+        <div class="navbar__logo-icon" aria-hidden="true">ChE</div>
+        <div class="navbar__logo-text">
+          <span class="navbar__logo-dept">Chemical Engineering</span>
+          <span class="navbar__logo-univ">Bangladesh University of Engineering &amp; Technology</span>
+        </div>
+      </a>
+
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <div class="nav-item">
+          <a class="nav-link" href="../index.html">Home</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="../about/index.html" data-dropdown="about">About <span class="chevron">▾</span></a>
+          <div class="dropdown">
+            <a class="dropdown__item" href="../about/index.html">About the Department</a>
+            <a class="dropdown__item" href="../about/mission-vision.html">Mission &amp; Vision</a>
+            <a class="dropdown__item" href="../about/history.html">History</a>
+            <a class="dropdown__item" href="../about/gallery.html">Gallery</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="../people/index.html" data-dropdown="people">People <span class="chevron">▾</span></a>
+          <div class="dropdown">
+            <a class="dropdown__item" href="../people/faculty.html">Faculty</a>
+            <a class="dropdown__item" href="../people/faculty-on-leave.html">Faculty on Leave</a>
+            <a class="dropdown__item" href="../people/former-faculty.html">Former Faculty</a>
+            <a class="dropdown__item" href="../people/staff.html">Staff</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="../academics/index.html" data-dropdown="academics">Academics <span class="chevron">▾</span></a>
+          <div class="dropdown">
+            <a class="dropdown__item" href="../academics/undergraduate.html">Undergraduate</a>
+            <a class="dropdown__item" href="../academics/postgraduate.html">Postgraduate</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="../research/index.html">Research</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="../news-events/index.html">News &amp; Events</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="../notices/index.html">Notices</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link active" href="../brtc/index.html">BRTC</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="../contact/index.html">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- PAGE BANNER -->
+    <section class="page-banner" aria-label="BRTC">
+      <div class="container page-banner__inner">
+        <p class="page-banner__breadcrumb">
+          <a href="../index.html">Home</a> &rsaquo; BRTC
+        </p>
+        <h1 class="page-banner__title">
+          Bureau of Research, Testing<br>
+          <span>and Consultation</span>
+        </h1>
+        <p class="page-banner__subtitle">
+          Providing accredited testing, applied research, and expert consultancy services
+          to industry and government through the Department of Chemical Engineering, BUET.
+        </p>
+      </div>
+    </section>
+
+    <!-- ABOUT BRTC -->
+    <section class="section" aria-labelledby="about-brtc">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-heading__label">Overview</p>
+          <h2 class="section-heading__title" id="about-brtc">About BRTC — Chemical Engineering</h2>
+          <hr class="section-heading__line" />
+        </div>
+
+        <div style="display:grid; grid-template-columns: 2fr 1fr; gap: var(--sp-12); align-items: start;">
+          <div>
+            <p style="font-size:0.95rem; color:var(--gray-600); line-height:1.85; margin-bottom:var(--sp-4);">
+              The Bureau of Research, Testing and Consultation (BRTC) is BUET's institutional mechanism for
+              delivering professional technical services to public and private sector organizations. Operating
+              under the central BRTC of BUET, the Chemical Engineering Department's BRTC cell offers
+              specialized testing and consultancy in areas aligned with its research and academic strengths.
+            </p>
+            <p style="font-size:0.95rem; color:var(--gray-600); line-height:1.85; margin-bottom:var(--sp-4);">
+              Our services support industries in food processing, pharmaceuticals, petrochemicals, water treatment,
+              textile, cement, and other chemical process sectors. Tests are conducted under the supervision of
+              qualified faculty using calibrated, modern laboratory equipment.
+            </p>
+            <p style="font-size:0.95rem; color:var(--gray-600); line-height:1.85;">
+              Clients requiring testing or consultation are requested to contact the departmental BRTC
+              coordinator or the central BRTC office to initiate a request. A formal work order and
+              quotation will be issued after review.
+            </p>
+          </div>
+
+          <!-- Key facts sidebar -->
+          <aside style="background:var(--off-white); border:1px solid var(--gray-200); border-top:4px solid var(--gold); padding:var(--sp-6);">
+            <h3 style="font-family:var(--font-serif); font-size:1rem; font-weight:600; color:var(--navy); margin-bottom:var(--sp-4);">Key Facts</h3>
+            <ul style="font-size:0.85rem; color:var(--gray-600); line-height:2.2; list-style:none;">
+              <li>🏛 Established under BUET BRTC</li>
+              <li>🔬 Faculty-supervised testing</li>
+              <li>📋 Calibrated lab instruments</li>
+              <li>📝 Official test reports issued</li>
+              <li>🤝 Government &amp; private clients</li>
+              <li>💼 Consultancy &amp; project work</li>
+              <li>📞 Appointments by request</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT INFORMATION -->
+    <section class="section section--alt" aria-labelledby="brtc-contacts">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-heading__label">Get in Touch</p>
+          <h2 class="section-heading__title" id="brtc-contacts">Contact Information</h2>
+          <hr class="section-heading__line" />
+        </div>
+
+        <div class="contact-cards-grid">
+
+          <!-- BRTC Office at ChE Dept -->
+          <div class="contact-card">
+            <div class="contact-card__icon">🏢</div>
+            <div class="contact-card__title">BRTC Cell — ChE Department</div>
+            <div class="contact-card__subtitle">Departmental Office</div>
+            <div class="contact-card__info">
+              <strong>Address</strong>
+              Chemical Engineering Building<br>
+              BUET, Dhaka – 1000, Bangladesh
+              <strong>Phone</strong>
+              <a href="tel:+8802-9665650">+880-2-9665650</a> (Ext. 7XXX)
+              <strong>Email</strong>
+              <a href="mailto:brtc@che.buet.ac.bd">brtc@che.buet.ac.bd</a>
+              <strong>Office Hours</strong>
+              Sunday – Thursday<br>
+              9:00 AM – 4:00 PM
+            </div>
+          </div>
+
+          <!-- BRTC Coordinator -->
+          <div class="contact-card">
+            <div class="contact-card__icon">👨‍🔬</div>
+            <div class="contact-card__title">Prof. Dr. [Coordinator Name]</div>
+            <div class="contact-card__subtitle">BRTC Coordinator — ChE Dept.</div>
+            <div class="contact-card__info">
+              <strong>Designation</strong>
+              Professor, Dept. of Chemical Engineering, BUET
+              <strong>Phone</strong>
+              <a href="tel:+8801XXXXXXXXX">+880-1XXX-XXXXXX</a>
+              <strong>Email</strong>
+              <a href="mailto:coordinator@che.buet.ac.bd">coordinator@che.buet.ac.bd</a>
+              <strong>Room</strong>
+              Room XXX, ChE Building
+            </div>
+          </div>
+
+          <!-- Central BRTC BUET -->
+          <div class="contact-card">
+            <div class="contact-card__icon">🏛</div>
+            <div class="contact-card__title">Central BRTC Office — BUET</div>
+            <div class="contact-card__subtitle">University-level Bureau</div>
+            <div class="contact-card__info">
+              <strong>Address</strong>
+              BRTC Building, BUET<br>
+              Dhaka – 1000, Bangladesh
+              <strong>Phone</strong>
+              <a href="tel:+88029665600">+880-2-9665600</a>
+              <strong>Fax</strong>
+              +880-2-9665600
+              <strong>Email</strong>
+              <a href="mailto:brtc@buet.ac.bd">brtc@buet.ac.bd</a>
+              <strong>Website</strong>
+              <a href="https://www.buet.ac.bd/brtc" target="_blank" rel="noopener">buet.ac.bd/brtc</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Map placeholder -->
+        <div style="border:1px solid var(--gray-200); border-radius:4px; overflow:hidden; height:240px; background:var(--gray-100); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:var(--sp-3); color:var(--gray-400);">
+          <div style="font-size:2rem;">📍</div>
+          <div style="font-size:0.85rem; font-weight:600;">BUET Campus, Palashi, Dhaka</div>
+          <a class="btn btn--outline" href="https://maps.google.com/?q=BUET+Dhaka" target="_blank" rel="noopener" style="margin-top:var(--sp-2);">Open in Google Maps</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES & PRICE LIST -->
+    <section class="section" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-heading__label">Services</p>
+          <h2 class="section-heading__title" id="services-heading">Tests &amp; Consultancy — Price Schedule</h2>
+          <hr class="section-heading__line" />
+        </div>
+
+        <div class="services-intro">
+          <p>
+            The following schedule lists the standard tests and analytical services offered by the
+            Department of Chemical Engineering through BRTC. All prices are in Bangladeshi Taka (BDT)
+            and are inclusive of material costs unless otherwise noted.
+          </p>
+          <p>
+            <strong style="color:var(--navy);">Note:</strong> Prices are subject to revision. For bulk testing, long-term projects, or services not
+            listed below, please contact the BRTC Coordinator for a custom quotation. A 15% VAT may
+            apply as per government regulations.
+          </p>
+        </div>
+
+        <!-- Download PDF button -->
+        <div class="pdf-download-block">
+          <div class="pdf-download-block__icon">PDF</div>
+          <div class="pdf-download-block__text">
+            <h4>Complete BRTC Services &amp; Price Schedule</h4>
+            <p>Official document including all tests, fees, terms &amp; conditions — updated 2025</p>
+          </div>
+          <a class="btn btn--primary" href="../assets/files/brtc-price-schedule.pdf" download>⬇ Download PDF</a>
+        </div>
+
+        <!-- Services Table -->
+        <div class="services-table-wrap" style="margin-top:var(--sp-10);">
+          <table class="services-table" aria-label="BRTC services and prices">
+            <thead>
+              <tr>
+                <th style="width:3rem;">#</th>
+                <th>Test / Service</th>
+                <th>Standard / Method</th>
+                <th>Turnaround</th>
+                <th>Fee (BDT)</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Proximate & Ultimate Analysis -->
+              <tr class="group-row">
+                <td colspan="5">A. Proximate &amp; Ultimate Analysis</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>
+                  Moisture Content
+                  <span class="note">Oven-drying method</span>
+                </td>
+                <td>ASTM D2216</td>
+                <td>1–2 days</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>
+                  Ash Content
+                  <span class="note">Gravimetric</span>
+                </td>
+                <td>ASTM D2974</td>
+                <td>1–2 days</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>
+                  Volatile Matter
+                  <span class="note">Thermogravimetric</span>
+                </td>
+                <td>ASTM D3175</td>
+                <td>2 days</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>
+                  Fixed Carbon (Calculated)
+                </td>
+                <td>By difference</td>
+                <td>—</td>
+                <td>500</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>
+                  Calorific Value (Gross / Net)
+                  <span class="note">Bomb calorimeter</span>
+                </td>
+                <td>ASTM D5865</td>
+                <td>2–3 days</td>
+                <td>3,500</td>
+              </tr>
+
+              <!-- Water & Wastewater -->
+              <tr class="group-row">
+                <td colspan="5">B. Water &amp; Wastewater Analysis</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>pH, Conductivity, TDS (combined)</td>
+                <td>APHA 4500</td>
+                <td>Same day</td>
+                <td>1,200</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>BOD (5-day)</td>
+                <td>APHA 5210 B</td>
+                <td>7 days</td>
+                <td>3,000</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>COD</td>
+                <td>APHA 5220</td>
+                <td>1–2 days</td>
+                <td>2,500</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Total Suspended Solids (TSS)</td>
+                <td>APHA 2540</td>
+                <td>1 day</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>
+                  Heavy Metal Analysis (per metal)
+                  <span class="note">Pb, Cd, Cr, Cu, Zn, Fe, Mn, As etc.</span>
+                </td>
+                <td>AAS / ICP</td>
+                <td>3–5 days</td>
+                <td>2,500</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Oil &amp; Grease</td>
+                <td>APHA 5520</td>
+                <td>2 days</td>
+                <td>2,000</td>
+              </tr>
+
+              <!-- Petroleum & Fuels -->
+              <tr class="group-row">
+                <td colspan="5">C. Petroleum Products &amp; Fuels</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Flash Point (open/closed cup)</td>
+                <td>ASTM D92 / D93</td>
+                <td>1 day</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Viscosity (kinematic / dynamic)</td>
+                <td>ASTM D445</td>
+                <td>1 day</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Specific Gravity / API Gravity</td>
+                <td>ASTM D1298</td>
+                <td>1 day</td>
+                <td>1,500</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>Sulphur Content</td>
+                <td>ASTM D4294</td>
+                <td>2 days</td>
+                <td>3,000</td>
+              </tr>
+
+              <!-- Food & Agricultural Products -->
+              <tr class="group-row">
+                <td colspan="5">D. Food &amp; Agricultural Products</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>
+                  Crude Protein (Kjeldahl)
+                </td>
+                <td>AOAC 960.52</td>
+                <td>2 days</td>
+                <td>2,500</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>Crude Fat (Soxhlet)</td>
+                <td>AOAC 920.39</td>
+                <td>2 days</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>Crude Fibre</td>
+                <td>AOAC 962.09</td>
+                <td>2 days</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>Total Sugar / Reducing Sugar</td>
+                <td>AOAC 925.35</td>
+                <td>2 days</td>
+                <td>2,000</td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>Acid Value / Peroxide Value (edible oils)</td>
+                <td>AOCS Cd 3d-63</td>
+                <td>1–2 days</td>
+                <td>1,800</td>
+              </tr>
+
+              <!-- Polymer & Materials -->
+              <tr class="group-row">
+                <td colspan="5">E. Polymer, Cement &amp; Materials Testing</td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>Thermogravimetric Analysis (TGA)</td>
+                <td>ASTM E1131</td>
+                <td>3–5 days</td>
+                <td>5,000</td>
+              </tr>
+              <tr>
+                <td>22</td>
+                <td>Differential Scanning Calorimetry (DSC)</td>
+                <td>ASTM E1269</td>
+                <td>3–5 days</td>
+                <td>5,500</td>
+              </tr>
+              <tr>
+                <td>23</td>
+                <td>X-Ray Diffraction (XRD)</td>
+                <td>—</td>
+                <td>5–7 days</td>
+                <td>6,000</td>
+              </tr>
+              <tr>
+                <td>24</td>
+                <td>Compressive Strength (cement / concrete)</td>
+                <td>ASTM C109</td>
+                <td>2 days</td>
+                <td>2,500</td>
+              </tr>
+
+              <!-- Consultancy -->
+              <tr class="group-row">
+                <td colspan="5">F. Consultancy &amp; Advisory Services</td>
+              </tr>
+              <tr>
+                <td>25</td>
+                <td>
+                  Process Design &amp; Feasibility Study
+                  <span class="note">Per project; initial discussion free</span>
+                </td>
+                <td>—</td>
+                <td>By agreement</td>
+                <td>Negotiable</td>
+              </tr>
+              <tr>
+                <td>26</td>
+                <td>
+                  Environmental Impact Assessment (EIA) Support
+                </td>
+                <td>DoE guidelines</td>
+                <td>By agreement</td>
+                <td>Negotiable</td>
+              </tr>
+              <tr>
+                <td>27</td>
+                <td>
+                  Effluent Treatment Plant (ETP) Design / Audit
+                </td>
+                <td>—</td>
+                <td>By agreement</td>
+                <td>Negotiable</td>
+              </tr>
+              <tr>
+                <td>28</td>
+                <td>
+                  Expert Witness / Technical Opinion
+                </td>
+                <td>—</td>
+                <td>By agreement</td>
+                <td>Negotiable</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <p style="font-size:0.8rem; color:var(--gray-400); margin-top:var(--sp-4);">
+          * All fees are per sample unless stated otherwise. Rush processing (24 hr) is available at a 50% surcharge for selected tests.
+          Prices effective from January 2025. Subject to change without prior notice.
+        </p>
+      </div>
+    </section>
+
+    <!-- HOW TO APPLY -->
+    <section class="section section--alt" aria-labelledby="how-to-apply">
+      <div class="container">
+        <div class="section-heading section-heading--center">
+          <p class="section-heading__label">Process</p>
+          <h2 class="section-heading__title" id="how-to-apply">How to Request a Service</h2>
+          <hr class="section-heading__line" />
+        </div>
+
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="process-step__title">Contact the Office</div>
+            <div class="process-step__text">
+              Reach out via email or phone to the departmental BRTC coordinator or the central BRTC office to discuss your requirement.
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-step__title">Submit Application</div>
+            <div class="process-step__text">
+              Submit a formal application letter on your organization's letterhead describing the test(s) or service required.
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-step__title">Work Order &amp; Payment</div>
+            <div class="process-step__text">
+              A work order and fee challan will be issued. Payment is made to the designated BUET account before work commences.
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="process-step__title">Receive Report</div>
+            <div class="process-step__text">
+              An official test report on BRTC letterhead is issued upon completion and can be collected from the departmental office.
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:var(--sp-10);">
+          <a class="btn btn--primary" href="../contact/index.html">Contact the Department</a>
+          &nbsp;
+          <a class="btn btn--outline" href="../assets/files/brtc-application-form.pdf" download>⬇ Download Application Form</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__main">
+      <div class="footer-col">
+        <div class="footer-col__logo">
+          <div class="footer-col__logo-icon">ChE</div>
+          <div class="footer-col__logo-text">Chemical Engineering<br><small style="font-weight:400;font-size:0.75rem;opacity:0.7;">BUET</small></div>
+        </div>
+        <p class="footer-col__desc">
+          The Department of Chemical Engineering at BUET has been shaping chemical engineers
+          since 1961, producing graduates who lead industry and academia nationally and internationally.
+        </p>
+        <div class="footer-col__social" aria-label="Social media links">
+          <a class="social-link" href="#" aria-label="Facebook">f</a>
+          <a class="social-link" href="#" aria-label="LinkedIn" style="font-family:serif;">in</a>
+          <a class="social-link" href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col__title">About</h3>
+        <nav aria-label="About links">
+          <a class="footer-nav__item" href="../about/index.html">About Department</a>
+          <a class="footer-nav__item" href="../about/mission-vision.html">Mission &amp; Vision</a>
+          <a class="footer-nav__item" href="../about/history.html">History</a>
+          <a class="footer-nav__item" href="../about/gallery.html">Gallery</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col__title">Academics</h3>
+        <nav aria-label="Academics links">
+          <a class="footer-nav__item" href="../academics/undergraduate.html">Undergraduate</a>
+          <a class="footer-nav__item" href="../academics/postgraduate.html">Postgraduate</a>
+          <a class="footer-nav__item" href="../research/index.html">Research</a>
+          <a class="footer-nav__item" href="../people/faculty.html">Faculty</a>
+          <a class="footer-nav__item" href="../people/staff.html">Staff</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col__title">Contact</h3>
+        <address style="font-style:normal;font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.8;">
+          Department of Chemical Engineering<br>
+          BUET, Dhaka – 1000, Bangladesh<br>
+          <a href="tel:+8809666793777" style="color:rgba(255,255,255,0.6);">+880-9666-793777</a><br>
+          <a href="mailto:head@che.buet.ac.bd" style="color:var(--gold);">head@che.buet.ac.bd</a>
+        </address>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>&copy; 2025 Department of Chemical Engineering, BUET. All rights reserved.</span>
+      <span>
+        <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a>
+        &nbsp;·&nbsp;
+        <a href="../contact/index.html">Webmaster</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
