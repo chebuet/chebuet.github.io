@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — ChE BUET</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox__img {
+      max-width: 90vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+    .lightbox__close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      background: var(--gray-100);
+      color: var(--gray-400);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span>Bangladesh University of Engineering and Technology (BUET)</span>
+      <nav class="topbar__links">
+        <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main</a>
+        <a href="../notices/index.html">Notices</a>
+        <a href="../contact/index.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <a class="navbar__logo" href="../index.html">
+        <div class="navbar__logo-icon">ChE</div>
+        <div class="navbar__logo-text">
+          <span class="navbar__logo-dept">Chemical Engineering</span>
+          <span class="navbar__logo-univ">Bangladesh University of Engineering &amp; Technology</span>
+        </div>
+      </a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="navbar__nav" id="navMenu">
+        <div class="nav-item"><a class="nav-link" href="../index.html">Home</a></div>
+        <div class="nav-item">
+          <a class="nav-link active" href="index.html" data-dropdown="about">About <span class="chevron">▾</span></a>
+          <div class="dropdown">
+            <a class="dropdown__item" href="index.html">About the Department</a>
+            <a class="dropdown__item" href="mission-vision.html">Mission &amp; Vision</a>
+            <a class="dropdown__item" href="history.html">History</a>
+            <a class="dropdown__item" href="gallery.html">Gallery</a>
+          </div>
+        </div>
+        <div class="nav-item"><a class="nav-link" href="../people/index.html" data-dropdown="people">People <span class="chevron">▾</span></a><div class="dropdown"><a class="dropdown__item" href="../people/faculty.html">Faculty</a><a class="dropdown__item" href="../people/faculty-on-leave.html">Faculty on Leave</a><a class="dropdown__item" href="../people/former-faculty.html">Former Faculty</a><a class="dropdown__item" href="../people/staff.html">Staff</a></div></div>
+        <div class="nav-item"><a class="nav-link" href="../academics/index.html" data-dropdown="academics">Academics <span class="chevron">▾</span></a><div class="dropdown"><a class="dropdown__item" href="../academics/undergraduate.html">Undergraduate</a><a class="dropdown__item" href="../academics/postgraduate.html">Postgraduate</a></div></div>
+        <div class="nav-item"><a class="nav-link" href="../research/index.html">Research</a></div>
+        <div class="nav-item"><a class="nav-link" href="../news-events/index.html">News &amp; Events</a></div>
+        <div class="nav-item"><a class="nav-link" href="../notices/index.html">Notices</a></div>
+        <div class="nav-item"><a class="nav-link" href="../brtc/index.html">BRTC</a></div>
+        <div class="nav-item"><a class="nav-link" href="../contact/index.html">Contact</a></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+  </div>
+
+  <main>
+    <div class="page-banner">
+      <div class="container">
+        <nav class="page-banner__breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a><span>›</span>
+          <a href="index.html">About</a><span>›</span>
+          <span>Gallery</span>
+        </nav>
+        <h1 class="page-banner__title">Photo Gallery</h1>
+        <p class="page-banner__subtitle">Moments from the department — labs, events, and campus life</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Category filter tabs -->
+        <div class="tabs" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab-group="gallery" data-tab="tab-all">All</button>
+          <button class="tab-btn" role="tab" data-tab-group="gallery" data-tab="tab-labs">Laboratories</button>
+          <button class="tab-btn" role="tab" data-tab-group="gallery" data-tab="tab-events">Events</button>
+          <button class="tab-btn" role="tab" data-tab-group="gallery" data-tab="tab-campus">Campus</button>
+        </div>
+
+        <!-- All photos -->
+        <div class="tab-panel active" id="tab-all" data-tab-group="gallery">
+          <div class="gallery-grid">
+            <!-- Replace src with actual image paths -->
+            <div class="gallery-item" data-src="assets/images/gallery/lab1.jpg" data-alt="Chemical Engineering Lab">
+              <div class="gallery-placeholder">🔬</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/event1.jpg" data-alt="Annual Symposium 2024">
+              <div class="gallery-placeholder">🎓</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/campus1.jpg" data-alt="Department Building">
+              <div class="gallery-placeholder">🏛️</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/lab2.jpg" data-alt="Research Lab">
+              <div class="gallery-placeholder">⚗️</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/event2.jpg" data-alt="Convocation Ceremony">
+              <div class="gallery-placeholder">🎉</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/campus2.jpg" data-alt="BUET Campus">
+              <div class="gallery-placeholder">🌿</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/lab3.jpg" data-alt="Pilot Plant">
+              <div class="gallery-placeholder">🏭</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/event3.jpg" data-alt="Industry Visit">
+              <div class="gallery-placeholder">🤝</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/gallery/campus3.jpg" data-alt="Student Life">
+              <div class="gallery-placeholder">👨‍🎓</div>
+              <div class="gallery-item__overlay">🔍</div>
+            </div>
+          </div>
+          <p style="text-align:center;margin-top:2rem;font-size:0.85rem;color:var(--gray-400);">
+            Replace placeholder icons with actual images by updating the <code>src</code> paths in <code>gallery.html</code>.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="tab-labs" data-tab-group="gallery">
+          <div class="gallery-grid">
+            <div class="gallery-item"><div class="gallery-placeholder">🔬</div><div class="gallery-item__overlay">🔍</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">⚗️</div><div class="gallery-item__overlay">🔍</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">🏭</div><div class="gallery-item__overlay">🔍</div></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-events" data-tab-group="gallery">
+          <div class="gallery-grid">
+            <div class="gallery-item"><div class="gallery-placeholder">🎓</div><div class="gallery-item__overlay">🔍</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">🎉</div><div class="gallery-item__overlay">🔍</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">🤝</div><div class="gallery-item__overlay">🔍</div></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-campus" data-tab-group="gallery">
+          <div class="gallery-grid">
+            <div class="gallery-item"><div class="gallery-placeholder">🏛️</div><div class="gallery-item__overlay">🔍</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">🌿</div><div class="gallery-item__overlay">🔍</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">👨‍🎓</div><div class="gallery-item__overlay">🔍</div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__main">
+      <div class="footer-col"><div class="footer-col__logo"><div class="footer-col__logo-icon">ChE</div><div class="footer-col__logo-text">Chemical Engineering<br><small style="opacity:0.7;font-weight:400;font-size:0.75rem;">BUET</small></div></div><p class="footer-col__desc">Shaping chemical engineers since 1961.</p></div>
+      <div class="footer-col"><h3 class="footer-col__title">About</h3><nav><a class="footer-nav__item" href="index.html">About Department</a><a class="footer-nav__item" href="mission-vision.html">Mission &amp; Vision</a><a class="footer-nav__item" href="history.html">History</a><a class="footer-nav__item" href="gallery.html">Gallery</a></nav></div>
+      <div class="footer-col"><h3 class="footer-col__title">Academics</h3><nav><a class="footer-nav__item" href="../academics/undergraduate.html">Undergraduate</a><a class="footer-nav__item" href="../academics/postgraduate.html">Postgraduate</a><a class="footer-nav__item" href="../research/index.html">Research</a></nav></div>
+      <div class="footer-col"><h3 class="footer-col__title">Contact</h3><address style="font-style:normal;font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.8;">BUET, Dhaka – 1000<br><a href="mailto:head@che.buet.ac.bd" style="color:var(--gold);">head@che.buet.ac.bd</a></address></div>
+    </div>
+    <div class="container footer__bottom">
+      <span>&copy; 2025 Department of Chemical Engineering, BUET.</span>
+      <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const src = item.getAttribute('data-src');
+        const alt = item.getAttribute('data-alt') || '';
+        if (src) {
+          lightboxImg.src = src;
+          lightboxImg.alt = alt;
+          lightbox.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+</html>
