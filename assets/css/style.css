@@ -1505,8 +1505,14 @@ ul { list-style: none; }
   .sidebar { position: static; }
 }
 
-@media (max-width: 768px) {
-  :root { --nav-height: 60px; }
+/* ── Prevent body scroll when mobile nav is open ────────────── */
+body.nav-open {
+  overflow: hidden;
+}
+
+/* ── Tablet breakpoint ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .navbar__toggle { display: flex; }
 
   .navbar__nav {
     display: none;
@@ -1518,25 +1524,62 @@ ul { list-style: none; }
     background: var(--navy-dark);
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--sp-6);
+    padding: var(--sp-4) var(--sp-6) var(--sp-10);
     gap: 0;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     height: auto;
+    /* Slide-in animation */
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.28s ease;
+    opacity: 0;
+    z-index: 999;
   }
 
-  .navbar__nav.open { display: flex; }
+  .navbar__nav.open {
+    display: flex;
+    transform: translateX(0);
+    opacity: 1;
+  }
 
-  .nav-item { width: 100%; height: auto; }
+  /* Overlay scrim behind open menu */
+  .navbar__nav.open::before {
+    display: none; /* handled by body.nav-open scroll-lock */
+  }
+
+  .nav-item {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .nav-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
 
   .nav-link {
     width: 100%;
     padding: var(--sp-4) var(--sp-2);
-    border-bottom: 1px solid rgba(255,255,255,0.07);
     height: auto;
+    /* Ensure adequate tap target */
+    min-height: 48px;
+    justify-content: space-between;
   }
 
   .nav-link::after { display: none; }
 
+  /* Chevron rotates when dropdown is open */
+  .nav-item.open > .nav-link .chevron {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease;
+  }
+
+  .nav-link .chevron {
+    transition: transform 0.2s ease;
+  }
+
+  /* Dropdown becomes accordion panel */
   .dropdown {
     position: static;
     opacity: 1;
@@ -1546,23 +1589,29 @@ ul { list-style: none; }
     border: none;
     border-left: 3px solid var(--gold);
     background: rgba(255,255,255,0.04);
-    padding: 0;
+    padding: var(--sp-1) 0;
     display: none;
+    /* Animate open */
+    animation: none;
   }
 
   .nav-item.open .dropdown { display: block; }
 
   .dropdown__item {
     color: rgba(255,255,255,0.7);
-    padding: var(--sp-3) var(--sp-6);
+    padding: 0.7rem var(--sp-6);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-left: none;
   }
 
-  .dropdown__item:hover {
-    background: rgba(255,255,255,0.05);
+  .dropdown__item:hover,
+  .dropdown__item:focus {
+    background: rgba(255,255,255,0.07);
     color: var(--white);
+    padding-left: var(--sp-6);
   }
-
-  .navbar__toggle { display: flex; }
 
   .topbar { display: none; }
 
@@ -1571,8 +1620,14 @@ ul { list-style: none; }
   .highlight-card { border-right: none; border-bottom: 1px solid var(--gray-200); }
   .highlight-card:last-child { border-bottom: none; }
 
-  .news-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Mobile breakpoint ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --nav-height: 60px; }
+
+  .news-grid { grid-template-columns: 1fr; }
   .hero__stats-grid { grid-template-columns: 1fr 1fr; }
 
   .head-message__inner {
@@ -1598,6 +1653,36 @@ ul { list-style: none; }
   .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
   .faculty-grid { grid-template-columns: repeat(2, 1fr); }
   .research-grid { grid-template-columns: 1fr; }
+
+  /* Tabs: horizontally scrollable on mobile */
+  .tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    padding-bottom: 1px;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex-shrink: 0;
+    padding: var(--sp-3) var(--sp-4);
+    min-height: 44px;
+  }
+
+  /* Container padding tighter on mobile */
+  .container { padding: 0 var(--sp-4); }
+
+  /* Page banner padding */
+  .page-banner { padding: var(--sp-12) 0 var(--sp-8); }
+
+  /* Logo text: hide university line on very small screens */
+  .navbar__logo-univ { display: none; }
+
+  /* Ensure logo doesn't get crushed */
+  .navbar__logo { gap: var(--sp-2); }
+  .navbar__logo-icon { width: 36px; height: 36px; }
+  .navbar__logo-dept { font-size: 0.85rem; }
 }
 
 @media (max-width: 480px) {
@@ -1612,4 +1697,14 @@ ul { list-style: none; }
 @media print {
   .navbar, .topbar, .footer, .hero__actions { display: none; }
   .hero { background: none; color: var(--navy); padding: var(--sp-8) 0; }
+}
+
+/* ── Extra small phones (≤ 480px) — tap target & sizing fixes ── */
+@media (max-width: 480px) {
+  .btn, .nav-link, .dropdown__item, .tab-btn,
+  .footer-nav__item, .sidebar-nav__item {
+    min-height: 44px;
+  }
+  .navbar__logo-dept { font-size: 0.8rem; }
+  .navbar__logo-icon { width: 32px; height: 32px; }
 }
