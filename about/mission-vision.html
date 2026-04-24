@@ -30,21 +30,21 @@
       .then(data => {
         document.getElementById('navbar').innerHTML = data;
   
-        // ✅ ACTIVE LINK FIX (runs AFTER navbar loads)
-        const currentPage = window.location.pathname.split("/").pop();
+        const currentPath = window.location.pathname;
   
         document.querySelectorAll('#navbar a').forEach(link => {
-          const linkPage = link.getAttribute('href').split("/").pop();
+          const linkPath = new URL(link.href, window.location.origin).pathname;
   
-          if (linkPage === currentPage) {
-            link.classList.add('active');
+          // Normalize homepage case
+          const isHome =
+            (currentPath === "/" || currentPath.endsWith("index.html")) &&
+            (linkPath === "/" || linkPath.endsWith("index.html"));
+  
+          if (isHome || linkPath === currentPath) {
+            link.classList.add("active");
           }
         });
       });
-  </script>
-
-  <script>
-    document.querySelector('a[href="/about/index.html"]').classList.add('active');
   </script>
 
   <main id="main-content">
