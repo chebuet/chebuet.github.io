@@ -7,6 +7,150 @@
   <meta name="description" content="Bureau of Research, Testing and Consultation — ChE BUET."/>
   <link rel="stylesheet" href="../assets/css/style.css"/>
   <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon"/>
+  <style>
+    /* ── Test Rates Table ─────────────────────────────────── */
+    .rates-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .rates-search {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.55rem 1rem 0.55rem 2.4rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 3px;
+      font-size: 0.875rem;
+      font-family: var(--font-sans);
+      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") 0.7rem center / 16px no-repeat;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .rates-search:focus { border-color: var(--gold-dark); }
+
+    .rates-filter {
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 3px;
+      font-size: 0.82rem;
+      font-family: var(--font-sans);
+      background: var(--white);
+      color: var(--navy);
+      cursor: pointer;
+      outline: none;
+    }
+    .rates-filter:focus { border-color: var(--gold-dark); }
+
+    .rates-count {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      white-space: nowrap;
+    }
+
+    .rates-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--gray-200);
+      border-radius: 3px;
+    }
+    .rates-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .rates-table thead {
+      background: var(--navy);
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .rates-table thead th {
+      padding: 0.7rem 0.9rem;
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+    .rates-table thead th:hover { background: rgba(255,255,255,0.1); }
+    .rates-table thead th .sort-icon { margin-left: 0.3rem; opacity: 0.5; font-size: 0.65rem; }
+    .rates-table thead th.sorted .sort-icon { opacity: 1; color: var(--gold); }
+
+    .rates-table tbody tr { border-bottom: 1px solid var(--gray-200); }
+    .rates-table tbody tr:last-child { border-bottom: none; }
+    .rates-table tbody tr:hover { background: rgba(196,158,66,0.06); }
+    .rates-table tbody tr.hidden { display: none; }
+
+    .rates-table td {
+      padding: 0.6rem 0.9rem;
+      vertical-align: top;
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+    .rates-table td:first-child { color: var(--gray-400); font-size: 0.72rem; width: 36px; }
+    .rates-table td.test-name { font-weight: 600; color: var(--navy); max-width: 260px; }
+    .rates-table td.price-cell { white-space: nowrap; font-family: monospace; font-size: 0.83rem; }
+    .rates-table td.total-cell { white-space: nowrap; font-weight: 700; color: var(--navy-dark); font-family: monospace; font-size: 0.83rem; }
+    .rates-table td.method-cell { color: var(--gray-500); font-size: 0.75rem; max-width: 180px; }
+
+    .category-badge {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.12rem 0.45rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .badge-chemical   { background:#e8f0f8; color:#1a4878; }
+    .badge-water      { background:#e6f4ea; color:#1a5c2e; }
+    .badge-air        { background:#f0f4e8; color:#3a5c1a; }
+    .badge-fuel       { background:#fdf3e3; color:#7a4a0a; }
+    .badge-food       { background:#fce8f3; color:#7a1a5c; }
+    .badge-materials  { background:#ede8fc; color:#3a1a7a; }
+    .badge-admixture  { background:#e8f4f8; color:#1a5c70; }
+    .badge-paint      { background:#fce8e8; color:#7a1a1a; }
+    .badge-gcgcms     { background:#f8f0e8; color:#7a5a1a; }
+    .badge-other      { background:#f0f0f0; color:#555; }
+    .badge-customs    { background:#e8ece8; color:#2a4a2a; }
+    .badge-estex      { background:#f8e8f0; color:#6a1a4a; }
+
+    .no-results {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--gray-400);
+      font-style: italic;
+      display: none;
+    }
+
+    .pdf-download-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--gold);
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .pdf-download-bar__icon { font-size: 1.6rem; flex-shrink: 0; }
+    .pdf-download-bar__text { flex: 1; }
+    .pdf-download-bar__text strong { display: block; color: var(--navy); font-size: 0.9rem; margin-bottom: 0.15rem; }
+    .pdf-download-bar__text span { font-size: 0.8rem; color: var(--gray-500); }
+
+    mark { background: rgba(196,158,66,0.3); border-radius: 1px; }
+
+    @media (max-width: 640px) {
+      .rates-table td.method-cell { display: none; }
+    }
+  </style>
 </head>
 <body>
   <div class="topbar">
@@ -37,19 +181,26 @@
         <div class="nav-item">
           <a class="nav-link" href="../about/index.html" data-dropdown="about">About <span class="chevron">▾</span></a>
           <div class="dropdown">
-            <a class="dropdown__item" href="../about/index.html">About the Department</a><a class="dropdown__item" href="../about/mission-vision.html">Mission &amp; Vision</a><a class="dropdown__item" href="../about/history.html">History</a><a class="dropdown__item" href="../about/gallery.html">Gallery</a>
+            <a class="dropdown__item" href="../about/index.html">About the Department</a>
+            <a class="dropdown__item" href="../about/mission-vision.html">Mission &amp; Vision</a>
+            <a class="dropdown__item" href="../about/history.html">History</a>
+            <a class="dropdown__item" href="../about/gallery.html">Gallery</a>
           </div>
         </div>
         <div class="nav-item">
           <a class="nav-link" href="../people/index.html" data-dropdown="people">People <span class="chevron">▾</span></a>
           <div class="dropdown">
-            <a class="dropdown__item" href="../people/faculty.html">Faculty</a><a class="dropdown__item" href="../people/faculty-on-leave.html">Faculty on Leave</a><a class="dropdown__item" href="../people/former-faculty.html">Former Faculty</a><a class="dropdown__item" href="../people/staff.html">Staff</a>
+            <a class="dropdown__item" href="../people/faculty.html">Faculty</a>
+            <a class="dropdown__item" href="../people/faculty-on-leave.html">Faculty on Leave</a>
+            <a class="dropdown__item" href="../people/former-faculty.html">Former Faculty</a>
+            <a class="dropdown__item" href="../people/staff.html">Staff</a>
           </div>
         </div>
         <div class="nav-item">
           <a class="nav-link" href="../academics/index.html" data-dropdown="academics">Academics <span class="chevron">▾</span></a>
           <div class="dropdown">
-            <a class="dropdown__item" href="../academics/undergraduate.html">Undergraduate</a><a class="dropdown__item" href="../academics/postgraduate.html">Postgraduate</a>
+            <a class="dropdown__item" href="../academics/undergraduate.html">Undergraduate</a>
+            <a class="dropdown__item" href="../academics/postgraduate.html">Postgraduate</a>
           </div>
         </div>
         <div class="nav-item"><a class="nav-link" href="../research/index.html">Research</a></div>
@@ -60,17 +211,23 @@
       </nav>
     </div>
   </header>
+
   <main id="main-content">
     <div class="page-banner">
       <div class="container">
-        <nav class="page-banner__breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span>›</span><span aria-current="page">BRTC</span></nav>
+        <nav class="page-banner__breadcrumb" aria-label="Breadcrumb">
+          <a href="../index.html">Home</a><span>›</span><span aria-current="page">BRTC</span>
+        </nav>
         <h1 class="page-banner__title">BRTC</h1>
         <p class="page-banner__subtitle">Bureau of Research, Testing &amp; Consultation</p>
       </div>
     </div>
+
     <section class="section">
       <div class="container">
         <div class="content-with-sidebar">
+
+          <!-- MAIN CONTENT -->
           <div>
             <div class="section-heading">
               <p class="section-heading__label">Services</p>
@@ -86,13 +243,7 @@
               reliable, accredited results.
             </p>
 
-            <div class="section-heading" style="margin-top:3rem;">
-              <p class="section-heading__label">What We Offer</p>
-              <h2 class="section-heading__title">Services</h2>
-              <hr class="section-heading__line"/>
-            </div>
-
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:1.5rem;">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-bottom:3rem;">
               <div style="background:var(--off-white);border:1px solid var(--gray-200);border-top:3px solid var(--gold);padding:1.5rem;">
                 <div style="font-size:1.5rem;margin-bottom:0.75rem;">🧪</div>
                 <h3 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:0.5rem;">Chemical Analysis</h3>
@@ -125,6 +276,72 @@
               </div>
             </div>
 
+            <!-- ══════════════════════════════════════════
+                 TEST RATES TABLE (2026)
+                 ══════════════════════════════════════════ -->
+            <div class="section-heading">
+              <p class="section-heading__label">Pricing</p>
+              <h2 class="section-heading__title">Test Rates 2026</h2>
+              <hr class="section-heading__line"/>
+            </div>
+
+            <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:1.25rem;line-height:1.7;">
+              All prices are in BDT and include 15% VAT where applicable. The Department of Chemical Engineering reserves the right to change rates at any time without prior notice.
+            </p>
+
+            <!-- PDF Download bar -->
+            <div class="pdf-download-bar">
+              <div class="pdf-download-bar__icon">📄</div>
+              <div class="pdf-download-bar__text">
+                <strong>BRTC Price List 2026 — Official PDF</strong>
+                <span>Download the complete, official test rates document as issued by BRTC.</span>
+              </div>
+              <a class="btn btn--primary" href="assets/files/BRTC_Test_Rates_2026.pdf" download style="white-space:nowrap;flex-shrink:0;">
+                ⬇ Download PDF
+              </a>
+            </div>
+
+            <!-- Search + Filter controls -->
+            <div class="rates-controls">
+              <input class="rates-search" type="search" id="ratesSearch" placeholder="Search tests, methods, categories…" autocomplete="off" />
+              <select class="rates-filter" id="ratesCategory">
+                <option value="">All Categories</option>
+                <option value="Chemical Analysis">Chemical Analysis</option>
+                <option value="Water Analysis">Water Analysis</option>
+                <option value="Air Analysis">Air Analysis</option>
+                <option value="Fuel Analysis">Fuel Analysis</option>
+                <option value="Food &amp; Contamination">Food &amp; Contamination</option>
+                <option value="Materials &amp; Chemical ID">Materials &amp; Chemical ID</option>
+                <option value="Admixture Analysis">Admixture Analysis</option>
+                <option value="Paint / Red Oxide">Paint / Red Oxide</option>
+                <option value="ESTeX">ESTeX</option>
+                <option value="GC-GC/MS">GC-GC/MS</option>
+                <option value="Customs">Customs</option>
+                <option value="Other Tests">Other Tests</option>
+              </select>
+              <span class="rates-count" id="ratesCount"></span>
+            </div>
+
+            <div class="rates-table-wrap">
+              <table class="rates-table" id="ratesTable" aria-label="BRTC Test Rates 2026">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th data-col="category">Category <span class="sort-icon">⇅</span></th>
+                    <th data-col="test">Name of Test <span class="sort-icon">⇅</span></th>
+                    <th data-col="price">Test Price (BDT) <span class="sort-icon">⇅</span></th>
+                    <th data-col="vat">VAT 15% (BDT) <span class="sort-icon">⇅</span></th>
+                    <th data-col="total">Total (BDT) <span class="sort-icon">⇅</span></th>
+                    <th data-col="method">Method</th>
+                  </tr>
+                </thead>
+                <tbody id="ratesBody">
+                  <!-- rows injected by JS -->
+                </tbody>
+              </table>
+              <div class="no-results" id="noResults">No tests match your search. Try a different keyword or category.</div>
+            </div>
+
             <div class="section-heading" style="margin-top:3.5rem;">
               <p class="section-heading__label">Process</p>
               <h2 class="section-heading__title">How to Request a Service</h2>
@@ -137,8 +354,9 @@
               <li>Testing / consultancy is conducted in the relevant department laboratory</li>
               <li>Official report is issued on department letterhead</li>
             </ol>
-          </div>
+          </div><!-- /main content -->
 
+          <!-- SIDEBAR -->
           <aside class="sidebar">
             <div class="sidebar-widget" style="background:var(--navy);border-top-color:var(--gold);">
               <h3 class="sidebar-widget__title" style="color:var(--gold);">BRTC Coordinator</h3>
@@ -163,6 +381,15 @@
               </div>
             </div>
             <div class="sidebar-widget">
+              <h3 class="sidebar-widget__title">Price List PDF</h3>
+              <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.7;margin-bottom:0.75rem;">
+                Download the complete BRTC Test Rates 2026 as an official PDF document.
+              </p>
+              <a class="btn btn--primary" href="assets/files/BRTC_Test_Rates_2026.pdf" download style="width:100%;justify-content:center;font-size:0.82rem;">
+                ⬇ BRTC_Test_Rates_2026.pdf
+              </a>
+            </div>
+            <div class="sidebar-widget">
               <h3 class="sidebar-widget__title">Quick Links</h3>
               <a class="sidebar-nav__item" href="../research/index.html">Research Groups</a>
               <a class="sidebar-nav__item" href="../people/faculty.html">Faculty Experts</a>
@@ -170,10 +397,12 @@
               <a class="sidebar-nav__item" href="../notices/index.html">Notices</a>
             </div>
           </aside>
-        </div>
+
+        </div><!-- /content-with-sidebar -->
       </div>
     </section>
   </main>
+
   <footer class="footer" role="contentinfo">
     <div class="container footer__main">
       <div class="footer-col">
@@ -222,6 +451,472 @@
       <span><a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a> &nbsp;·&nbsp; <a href="../contact/index.html">Webmaster</a></span>
     </div>
   </footer>
+
   <script src="../assets/js/main.js"></script>
+  <script>
+  // ─── BRTC Test Rates Data (from BRTC Price List 2026) ────────────────────────
+  const RATES = [
+    // ── Chemical Analysis ──────────────────────────────────────────────────────
+    { cat:"Chemical Analysis", sub:"Alum", test:"Al₂O₃", price:7000, vat:1050, total:8050, method:"ASTM C 2598" },
+    { cat:"Chemical Analysis", sub:"Alum", test:"Fe₂O₃", price:7000, vat:1050, total:8050, method:"ASTM C 2598" },
+    { cat:"Chemical Analysis", sub:"Alum", test:"Insoluble Residue (IR)", price:7000, vat:1050, total:8050, method:"ASTM C 2598" },
+    { cat:"Chemical Analysis", sub:"Lime / Hydrated", test:"CaCO₃", price:7000, vat:1050, total:8050, method:"ASTM C 2598" },
+    { cat:"Chemical Analysis", sub:"Lime / Hydrated", test:"CaO", price:7000, vat:1050, total:8050, method:"ASTM C 2598" },
+    { cat:"Chemical Analysis", sub:"Lime / Hydrated", test:"Size", price:2800, vat:420, total:3220, method:"Tyler mesh analysis" },
+    { cat:"Chemical Analysis", sub:"Bleaching Powder", test:"Chlorine Content and Boiling Loss", price:7000, vat:1050, total:8050, method:"ASTM D2022" },
+    { cat:"Chemical Analysis", sub:"Paper", test:"GSM", price:3500, vat:525, total:4025, method:"ASTM D 646-13" },
+    { cat:"Chemical Analysis", sub:"Paper", test:"Bulk", price:3500, vat:525, total:4025, method:"" },
+    { cat:"Chemical Analysis", sub:"Paper", test:"Bursting Factor", price:3500, vat:525, total:4025, method:"" },
+    { cat:"Chemical Analysis", sub:"Paper", test:"Moisture Content", price:3500, vat:525, total:4025, method:"ASTM C114" },
+    { cat:"Chemical Analysis", sub:"Paper", test:"Size", price:3500, vat:525, total:4025, method:"Scalometric" },
+    { cat:"Chemical Analysis", sub:"Paper", test:"Thickness", price:3500, vat:525, total:4025, method:"Slide calipers" },
+    { cat:"Chemical Analysis", sub:"Hydrogen Peroxide", test:"H₂O₂ Content", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Hydrogen Peroxide", test:"Specific Gravity at 20°C", price:1500, vat:225, total:1725, method:"Gravimetric" },
+    { cat:"Chemical Analysis", sub:"Hydrogen Peroxide", test:"Thermal Stability", price:2800, vat:420, total:3220, method:"" },
+    { cat:"Chemical Analysis", sub:"Soda Ash", test:"Insoluble Residue (IR)", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Soda Ash", test:"Iron", price:7000, vat:1050, total:8050, method:"ASTM E291" },
+    { cat:"Chemical Analysis", sub:"Soda Ash", test:"Na₂CO₃ Content", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Soda Ash", test:"NaCl", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Soda Ash", test:"pH", price:1500, vat:225, total:1725, method:"ASTM D 1293" },
+    { cat:"Chemical Analysis", sub:"Soda Ash", test:"SO₄²⁻", price:7000, vat:1050, total:8050, method:"Spectrophotometric" },
+    { cat:"Chemical Analysis", sub:"Caustic Soda", test:"Na₂CO₃ %", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Caustic Soda", test:"Na₂SO₄ %", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Chemical Analysis", sub:"Caustic Soda", test:"NaCl %", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Caustic Soda", test:"NaOH %", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Sea Salt", test:"Ca", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Sea Salt", test:"Density", price:2350, vat:353, total:2703, method:"Gravimetric" },
+    { cat:"Chemical Analysis", sub:"Sea Salt", test:"Fe", price:7000, vat:1050, total:8050, method:"ASTM E 291" },
+    { cat:"Chemical Analysis", sub:"Sea Salt", test:"IR", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Sea Salt", test:"NaCl %", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"Sea Salt", test:"pH", price:2350, vat:353, total:2703, method:"ASTM D 1293 / Glass electrode" },
+    { cat:"Chemical Analysis", sub:"Sea Salt", test:"SO₄", price:7000, vat:1050, total:8050, method:"Spectrophotometric" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"Insoluble Residue (IR)", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"SiO₂", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"Al₂O₃", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"Fe₂O₃", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"CaO", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"MgO", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"LOI", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"VOC", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"Sulphide as SO₃", price:7000, vat:1050, total:8050, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"K₂O", price:7000, vat:1050, total:8050, method:"Flame photometer" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"C₃A", price:7000, vat:1050, total:8050, method:"ASTM C 150" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"Na₂O", price:7000, vat:1050, total:8050, method:"Flame photometer" },
+    { cat:"Chemical Analysis", sub:"Cement", test:"Chloride", price:7000, vat:1050, total:8050, method:"IS 6925" },
+    { cat:"Chemical Analysis", sub:"Cement Package", test:"Cement Package (IR, SiO₂, Al₂O₃, Fe₂O₃, CaO, MgO, LOI, VOC, Sulphide as SO₃, Chloride, C₃A, C₃S)", price:70000, vat:10500, total:80500, method:"ASTM C114, C150, IS 6925, Flame photometer" },
+    { cat:"Chemical Analysis", sub:"Zinc Oxide", test:"Zinc Oxide", price:7000, vat:1050, total:8050, method:"" },
+    { cat:"Chemical Analysis", sub:"Boiler Scale", test:"Ca", price:7000, vat:1050, total:8050, method:"AAS" },
+    { cat:"Chemical Analysis", sub:"Boiler Scale", test:"Mg", price:7000, vat:1050, total:8050, method:"AAS" },
+    { cat:"Chemical Analysis", sub:"Boiler Scale", test:"Iron", price:7000, vat:1050, total:8050, method:"AAS" },
+    { cat:"Chemical Analysis", sub:"Boiler Scale", test:"Silicon", price:7000, vat:1050, total:8050, method:"AAS" },
+    { cat:"Chemical Analysis", sub:"Limestone", test:"CaO, SiO₂, LOI", price:27950, vat:4193, total:32143, method:"ASTM C 114" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"Color / Appearance", price:1500, vat:225, total:1725, method:"Spectrophotometric" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"pH", price:1500, vat:225, total:1725, method:"ASTM D 1293 / Glass electrode" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"Interaction with Chlorine", price:3000, vat:450, total:3450, method:"" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"Viscosity", price:3000, vat:450, total:3450, method:"ASTM D88" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"Water Solubility", price:1500, vat:225, total:1725, method:"Gravimetric" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"Bulk Density", price:1500, vat:225, total:1725, method:"" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"Insoluble Residue (IR)", price:7000, vat:1050, total:8050, method:"ASTM C494" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"% of Polymer", price:8600, vat:1290, total:9890, method:"" },
+    { cat:"Chemical Analysis", sub:"Polyelectrolyte", test:"Jar Test", price:17500, vat:2625, total:20125, method:"SM" },
+    { cat:"Chemical Analysis", sub:"NPKS Fertilizer", test:"Nitrogen as NH₃", price:3500, vat:525, total:4025, method:"Titrimetric" },
+    { cat:"Chemical Analysis", sub:"NPKS Fertilizer", test:"Phosphate as P₂O₅", price:1750, vat:263, total:2013, method:"Spectrophotometric" },
+    { cat:"Chemical Analysis", sub:"NPKS Fertilizer", test:"Potassium as K₂O", price:3000, vat:450, total:3450, method:"Flame photometer" },
+    { cat:"Chemical Analysis", sub:"NPKS Fertilizer", test:"Sulphur as SO₄", price:1750, vat:263, total:2013, method:"Spectrophotometric" },
+
+    // ── Air Analysis ───────────────────────────────────────────────────────────
+    { cat:"Air Analysis", sub:"Stack/Chimney Gas", test:"SOx", price:8000, vat:1200, total:9200, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Stack/Chimney Gas", test:"NOx", price:8000, vat:1200, total:9200, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Stack/Chimney Gas", test:"CO₂", price:8000, vat:1200, total:9200, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Stack/Chimney Gas", test:"CO", price:8000, vat:1200, total:9200, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Stack/Chimney Gas", test:"SPM (Suspended Particulate Matter)", price:29150, vat:4373, total:33523, method:"" },
+    { cat:"Air Analysis", sub:"Stack/Chimney Gas", test:"Noise Level", price:8000, vat:1200, total:9200, method:"" },
+    { cat:"Air Analysis", sub:"Stack/Chimney Gas", test:"Extra fees per site visit (Dhaka and nearby only)", price:22000, vat:3300, total:25300, method:"Conveyance by client" },
+    { cat:"Air Analysis", sub:"Ambient Air", test:"SOx", price:7000, vat:1050, total:8050, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Ambient Air", test:"NOx", price:7000, vat:1050, total:8050, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Ambient Air", test:"CO₂", price:7000, vat:1050, total:8050, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Ambient Air", test:"CO", price:7000, vat:1050, total:8050, method:"Gastec tubes" },
+    { cat:"Air Analysis", sub:"Ambient Air", test:"SPM (Suspended Particulate Matter)", price:29150, vat:4373, total:33523, method:"" },
+    { cat:"Air Analysis", sub:"Ambient Air", test:"Noise Level", price:7000, vat:1050, total:8050, method:"" },
+    { cat:"Air Analysis", sub:"Ambient Air", test:"Extra fees per site visit (inside Dhaka)", price:22000, vat:3300, total:25300, method:"Conveyance by client" },
+
+    // ── Water Analysis ─────────────────────────────────────────────────────────
+    { cat:"Water Analysis", sub:"", test:"Aluminum (Al)", price:4000, vat:600, total:4600, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Ammonium (NH₄⁺)", price:1200, vat:180, total:1380, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Arsenic (As)", price:2000, vat:300, total:2300, method:"AAS (consumable 800 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Barium (Ba)", price:2000, vat:300, total:2300, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Biochemical Oxygen Demand (BOD₅)", price:2000, vat:300, total:2300, method:"SM" },
+    { cat:"Water Analysis", sub:"", test:"Boron (B)", price:2500, vat:375, total:2875, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Bicarbonate (HCO₃⁻)", price:1000, vat:150, total:1150, method:"Titrimetric" },
+    { cat:"Water Analysis", sub:"", test:"Carbonate (CO₃)", price:1000, vat:150, total:1150, method:"Titrimetric" },
+    { cat:"Water Analysis", sub:"", test:"Calcium (Ca)", price:1800, vat:270, total:2070, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Carbon Dioxide (CO₂)", price:1000, vat:150, total:1150, method:"SM" },
+    { cat:"Water Analysis", sub:"", test:"Chemical Oxygen Demand (COD)", price:2000, vat:300, total:2300, method:"SM" },
+    { cat:"Water Analysis", sub:"", test:"Chloride", price:900, vat:135, total:1035, method:"ASTM E291" },
+    { cat:"Water Analysis", sub:"", test:"Cadmium", price:2000, vat:300, total:2300, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Chromium (Cr), Hexavalent", price:1500, vat:225, total:1725, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Chromium (Cr), Total", price:1800, vat:270, total:2070, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Cobalt", price:2500, vat:375, total:2875, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Coliform, Fecal", price:1250, vat:188, total:1438, method:"Plate counting" },
+    { cat:"Water Analysis", sub:"", test:"Coliform, Total", price:1250, vat:188, total:1438, method:"Plate counting" },
+    { cat:"Water Analysis", sub:"", test:"Color", price:500, vat:75, total:575, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Color (Filtered)", price:650, vat:98, total:748, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Conductivity", price:700, vat:105, total:805, method:"Glass Electrode" },
+    { cat:"Water Analysis", sub:"", test:"Copper (Cu)", price:2000, vat:300, total:2300, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Density / Specific Gravity", price:500, vat:75, total:575, method:"Gravimetric" },
+    { cat:"Water Analysis", sub:"", test:"Dissolved Oxygen (DO)", price:500, vat:75, total:575, method:"Glass electrode" },
+    { cat:"Water Analysis", sub:"", test:"Free Ammonia (NH₃-N)", price:1200, vat:180, total:1380, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Fluoride, F", price:1000, vat:150, total:1150, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Hydroxyl (OH⁻)", price:2000, vat:300, total:2300, method:"Titrimetric" },
+    { cat:"Water Analysis", sub:"", test:"Iron (Fe)", price:1800, vat:270, total:2070, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Fe²⁺", price:6500, vat:975, total:7475, method:"" },
+    { cat:"Water Analysis", sub:"", test:"Fe³⁺", price:2000, vat:300, total:2300, method:"" },
+    { cat:"Water Analysis", sub:"", test:"Lead (Pb)", price:2000, vat:300, total:2300, method:"AAS (consumable 500 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Magnesium (Mg)", price:1800, vat:270, total:2070, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Manganese (Mn)", price:1800, vat:270, total:2070, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Mercury (Hg)", price:4000, vat:600, total:4600, method:"AAS (consumable 800 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Nickel (Ni)", price:2000, vat:300, total:2300, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Nitrogen (Kjeldahl)", price:12000, vat:1800, total:13800, method:"" },
+    { cat:"Water Analysis", sub:"", test:"Nitrate Nitrogen (NO₃-N)", price:900, vat:135, total:1035, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Nitrite Nitrogen (NO₂-N)", price:900, vat:135, total:1035, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Total Nitrogen (if not Kjeldahl)", price:12000, vat:1800, total:13800, method:"" },
+    { cat:"Water Analysis", sub:"", test:"Oil & Grease", price:6000, vat:900, total:6900, method:"Hexane extractable Gravimetric" },
+    { cat:"Water Analysis", sub:"", test:"pH", price:500, vat:75, total:575, method:"ASTM D 1293 / Glass electrode" },
+    { cat:"Water Analysis", sub:"", test:"Phosphate", price:1000, vat:150, total:1150, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Phosphorus (Total as P)", price:1000, vat:150, total:1150, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Potassium (K)", price:2000, vat:300, total:2300, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Silica (SiO₂)", price:1200, vat:180, total:1380, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Silicon (Si)", price:3000, vat:450, total:3450, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Inactive Silicon (as SiO₂)", price:3000, vat:450, total:3450, method:"AAS" },
+    { cat:"Water Analysis", sub:"", test:"Sodium (Na)", price:2000, vat:300, total:2300, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"", test:"Sulfate", price:1000, vat:150, total:1150, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Sulfide", price:1000, vat:150, total:1150, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Total Alkalinity", price:1000, vat:150, total:1150, method:"Titrimetric" },
+    { cat:"Water Analysis", sub:"", test:"Phenolphthalein / Methyl Orange Alkalinity", price:1000, vat:150, total:1150, method:"Titrimetric" },
+    { cat:"Water Analysis", sub:"", test:"Total Dissolved Solids (TDS)", price:1000, vat:150, total:1150, method:"Glass Electrode" },
+    { cat:"Water Analysis", sub:"", test:"Total Hardness", price:1000, vat:150, total:1150, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Carbonate Hardness (as CaCO₃)", price:2000, vat:300, total:2300, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Total Solids (TS)", price:1000, vat:150, total:1150, method:"Gravimetric" },
+    { cat:"Water Analysis", sub:"", test:"Total Suspended Solids (TSS)", price:1000, vat:150, total:1150, method:"Gravimetric" },
+    { cat:"Water Analysis", sub:"", test:"Turbidity", price:650, vat:98, total:748, method:"Spectrophotometric" },
+    { cat:"Water Analysis", sub:"", test:"Zinc (Zn)", price:1800, vat:270, total:2070, method:"AAS (consumable 300 BDT)" },
+    { cat:"Water Analysis", sub:"Drinking Water Package", test:"Drinking Water Parameters Package (pH, Color, Turbidity, Total Hardness, Chloride, TDS, Mn, As, Total Fe, Total Coliform)", price:7000, vat:1050, total:8050, method:"Various (ASTM, AAS, Plate counting)" },
+
+    // ── Other Tests ────────────────────────────────────────────────────────────
+    { cat:"Other Tests", sub:"Thermometer Calibration", test:"Thermometer Calibration up to 100°C", price:5000, vat:750, total:5750, method:"" },
+    { cat:"Other Tests", sub:"Thermometer Calibration", test:"Thermometer Calibration up to 200°C", price:8000, vat:1200, total:9200, method:"" },
+    { cat:"Other Tests", sub:"Thermometer Calibration", test:"Thermometer Calibration above 200°C (up to 250°C)", price:10000, vat:1500, total:11500, method:"" },
+    { cat:"Other Tests", sub:"", test:"Biodegradability of Plastic / Polymer", price:60000, vat:9000, total:69000, method:"" },
+    { cat:"Other Tests", sub:"", test:"Biomethane Potential (BMP) of Biomass / Waste", price:60000, vat:9000, total:69000, method:"Automatic BMP Setup" },
+    { cat:"Other Tests", sub:"", test:"Moisture Meter Calibration", price:27000, vat:4050, total:31050, method:"Gravimetric" },
+    { cat:"Other Tests", sub:"", test:"Micro Plastics in Water", price:32500, vat:4875, total:37375, method:"Raman Microscopy" },
+    { cat:"Other Tests", sub:"", test:"Jute Charcoal", price:40500, vat:6075, total:46575, method:"BET" },
+
+    // ── Admixture Analysis ─────────────────────────────────────────────────────
+    { cat:"Admixture Analysis", sub:"", test:"pH", price:1500, vat:225, total:1725, method:"ASTM D1293" },
+    { cat:"Admixture Analysis", sub:"", test:"Specific Gravity", price:1500, vat:225, total:1725, method:"ASTM C494" },
+    { cat:"Admixture Analysis", sub:"", test:"Chloride Content", price:7000, vat:1050, total:8050, method:"ASTM E291 / EN480" },
+    { cat:"Admixture Analysis", sub:"", test:"Density", price:1500, vat:225, total:1725, method:"ASTM C494" },
+    { cat:"Admixture Analysis", sub:"", test:"IR", price:7000, vat:1050, total:8050, method:"ASTM C494" },
+    { cat:"Admixture Analysis", sub:"", test:"Dry Material Content", price:3000, vat:450, total:3450, method:"ASTM C494" },
+    { cat:"Admixture Analysis", sub:"", test:"Alkali Content", price:7000, vat:1050, total:8050, method:"AAS" },
+
+    // ── Food & Contamination Analysis ──────────────────────────────────────────
+    { cat:"Food & Contamination", sub:"", test:"Vitamins (Fat Soluble)", price:8000, vat:1200, total:9200, method:"LC-MS/MS or Raman Microscopy" },
+    { cat:"Food & Contamination", sub:"", test:"Vitamins (Water Soluble)", price:5500, vat:825, total:6325, method:"LC-MS/MS or Raman Microscopy" },
+    { cat:"Food & Contamination", sub:"", test:"Aflatoxin (B1, B2, G1, G2, M1, M2, Ochratoxin)", price:8100, vat:1215, total:9315, method:"LC-MS/MS" },
+    { cat:"Food & Contamination", sub:"", test:"Total Aflatoxin (B1, B2, G1, G2)", price:9200, vat:1380, total:10580, method:"LC-MS/MS" },
+    { cat:"Food & Contamination", sub:"", test:"Pesticides (Carbamate Based)", price:8000, vat:1200, total:9200, method:"LC-MS/MS or Raman Microscopy" },
+    { cat:"Food & Contamination", sub:"", test:"Amino Acid Profile", price:10750, vat:1613, total:12363, method:"LC-MS/MS or Raman Microscopy" },
+    { cat:"Food & Contamination", sub:"", test:"Antibiotics (Amoxicillin, Tylosin, Gentamicin, Tetracycline, Oxytetracycline, Chlorotetracycline, Doxycycline, Chloramphenicol, Nitrofuran Metabolites, etc.)", price:8000, vat:1200, total:9200, method:"LC-MS/MS or Raman Microscopy" },
+    { cat:"Food & Contamination", sub:"", test:"Hormones and Steroids (Dexamethasone, Prednisolone, etc.)", price:8000, vat:1200, total:9200, method:"LC-MS/MS" },
+
+    // ── Materials & Chemical ID ────────────────────────────────────────────────
+    { cat:"Materials & Chemical ID", sub:"", test:"Packaging Material Identification", price:3250, vat:488, total:3738, method:"Raman / ATR-FTIR" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Pharmaceuticals API Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Polymer Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Azo Compound Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Pesticides (Carbamate Based)", price:8000, vat:1200, total:9200, method:"LC-MS/MS or Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Amino Acid Profile", price:10750, vat:1613, total:12363, method:"LC-MS/MS or Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Chemical Identification with ATR-FTIR", price:2150, vat:323, total:2473, method:"ATR-FTIR" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Physical Analysis with Scanning Electron Microscope (EDX costs additional 1000 + VAT)", price:5500, vat:825, total:6325, method:"SEM" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Cellulosic Compound Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Nylon Derivatives Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Basic Inorganic Chemical Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Basic Organic Chemical Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Solvents Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Resin Identification", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Identification of Common Ingredients in Paints and Pigments", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Identification of Hydrocarbons", price:5500, vat:825, total:6325, method:"Raman Microscopy" },
+    { cat:"Materials & Chemical ID", sub:"", test:"Hormones and Steroids (Dexamethasone, Prednisolone, etc.)", price:8000, vat:1200, total:9200, method:"LC-MS/MS or Raman Microscopy" },
+
+    // ── Fuel Analysis ──────────────────────────────────────────────────────────
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Heating / Calorific Value", price:7750, vat:1163, total:8913, method:"ASTM D2015 (consumable 300 BDT)" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Proximate Analysis (Ash, Fixed Carbon, Volatile Matter, Moisture)", price:8600, vat:1290, total:9890, method:"ASTM D3172 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Elemental / Ultimate Analysis (C, H, N, S, O, Ash)", price:10750, vat:1613, total:12363, method:"ASTM D5373 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Sulfur", price:8000, vat:1200, total:9200, method:"ASTM D3177" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Moisture Content", price:3000, vat:450, total:3450, method:"ASTM D3173" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Inherent Moisture", price:3000, vat:450, total:3450, method:"ASTM D1412" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Surface Moisture", price:3000, vat:450, total:3450, method:"ASTM D1412" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Volatile Matter", price:3250, vat:488, total:3738, method:"ASTM D3175 (consumable 250 BDT)" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Fixed Carbon", price:3250, vat:488, total:3738, method:"ASTM D3172 (consumable 250 BDT)" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Size Distribution", price:6000, vat:900, total:6900, method:"ASTM D4749" },
+    { cat:"Fuel Analysis", sub:"Solid Fuels (Coal, Biomass, MSW)", test:"Ash Content", price:2700, vat:405, total:3105, method:"ASTM D3172 (consumable 200 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Free Acid / Free Base Value", price:7000, vat:1050, total:7475, method:"ASTM D4809 (consumable 300 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"TAN / TBN", price:9675, vat:1451, total:10350, method:"ASTM D4809 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"TAN and TBN Combined Package", price:14000, vat:2100, total:14950, method:"ASTM D664 (consumable 1000 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Lower Heating Value", price:10750, vat:1613, total:12363, method:"ASTM D664 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"ASTM Color", price:1500, vat:225, total:1725, method:"ASTM D1500" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"ASTM Distillation", price:5500, vat:825, total:6325, method:"ASTM D 86" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Copper Strip Corrosion", price:3250, vat:488, total:3738, method:"ASTM D 130-94 (consumable 50 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Reid Vapor Pressure", price:5500, vat:825, total:6325, method:"ASTM D323" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Carbon Type", price:21500, vat:3225, total:24725, method:"ASTM D130 (consumable 2000 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Aniline Point", price:3000, vat:450, total:3450, method:"ASTM D611 (consumable 100 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Density", price:1500, vat:225, total:1725, method:"ASTM D1298" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Fire Point", price:3000, vat:450, total:3450, method:"ASTM D 97" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Flash Point", price:3000, vat:450, total:3450, method:"ASTM D 93" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Gross Heating / Calorific Value", price:8000, vat:1200, total:9200, method:"ASTM D 97 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Pour Point", price:3000, vat:450, total:3450, method:"ASTM D 93" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"pH", price:1500, vat:225, total:1725, method:"ASTM D1293" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Sulphur", price:8000, vat:1200, total:9200, method:"ASTM D 3177 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Carbon Residue", price:8000, vat:1200, total:9200, method:"ASTM D189 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Volatile Matter", price:6000, vat:900, total:6900, method:"ASTM D 5142 (consumable 250 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Fixed Carbon", price:3250, vat:488, total:3738, method:"ASTM D 5142 (consumable 250 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Ash Content", price:2700, vat:405, total:3105, method:"ASTM D 5142 (consumable 200 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Cetane Index / Number", price:6000, vat:900, total:6900, method:"ASTM D482" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Diesel Index", price:6000, vat:900, total:6900, method:"ASTM D4737 (consumable 100 BDT)" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Sediment", price:3250, vat:488, total:3738, method:"ASTM D 1796" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Solid Particle", price:3000, vat:450, total:3450, method:"ASTM D1796" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Water", price:3000, vat:450, total:3450, method:"ASTM D1796" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Bottom Sediment and Water (BSW)", price:5500, vat:825, total:6325, method:"ASTM D 1796" },
+    { cat:"Fuel Analysis", sub:"Liquid Fuels (Furnace Oil, Petrol, Diesel, HFO, NG Condensate, etc.)", test:"Oil Particle Contamination", price:9675, vat:1451, total:11126, method:"ASTM D6217" },
+    { cat:"Fuel Analysis", sub:"Gaseous Fuels (NG, LPG, etc.)", test:"Composition and Heating Value", price:21500, vat:3225, total:24725, method:"Gas Chromatography (consumable 1000 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Free Acid / Free Base Value", price:7000, vat:1050, total:8050, method:"ASTM D664 (consumable 300 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"TAN / TBN", price:9675, vat:1451, total:11126, method:"ASTM D664 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"TAN and TBN Combined Package", price:14000, vat:2100, total:16100, method:"ASTM D664 (consumable 1000 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Volatile Content", price:5650, vat:848, total:6498, method:"ASTM D5142 (consumable 200 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Ash Content", price:2700, vat:405, total:3105, method:"ASTM D5142 (consumable 200 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Sulphur", price:8000, vat:1200, total:9200, method:"ASTM D3227 (consumable 500 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Viscosity at One Temperature", price:2700, vat:405, total:3105, method:"ASTM D88 (consumable 200 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Viscosity Index (at 40°C and 100°C)", price:7000, vat:1050, total:8050, method:"ASTM D88 (consumable 200 BDT)" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"ASTM Color", price:1500, vat:225, total:1725, method:"ASTM D1500" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"ASTM Distillation", price:5500, vat:825, total:6325, method:"ASTM D 86" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Copper Strip Corrosion", price:3250, vat:488, total:3738, method:"ASTM D130" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Density", price:1500, vat:225, total:1725, method:"ASTM D 1298" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Fire Point", price:3000, vat:450, total:3450, method:"ASTM D 97" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Flash Point", price:3000, vat:450, total:3450, method:"ASTM D93" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Pour Point", price:3000, vat:450, total:3450, method:"ASTM D97" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"pH", price:1500, vat:225, total:1725, method:"ASTM D 1293" },
+    { cat:"Fuel Analysis", sub:"Engine Oil / Needle Oil / Transformer Oil / Knitting Oil", test:"Solid Particle", price:3000, vat:450, total:3450, method:"ASTM D1796" },
+    { cat:"Fuel Analysis", sub:"Rifle Grease", test:"Rifle Grease (According to PX-11)", price:17500, vat:2625, total:20125, method:"PX-11" },
+    { cat:"Fuel Analysis", sub:"Rifle Oil", test:"Rifle Oil (According to PX-11)", price:17500, vat:2625, total:20125, method:"PX-11" },
+
+    // ── ESTeX ──────────────────────────────────────────────────────────────────
+    { cat:"ESTeX", sub:"Element Analysis (TXRF)", test:"Soil / Textile / Sludge (up to 30 elements)", price:55000, vat:8250, total:63250, method:"TXRF" },
+    { cat:"ESTeX", sub:"Element Analysis (TXRF)", test:"Water Sample (up to 30 elements)", price:32500, vat:4875, total:37375, method:"TXRF" },
+    { cat:"ESTeX", sub:"Element Analysis (TXRF)", test:"Feed (Dairy, Poultry, Hatchery) and Agricultural Products (up to 30 elements)", price:55000, vat:8250, total:63250, method:"TXRF" },
+    { cat:"ESTeX", sub:"", test:"Chlorinated Compounds, VOCs, Alcohols, Aldehydes, Esters, Ketones, Fatty Acids, PAHs, PCBs, Pesticides, Herbicides (Water, Soil, Sludge)", price:32500, vat:4875, total:37375, method:"GC-MS" },
+    { cat:"ESTeX", sub:"", test:"Analysis of Functional Groups (Plastics, Textile Pigments, Polymers, Coatings, Antioxidants, UV Stabilizers, Nutrients and Adulterants)", price:2150, vat:323, total:2473, method:"FT-IR" },
+    { cat:"ESTeX", sub:"PPE Testing", test:"PPE Testing: Mask Synthetic Blood Penetration", price:21500, vat:3225, total:24725, method:"ASTM F1862" },
+    { cat:"ESTeX", sub:"PPE Testing", test:"PPE Testing: Mask Bacterial Filtration Efficiency", price:13975, vat:2097, total:16072, method:"ASTM F2101" },
+    { cat:"ESTeX", sub:"PPE Testing", test:"Protective Clothing Viral Penetration Resistance (Disposable Medical Gowns, Coveralls Level 1–4)", price:37650, vat:5250, total:40250, method:"ASTM F1671/F1671M" },
+
+    // ── Paint / Red Oxide ──────────────────────────────────────────────────────
+    { cat:"Paint / Red Oxide", sub:"", test:"Flash Point", price:2800, vat:420, total:3220, method:"ASTM D 93" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Viscosity", price:2800, vat:420, total:3220, method:"ASTM D 1200 / Ford Cup No.4" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Drying Time", price:6000, vat:900, total:6900, method:"ASTM D 5895, D 1640, BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Coverage", price:7000, vat:1050, total:8050, method:"ASTM D 5895" },
+    { cat:"Paint / Red Oxide", sub:"", test:"VOC", price:7000, vat:1050, total:8050, method:"ASTM D 5895, D 3960" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Lead Content", price:7000, vat:1050, total:8050, method:"AAS" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Color", price:2800, vat:420, total:3220, method:"Visual inspection" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Gloss", price:3250, vat:488, total:3738, method:"BDS ISO 2814 (A), ASTM D 523" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Specific Gravity", price:2800, vat:420, total:3220, method:"ASTM D189" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Finish / Grind", price:3250, vat:488, total:3738, method:"BDS 1833.2018 (A1.3), ASTM D 1210" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Opacity*", price:3250, vat:488, total:3738, method:"ASTM D 2805, BDS ISO 2814 (A)" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Wet Film Thickness*", price:10750, vat:1613, total:12363, method:"BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Dry Film Thickness*", price:10750, vat:1613, total:12363, method:"BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"WFT + DFT*", price:16150, vat:2423, total:18573, method:"BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Pot Life of Mixed Paint*", price:5000, vat:750, total:5750, method:"BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Storage Properties*", price:32500, vat:4875, total:37375, method:"BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Color Fastness and Resistance to Chalking*", price:7000, vat:1050, total:8050, method:"BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Acid Soluble Residue on Sieve*", price:12000, vat:1800, total:13800, method:"BDS 1706:2015" },
+    { cat:"Paint / Red Oxide", sub:"", test:"Water Repellency", price:5000, vat:750, total:5750, method:"In-house Method" },
+
+    // ── GC-GC/MS ──────────────────────────────────────────────────────────────
+    { cat:"GC-GC/MS", sub:"Stack Analysis", test:"Particulate Matter", price:107500, vat:16125, total:123625, method:"Isokinetic air sampler" },
+    { cat:"GC-GC/MS", sub:"Stack Analysis", test:"Gaseous Pollutant (SOx, NOx, CO, CO₂)", price:21500, vat:3225, total:24725, method:"Gas chromatography / GC-MS" },
+    { cat:"GC-GC/MS", sub:"Organic Chemicals (Methanol, Ethanol, Propanol, Butanol, Hexane, Pentane, Benzene, Toluene, Xylene, MTBE, Acetone, Acetaldehyde, MEK, DME, Ethyl Benzene, Hexanone)", test:"Organic Chemicals Analysis", price:21500, vat:3225, total:24725, method:"Gas chromatography / GC-MS" },
+    { cat:"GC-GC/MS", sub:"LPG / NG", test:"Naptha", price:27000, vat:4050, total:31050, method:"Gas chromatography" },
+    { cat:"GC-GC/MS", sub:"LPG / NG", test:"Natural Gas", price:27000, vat:4050, total:31050, method:"Gas chromatography" },
+    { cat:"GC-GC/MS", sub:"LPG / NG", test:"Condensate", price:27000, vat:4050, total:31050, method:"Gas chromatography" },
+    { cat:"GC-GC/MS", sub:"LPG / NG", test:"LPG", price:27000, vat:4050, total:31050, method:"Gas chromatography" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Density / SG", price:1500, vat:225, total:1725, method:"ASTM D1298" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Moisture", price:3000, vat:450, total:3450, method:"ASTM D3173" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Peroxide Value", price:6500, vat:975, total:7475, method:"Titrimetric" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Saponification Value", price:6500, vat:975, total:7475, method:"Titrimetric" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Free Fatty Acid", price:6500, vat:975, total:7475, method:"Titrimetric" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Acid Value", price:6500, vat:975, total:7475, method:"Titrimetric" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Iodine Value", price:7500, vat:1125, total:8625, method:"Titrimetric" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Insoluble Impurities", price:7000, vat:1050, total:8050, method:"Gravimetric" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Trace Elemental Analysis", price:21500, vat:3225, total:24725, method:"TXRF / AAS" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Flash Point", price:3000, vat:450, total:3450, method:"ASTM D93" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Refractive Index", price:3250, vat:488, total:3738, method:"Refractometric" },
+    { cat:"GC-GC/MS", sub:"Edible Oil", test:"Color", price:1500, vat:225, total:1725, method:"Visual inspection" },
+
+    // ── Customs ────────────────────────────────────────────────────────────────
+    { cat:"Customs", sub:"Refrigerant Gas", test:"Refrigerant Gas Composition", price:21500, vat:3225, total:24725, method:"GC" },
+    { cat:"Customs", sub:"Non-Portland Cement Mixture", test:"Silica (SiO₂)", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Non-Portland Cement Mixture", test:"Lime (CaO)", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Non-Portland Cement Mixture", test:"Alumina (Al₂O₃)", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Non-Portland Cement Mixture", test:"Magnesium Oxide (MgO)", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Non-Portland Cement Mixture", test:"Sulfurous Compound (SO₃)", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Eterac Acrylic Polyol Polyurethane Coating", test:"Color, Solid Content, Acid Value, Solubility in Water, Flash Point, Relative Density", price:21500, vat:3225, total:24725, method:"Visual Inspection, ASTM D 1298, ASTM D93, ASTM D5142" },
+    { cat:"Customs", sub:"Potassium Methyl Siliconate", test:"Potassium (K), Particle Density, Solid Content, pH", price:21500, vat:3225, total:24725, method:"Flame Photometric, ASTM D1298, ASTM D3173" },
+    { cat:"Customs", sub:"Fire Bricks", test:"SiO₂, Al₂O₃, CaO, SO₃, Fe₂O₃", price:21500, vat:3225, total:24725, method:"ASTM C114" },
+    { cat:"Customs", sub:"Glucose / Starch", test:"Refractive Index, Solubility, pH, Specific Gravity, Melting Point, Flammability, Sulphate, Sodium", price:21500, vat:3225, total:24725, method:"Refractometric, ASTM D1298, ASTM D1293, Flame Photometric, Spectrophotometric" },
+    { cat:"Customs", sub:"Soda Ash Light / Disodium Carbonate", test:"Sodium Carbonate, Loss on Drying, Density", price:21500, vat:3225, total:24725, method:"Titrimetric, ASTM D1298, ASTM D3173" },
+    { cat:"Customs", sub:"Lubricating Oil / Base Oil / Mineral Oil", test:"Mineral Oil Additives, Flash Point, Viscosity, Density", price:21500, vat:3225, total:24725, method:"ASTM D 1298, D 5142, D88, D93" },
+    { cat:"Customs", sub:"Stone Chip / Basalt / Clay", test:"Appearance, Size, Shape, Aggregate Form", price:21500, vat:3225, total:24725, method:"Visual Inspection, ASTM C 136, ASTM C 939" },
+    { cat:"Customs", sub:"Micronutrient Premix", test:"B Vitamins, Minerals (Fe, Ca, Mg)", price:21500, vat:3225, total:24725, method:"Titration, Spectrophotometric" },
+    { cat:"Customs", sub:"Dolomite Powder", test:"Calcium (Ca), Magnesium (Mg)", price:21500, vat:3225, total:24725, method:"AAS, Titration, Raman Spectroscopy, Spectrophotometric" },
+    { cat:"Customs", sub:"Silica Sand / Sand C-778 / Silica Quartz", test:"SiO₂, SO₃²⁻, Loss of Ignition", price:21500, vat:3225, total:24725, method:"ASTM C114, ASTM C25, Gravimetric" },
+    { cat:"Customs", sub:"Sodium Bicarbonate", test:"Sodium Bicarbonate", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Customs", sub:"Azo Dye Carbonamite", test:"Conformity Test, Concentration, Al₂O₃, Cl", price:21500, vat:3225, total:24725, method:"AAS, ASTM D1298" },
+    { cat:"Customs", sub:"DMI 65 Water Filtration Media", test:"Bulk Density, SG, SiO₂, Mn₂O₃, CaCO₃", price:21500, vat:3225, total:24725, method:"ASTM C114, ASTM D1298" },
+    { cat:"Customs", sub:"Na₂CO₃", test:"Concentration (%)", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Customs", sub:"K₂SiO₃", test:"SG, Viscosity, Insoluble Matter, K₂SiO₃, Sodium Content", price:21500, vat:3225, total:24725, method:"ASTM D88, ASTM D1298, Gravimetric, AAS" },
+    { cat:"Customs", sub:"Limestone (Custom)", test:"CaO, SiO₂, IR, MgO, LOI", price:21500, vat:3225, total:24725, method:"ASTM C25" },
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Water Solubility, Al₂O₃, Iron as Fe₂O₃, Water Soluble Iron as Fe, Insoluble Matter, pH, Color", price:21500, vat:3225, total:24725, method:"ASTM C 2598, Visual Inspection, ASTM D1293" },
+    { cat:"Customs", sub:"Floor Hardener", test:"Silica, Alumina, Iron Oxide, Calcium Oxide", price:21500, vat:3225, total:24725, method:"ASTM C114" },
+    { cat:"Customs", sub:"Hydraulic Oil", test:"Kinematic Viscosity @ 40°C", price:3000, vat:450, total:3450, method:"ASTM D 88" },
+    { cat:"Customs", sub:"HSD (High Speed Diesel)", test:"Density @ 15, Ash, Carbon Residue, Total Sulphur, Sediment, Water Content, Particle Contamination, Total Na+K, Calcium, Lead, Zinc", price:21500, vat:3225, total:24725, method:"AAS, ASTM D 1298, ASTM D 1796, ASTM D 3177" },
+    { cat:"Customs", sub:"Acetic Acid", test:"% of Acetic Acid", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    { cat:"Customs", sub:"Hydrotreating Catalyst", test:"Surface Area, Pore Volume, Bulk Density, CaO, MoO₃, S, Cl", price:21500, vat:3225, total:24725, method:"BET, AAS, ASTM C25" },
+    { cat:"Customs", sub:"Stove Test", test:"Thermal Efficiency, Safety, Emission and IAP Test", price:75250, vat:11288, total:86538, method:"ISO 19867" },
+    { cat:"Customs", sub:"Paint Thinner", test:"VOC, Density, Boiling Point, Flash Point, Sulfur Content", price:21500, vat:3225, total:24725, method:"ASTM D 5142, ASTM D 1298, GC/GC-MS" },
+    { cat:"Customs", sub:"Dosing Chemicals", test:"Scale and Corrosion Inhibitor, Chelation Value", price:21500, vat:3225, total:24725, method:"Titrimetric" },
+    { cat:"Customs", sub:"Soil", test:"Bulk Density, Particle Density, Chemical Resistance, Uniformity Coefficient, Mesh Analysis", price:21500, vat:3225, total:24725, method:"Gravimetric" },
+    { cat:"Customs", sub:"Liquid PAC (Poly Aluminium Chloride)", test:"Appearance, pH, SO₄²⁻, Al₂O₃, Basicity, Iron as Fe, Arsenic, IR", price:21500, vat:3225, total:24725, method:"Colorimetric, Gravimetric, ASTM C 2598, Spectrophotometric" },
+    { cat:"Customs", sub:"Printing Ink", test:"Appearance, Dry Material Content, Surface Coating on Fabric/Paper/Metal, pH, Density", price:21500, vat:3225, total:24725, method:"ASTM D3172, D 5895, D1293, D1298, Visual Inspection" },
+  ];
+
+  // ─── Category badge class map ─────────────────────────────────────────────
+  const BADGE = {
+    "Chemical Analysis":  "badge-chemical",
+    "Water Analysis":     "badge-water",
+    "Air Analysis":       "badge-air",
+    "Fuel Analysis":      "badge-fuel",
+    "Food & Contamination":"badge-food",
+    "Materials & Chemical ID":"badge-materials",
+    "Admixture Analysis": "badge-admixture",
+    "Paint / Red Oxide":  "badge-paint",
+    "ESTeX":              "badge-estex",
+    "GC-GC/MS":           "badge-gcgcms",
+    "Customs":            "badge-customs",
+    "Other Tests":        "badge-other",
+  };
+
+  function fmt(n){ return n ? Number(n).toLocaleString('en-BD') : '—'; }
+
+  function highlight(text, query){
+    if (!query) return text;
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    return text.replace(new RegExp(`(${escaped})`,'gi'),'<mark>$1</mark>');
+  }
+
+  function buildRows(){
+    const tbody = document.getElementById('ratesBody');
+    tbody.innerHTML = '';
+    RATES.forEach((r, i) => {
+      const tr = document.createElement('tr');
+      tr.dataset.cat = r.cat;
+      tr.dataset.search = [r.cat, r.sub, r.test, r.method].join(' ').toLowerCase();
+      tr.innerHTML = `
+        <td>${i+1}</td>
+        <td>
+          <span class="category-badge ${BADGE[r.cat]||'badge-other'}">${r.cat}</span>
+          ${r.sub ? `<br><small style="font-size:0.7rem;color:var(--gray-400);display:block;margin-top:0.2rem;">${r.sub}</small>` : ''}
+        </td>
+        <td class="test-name">${r.test}</td>
+        <td class="price-cell">${fmt(r.price)}</td>
+        <td class="price-cell">${fmt(r.vat)}</td>
+        <td class="total-cell">${fmt(r.total)}</td>
+        <td class="method-cell">${r.method||'—'}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    updateCount();
+  }
+
+  function filterRows(){
+    const q = document.getElementById('ratesSearch').value.toLowerCase().trim();
+    const cat = document.getElementById('ratesCategory').value;
+    const rows = document.querySelectorAll('#ratesBody tr');
+    let visible = 0;
+
+    rows.forEach(tr => {
+      const matchCat = !cat || tr.dataset.cat === cat;
+      const matchQ   = !q   || tr.dataset.search.includes(q);
+      const show = matchCat && matchQ;
+      tr.classList.toggle('hidden', !show);
+      if (show) {
+        visible++;
+        // highlight
+        if (q) {
+          tr.querySelectorAll('td.test-name, td.method-cell').forEach(td => {
+            const original = td.dataset.orig || td.textContent;
+            td.dataset.orig = original;
+            td.innerHTML = highlight(original, q);
+          });
+        } else {
+          tr.querySelectorAll('td.test-name, td.method-cell').forEach(td => {
+            if (td.dataset.orig) { td.textContent = td.dataset.orig; delete td.dataset.orig; }
+          });
+        }
+      }
+    });
+
+    document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+    updateCount(visible);
+  }
+
+  function updateCount(n){
+    const total = RATES.length;
+    const shown = (n !== undefined) ? n : total;
+    document.getElementById('ratesCount').textContent =
+      shown === total ? `${total} tests` : `Showing ${shown} of ${total} tests`;
+  }
+
+  function sortTable(col){
+    const tbody = document.getElementById('ratesBody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const colMap = { category:1, test:2, price:3, vat:4, total:5, method:6 };
+    const idx = colMap[col];
+    const th = document.querySelector(`th[data-col="${col}"]`);
+    const asc = th.dataset.dir !== 'asc';
+    document.querySelectorAll('thead th').forEach(t => { t.classList.remove('sorted'); delete t.dataset.dir; });
+    th.classList.add('sorted');
+    th.dataset.dir = asc ? 'asc' : 'desc';
+    th.querySelector('.sort-icon').textContent = asc ? '↑' : '↓';
+
+    rows.sort((a,b) => {
+      const av = a.cells[idx].textContent.replace(/,/g,'').trim();
+      const bv = b.cells[idx].textContent.replace(/,/g,'').trim();
+      const an = parseFloat(av), bn = parseFloat(bv);
+      if (!isNaN(an) && !isNaN(bn)) return asc ? an-bn : bn-an;
+      return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+    rows.forEach(r => tbody.appendChild(r));
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    buildRows();
+    document.getElementById('ratesSearch').addEventListener('input', filterRows);
+    document.getElementById('ratesCategory').addEventListener('change', filterRows);
+    document.querySelectorAll('thead th[data-col]').forEach(th => {
+      th.addEventListener('click', () => sortTable(th.dataset.col));
+    });
+  });
+  </script>
 </body>
 </html>
