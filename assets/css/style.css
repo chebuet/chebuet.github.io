@@ -304,7 +304,7 @@ ul { list-style: none; }
   height: 44px;
   background: none; /* var(--gold); */
   border-radius: 0; /* 50%; */
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-serif);
@@ -312,7 +312,7 @@ ul { list-style: none; }
   font-weight: 700;
   color: var(--navy-dark);
   flex-shrink: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.02em; */
 }
 
 .navbar__logo-text {
