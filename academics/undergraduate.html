@@ -7,9 +7,249 @@
   <meta name="description" content="B.Sc. in Chemical Engineering at BUET — curriculum, admission, and program details." />
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+  <style>
+    /* ── Page Banner ── */
+    .page-banner {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #0a3060 100%);
+      color: var(--white);
+      padding: var(--sp-16) 0 var(--sp-12);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 360px; height: 360px;
+      border: 70px solid rgba(201,169,75,0.07);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .page-banner__inner { position: relative; z-index: 1; }
+    .page-banner__breadcrumb {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: var(--sp-3);
+      letter-spacing: 0.05em;
+    }
+    .page-banner__breadcrumb a { color: var(--gold); }
+    .page-banner__breadcrumb a:hover { color: var(--gold-light); }
+    .page-banner__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: var(--sp-3);
+    }
+    .page-banner__title span { color: var(--gold); }
+    .page-banner__subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* ── Content + Sidebar layout ── */
+    .content-with-sidebar {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--sp-12);
+      align-items: start;
+    }
+    .sidebar { position: sticky; top: calc(var(--nav-height) + var(--sp-6)); }
+    .sidebar-widget {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: var(--sp-6);
+      margin-bottom: var(--sp-4);
+    }
+    .sidebar-widget__title {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: var(--sp-4);
+      padding-bottom: var(--sp-2);
+      border-bottom: 2px solid var(--gold);
+    }
+    .sidebar-nav__item {
+      display: block;
+      padding: var(--sp-2) 0;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      border-bottom: 1px solid var(--gray-100);
+      transition: color var(--ease), padding var(--ease);
+    }
+    .sidebar-nav__item:hover { color: var(--navy); padding-left: var(--sp-2); }
+    .sidebar-nav__item.active { color: var(--navy); font-weight: 600; }
+
+    /* ── Stat highlight boxes ── */
+    .stat-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-10);
+    }
+    .stat-box {
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-top: 3px solid var(--gold);
+      padding: var(--sp-6);
+      border-radius: 2px;
+      text-align: center;
+    }
+    .stat-box__num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold-dark);
+      line-height: 1;
+      margin-bottom: var(--sp-1);
+    }
+    .stat-box__label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Data table ── */
+    .table-wrapper { overflow-x: auto; margin-bottom: var(--sp-4); }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .data-table thead {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .data-table thead th {
+      padding: var(--sp-3) var(--sp-4);
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .data-table tbody tr { border-bottom: 1px solid var(--gray-200); }
+    .data-table tbody tr:last-child { border-bottom: none; }
+    .data-table tbody tr:hover { background: rgba(201,169,75,0.05); }
+    .data-table td { padding: var(--sp-3) var(--sp-4); color: var(--gray-800); vertical-align: top; }
+    .data-table td:first-child { font-family: var(--font-mono); font-size: 0.8rem; color: var(--navy); white-space: nowrap; }
+    .data-table td:nth-child(3) { text-align: center; white-space: nowrap; }
+    .data-table .term-header td {
+      background: var(--off-white);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      padding: var(--sp-2) var(--sp-4);
+      border-top: 2px solid var(--gray-200);
+    }
+    .data-table .total-row td {
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: var(--sp-2) var(--sp-4);
+    }
+
+    /* ── Credit summary table ── */
+    .credit-summary {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin-bottom: var(--sp-6);
+    }
+    .credit-summary th, .credit-summary td {
+      padding: var(--sp-3) var(--sp-5);
+      border-bottom: 1px solid var(--gray-200);
+      text-align: left;
+    }
+    .credit-summary thead { background: var(--navy); color: var(--white); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .credit-summary tbody tr:hover { background: rgba(201,169,75,0.05); }
+    .credit-summary tbody tr:last-child { font-weight: 700; background: var(--off-white); }
+    .credit-summary td:last-child { text-align: center; font-weight: 600; color: var(--navy); }
+
+    /* ── PEO / PO list ── */
+    .numbered-list { list-style: none; counter-reset: items; }
+    .numbered-list li {
+      counter-increment: items;
+      display: flex;
+      gap: var(--sp-4);
+      padding: var(--sp-4) 0;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      align-items: flex-start;
+    }
+    .numbered-list li:last-child { border-bottom: none; }
+    .numbered-list li::before {
+      content: counter(items);
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 50%;
+      margin-top: 2px;
+    }
+
+    /* ── Elective specialization card ── */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--sp-5);
+      margin-top: var(--sp-6);
+    }
+    .spec-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-top: 3px solid var(--gold);
+      padding: var(--sp-5);
+    }
+    .spec-card__title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: var(--sp-3);
+    }
+    .spec-card__courses {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      line-height: 2;
+    }
+    .spec-card__courses span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--navy);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .content-with-sidebar { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+    }
+    @media (max-width: 480px) {
+      .stat-boxes { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- TOP BAR -->
   <div class="topbar">
     <div class="container topbar__inner">
       <span>Bangladesh University of Engineering and Technology (BUET)</span>
@@ -22,6 +262,7 @@
     </div>
   </div>
 
+  <!-- NAVIGATION -->
   <header class="navbar" role="banner">
     <div class="container navbar__inner">
       <a class="navbar__logo" href="../index.html" aria-label="Home — ChE BUET">
@@ -72,26 +313,29 @@
 
   <main id="main-content">
 
-    <div class="page-banner">
-      <div class="container">
-        <nav class="page-banner__breadcrumb" aria-label="Breadcrumb">
-          <a href="../index.html">Home</a>
-          <span>›</span>
-          <a href="index.html">Academics</a>
-          <span>›</span>
-          <span aria-current="page">Undergraduate</span>
-        </nav>
-        <h1 class="page-banner__title">Undergraduate Program</h1>
-        <p class="page-banner__subtitle">B.Sc. in Chemical Engineering — Four-Year Honours Degree</p>
+    <!-- PAGE BANNER -->
+    <section class="page-banner">
+      <div class="container page-banner__inner">
+        <p class="page-banner__breadcrumb">
+          <a href="../index.html">Home</a> &rsaquo; <a href="index.html">Academics</a> &rsaquo; Undergraduate
+        </p>
+        <h1 class="page-banner__title">
+          B.Sc. in <span>Chemical Engineering</span>
+        </h1>
+        <p class="page-banner__subtitle">
+          Four-year honours degree program — B.Sc. Engg. (Chem.) — approved curriculum, July 2023
+        </p>
       </div>
-    </div>
+    </section>
 
+    <!-- MAIN SECTION -->
     <section class="section">
       <div class="container">
         <div class="content-with-sidebar">
 
-          <!-- Main Content -->
+          <!-- ══ MAIN CONTENT ══ -->
           <div>
+
             <!-- Overview -->
             <div class="section-heading">
               <p class="section-heading__label">Program</p>
@@ -100,38 +344,97 @@
             </div>
 
             <p style="margin-bottom:1.25rem;color:var(--gray-600);line-height:1.8;">
-              The Department of Chemical Engineering at BUET offers a four-year Bachelor of Science (B.Sc.) degree in Chemical Engineering. Established in 1961, this program is one of the most prestigious in Bangladesh, combining rigorous theoretical foundations with hands-on laboratory and design experience.
+              The Department of Chemical Engineering at BUET offers a four-year Bachelor of Science degree in Chemical Engineering (<strong style="color:var(--navy);">B.Sc. Engg. (Chem.)</strong>). The program provides a broad and deep foundation in the theory, design and applications of Chemical Engineering and interdisciplinary fields. In parallel to theory courses, students attend laboratory sessionals, industrial visits, workshops, seminars, and training programs.
             </p>
-            <p style="margin-bottom:2.5rem;color:var(--gray-600);line-height:1.8;">
-              Graduates are equipped to work in the chemical, petrochemical, pharmaceutical, food processing, polymer, energy, and environmental sectors, or to pursue advanced studies and research. The curriculum is continuously updated to reflect the evolving needs of industry and society.
+            <p style="margin-bottom:var(--sp-10);color:var(--gray-600);line-height:1.8;">
+              From 2020 onwards, the department admits 120 undergraduate students per year. Graduates go on to work in the chemical, petrochemical, energy, environment, safety, pharmaceutical, biochemical engineering and other sectors — or pursue graduate and professional studies locally and internationally.
             </p>
 
-            <!-- Highlights -->
-            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:3rem;">
-              <div style="background:var(--off-white);border:1px solid var(--gray-200);border-top:3px solid var(--gold);padding:1.5rem;border-radius:2px;">
-                <div style="font-family:var(--font-serif);font-size:2rem;font-weight:600;color:var(--gold-dark);margin-bottom:0.25rem;">4</div>
-                <div style="font-size:0.82rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em;">Years Duration</div>
-              </div>
-              <div style="background:var(--off-white);border:1px solid var(--gray-200);border-top:3px solid var(--gold);padding:1.5rem;border-radius:2px;">
-                <div style="font-family:var(--font-serif);font-size:2rem;font-weight:600;color:var(--gold-dark);margin-bottom:0.25rem;">8</div>
-                <div style="font-size:0.82rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em;">Semesters</div>
-              </div>
-              <div style="background:var(--off-white);border:1px solid var(--gray-200);border-top:3px solid var(--gold);padding:1.5rem;border-radius:2px;">
-                <div style="font-family:var(--font-serif);font-size:2rem;font-weight:600;color:var(--gold-dark);margin-bottom:0.25rem;">160+</div>
-                <div style="font-size:0.82rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em;">Credit Hours</div>
-              </div>
-              <div style="background:var(--off-white);border:1px solid var(--gray-200);border-top:3px solid var(--gold);padding:1.5rem;border-radius:2px;">
-                <div style="font-family:var(--font-serif);font-size:2rem;font-weight:600;color:var(--gold-dark);margin-bottom:0.25rem;">~60</div>
-                <div style="font-size:0.82rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.06em;">Annual Intake</div>
-              </div>
+            <!-- Quick stats -->
+            <div class="stat-boxes">
+              <div class="stat-box"><div class="stat-box__num">4</div><div class="stat-box__label">Years Duration</div></div>
+              <div class="stat-box"><div class="stat-box__num">8</div><div class="stat-box__label">Terms / Semesters</div></div>
+              <div class="stat-box"><div class="stat-box__num">158.5</div><div class="stat-box__label">Credit Hours</div></div>
+              <div class="stat-box"><div class="stat-box__num">120</div><div class="stat-box__label">Annual Intake</div></div>
+              <div class="stat-box"><div class="stat-box__num">2.20</div><div class="stat-box__label">Min. CGPA to Graduate</div></div>
+              <div class="stat-box"><div class="stat-box__num">7</div><div class="stat-box__label">Max. Years to Complete</div></div>
             </div>
 
-            <!-- Curriculum Tabs -->
+            <!-- ── PROGRAM OBJECTIVES ── -->
             <div class="section-heading">
-              <p class="section-heading__label">Curriculum</p>
-              <h2 class="section-heading__title">Course Structure</h2>
+              <p class="section-heading__label">Goals</p>
+              <h2 class="section-heading__title">Program Educational Objectives (PEOs)</h2>
               <hr class="section-heading__line" />
             </div>
+            <p style="font-size:0.9rem;color:var(--gray-600);line-height:1.8;margin-bottom:var(--sp-5);">
+              Graduates of the B.Sc. in Chemical Engineering program, within 3–5 years after graduation, will be able to:
+            </p>
+            <ul class="numbered-list" style="margin-bottom:var(--sp-10);">
+              <li>Achieve excellence for leadership within multidisciplinary teams.</li>
+              <li>Provide sustainable engineering solutions for the betterment of society through problem-solving and effective communication.</li>
+              <li>Pursue postgraduate studies in engineering or other fields.</li>
+              <li>Engage in life-long learning skills in alignment with state-of-art knowledge.</li>
+            </ul>
+
+            <!-- ── PROGRAM OUTCOMES ── -->
+            <div class="section-heading">
+              <p class="section-heading__label">Outcomes</p>
+              <h2 class="section-heading__title">Program Outcomes (POs)</h2>
+              <hr class="section-heading__line" />
+            </div>
+            <p style="font-size:0.9rem;color:var(--gray-600);line-height:1.8;margin-bottom:var(--sp-5);">
+              Upon completing the program, graduates will be able to:
+            </p>
+            <ul class="numbered-list" style="margin-bottom:var(--sp-10);">
+              <li>Apply knowledge of mathematics, natural science, engineering fundamentals and an engineering specialization to the solution of complex engineering problems.</li>
+              <li>Identify, formulate, research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences and engineering sciences.</li>
+              <li>Design solutions for complex engineering problems and design systems, components or processes that meet specified needs with appropriate consideration for public health and safety, cultural, societal, and environmental considerations.</li>
+              <li>Conduct investigations of complex problems using research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of information to provide valid conclusions.</li>
+              <li>Create, select and apply appropriate techniques, resources, and modern engineering and IT tools, including prediction and modelling, to complex engineering problems, with an understanding of the limitations.</li>
+              <li>Apply reasoning informed by contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to professional engineering practice.</li>
+              <li>Understand and evaluate the sustainability and impact of professional engineering work in societal and environmental contexts.</li>
+              <li>Apply ethical principles and commit to professional ethics and responsibilities and norms of engineering practice.</li>
+              <li>Function effectively as an individual, and as a member or leader in diverse teams and in multi-disciplinary settings.</li>
+              <li>Communicate effectively on complex engineering activities with the engineering community and with society at large — including writing effective reports, design documentation, and presentations.</li>
+              <li>Demonstrate knowledge and understanding of engineering management principles and economic decision-making and apply these to manage projects in multidisciplinary environments.</li>
+              <li>Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.</li>
+            </ul>
+
+            <!-- ── CREDIT SUMMARY ── -->
+            <div class="section-heading">
+              <p class="section-heading__label">Requirements</p>
+              <h2 class="section-heading__title">Credit Hour Summary</h2>
+              <hr class="section-heading__line" />
+            </div>
+            <div class="table-wrapper" style="margin-bottom:var(--sp-10);">
+              <table class="credit-summary">
+                <thead>
+                  <tr><th>Category</th><th style="text-align:center;">Credit Hours</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>A. Natural Science (Physics &amp; Chemistry)</td><td>27.0</td></tr>
+                  <tr><td>B. Mathematics</td><td>13.0</td></tr>
+                  <tr><td>C. Humanities &amp; Social Sciences</td><td>9.5</td></tr>
+                  <tr><td>D. Chemical Engineering Core Courses</td><td>68.5</td></tr>
+                  <tr><td>E. Chemical Engineering Elective Courses</td><td>15.0</td></tr>
+                  <tr><td>F. Other Engineering Courses (EEE, ME)</td><td>15.0</td></tr>
+                  <tr style="font-weight:700;"><td>Subtotal</td><td>148.0</td></tr>
+                  <tr><td>UG Thesis / Project (ChE 400)</td><td>6.0</td></tr>
+                  <tr><td>Final Year Design Project (ChE 408)</td><td>4.5</td></tr>
+                  <tr style="background:var(--navy);color:var(--white);font-weight:700;"><td style="color:var(--white);">Grand Total</td><td style="color:var(--gold);">158.5</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ── TERM-BY-TERM CURRICULUM ── -->
+            <div class="section-heading">
+              <p class="section-heading__label">Curriculum</p>
+              <h2 class="section-heading__title">Course Schedule by Year &amp; Term</h2>
+              <hr class="section-heading__line" />
+            </div>
+            <p style="font-size:0.85rem;color:var(--gray-600);margin-bottom:var(--sp-6);">
+              Each academic year has two terms (Term 1 &amp; Term 2). Each term spans 18 weeks: 14 weeks of classes, 2 weeks recess, and 2 weeks of final examinations.
+            </p>
 
             <div class="tabs" role="tablist">
               <button class="tab-btn active" data-tab-group="curriculum" data-tab="year1" role="tab" aria-selected="true">Year 1</button>
@@ -140,121 +443,253 @@
               <button class="tab-btn" data-tab-group="curriculum" data-tab="year4" role="tab">Year 4</button>
             </div>
 
+            <!-- YEAR 1 -->
             <div id="year1" class="tab-panel active" data-tab-group="curriculum">
               <div class="table-wrapper">
                 <table class="data-table">
-                  <thead>
-                    <tr><th>Course Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr>
-                  </thead>
+                  <thead><tr><th>Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr></thead>
                   <tbody>
-                    <tr><td>ChE 101</td><td>Introduction to Chemical Engineering</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 102</td><td>Chemical Engineering Fundamentals Lab</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
-                    <tr><td>Math 101</td><td>Differential &amp; Integral Calculus</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>Math 103</td><td>Differential Equations</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>Chem 101</td><td>Physical Chemistry</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>Chem 111</td><td>Physical Chemistry Lab</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
-                    <tr><td>Phys 101</td><td>Physics I</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>Hum 101</td><td>English for Engineers</td><td>2.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
-                    <tr><td>ChE 103</td><td>Computer Programming for ChE</td><td>2.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 104</td><td>Engineering Drawing &amp; Graphics</td><td>1.5</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr class="term-header"><td colspan="4">Level 1 — Term 1</td></tr>
+                    <tr><td>ChE 101</td><td>Elementary Principles of Chemical Engineering</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Phy 127</td><td>Physical Optics, Waves &amp; Oscillations and Modern Physics</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Chem 111</td><td>Inorganic Chemistry</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Math 125</td><td>Calculus</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>EEE 155</td><td>Electrical Engineering Fundamentals</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Phy 102</td><td>Physics Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>Chem 112</td><td>Inorganic Analysis Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>EEE 156</td><td>Electrical Engineering Fundamentals Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 1 Total</td><td>19.5 credits</td></tr>
+
+                    <tr class="term-header"><td colspan="4">Level 1 — Term 2</td></tr>
+                    <tr><td>ChE 103</td><td>Engineering Thermodynamics</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Phy 171</td><td>Structure of Matter, Electricity &amp; Magnetism and Nanophysics</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Chem 131</td><td>Physical Chemistry I</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Math 127</td><td>Linear Algebra and Vector Calculus</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Hum 125</td><td>English</td><td>2.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Chem 116</td><td>Inorganic Analysis II Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>Shop 120</td><td>Workshop</td><td>1.5</td><td><span class="tag">Practical</span></td></tr>
+                    <tr><td>ME 174</td><td>Mechanical Engineering Drawing and CAD</td><td>1.5</td><td><span class="tag">Practical</span></td></tr>
+                    <tr><td>Hum 272</td><td>English Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 2 Total</td><td>20.0 credits</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
+            <!-- YEAR 2 -->
             <div id="year2" class="tab-panel" data-tab-group="curriculum">
               <div class="table-wrapper">
                 <table class="data-table">
-                  <thead>
-                    <tr><th>Course Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr>
-                  </thead>
+                  <thead><tr><th>Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr></thead>
                   <tbody>
-                    <tr><td>ChE 201</td><td>Material and Energy Balances</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 203</td><td>Chemical Engineering Thermodynamics I</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr class="term-header"><td colspan="4">Level 2 — Term 1</td></tr>
+                    <tr><td>ChE 201</td><td>Material and Energy Balance</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>EEE 267</td><td>Electrical and Electronics Technology</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Math 225</td><td>Differential Equations and Laplace Transforms</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Chem 235</td><td>Physical Chemistry II</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Hum 10x</td><td>Elective I — Economics / Social Psychology</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ChE 208</td><td>Computer Programming and Applications</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>EEE 268</td><td>Electrical and Electronics Technology Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>Chem 236</td><td>Physical Chemistry Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 1 Total</td><td>19.5 credits</td></tr>
+
+                    <tr class="term-header"><td colspan="4">Level 2 — Term 2</td></tr>
                     <tr><td>ChE 205</td><td>Fluid Mechanics</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 206</td><td>Fluid Mechanics Lab</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
-                    <tr><td>ChE 207</td><td>Organic Chemistry for ChE</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 209</td><td>Numerical Methods in ChE</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 211</td><td>Heat Transfer</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 212</td><td>Heat Transfer Lab</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
-                    <tr><td>Math 201</td><td>Linear Algebra &amp; Fourier Analysis</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>Hum 201</td><td>Economics for Engineers</td><td>2.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ME 251</td><td>Mechanics of Rigid and Deformable Solids</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Math 227</td><td>Engineering Statistics and Data Analysis</td><td>4.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Chem 221</td><td>Organic Chemistry</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>Hum 2xx</td><td>Elective II — Sociology / Government / Accounting</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ChE 202</td><td>Material and Energy Balance Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>ChE 206</td><td>Chemical Engineering Laboratory I</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>Chem 222</td><td>Organic Chemistry Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 2 Total</td><td>19.5 credits</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
+            <!-- YEAR 3 -->
             <div id="year3" class="tab-panel" data-tab-group="curriculum">
               <div class="table-wrapper">
                 <table class="data-table">
-                  <thead>
-                    <tr><th>Course Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr>
-                  </thead>
+                  <thead><tr><th>Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr></thead>
                   <tbody>
-                    <tr><td>ChE 301</td><td>Mass Transfer Operations I</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 303</td><td>Chemical Reaction Engineering I</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 305</td><td>Chemical Engineering Thermodynamics II</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 307</td><td>Mass Transfer Lab</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
-                    <tr><td>ChE 309</td><td>Process Control &amp; Instrumentation</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 311</td><td>Process Control Lab</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
-                    <tr><td>ChE 313</td><td>Chemical Reaction Engineering II</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 315</td><td>Transport Phenomena</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 3xx</td><td>Technical Elective I</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
-                    <tr><td>ChE 3xx</td><td>Technical Elective II</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr class="term-header"><td colspan="4">Level 3 — Term 1</td></tr>
+                    <tr><td>ChE 301</td><td>Heat Transfer</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 303</td><td>Mass Transfer I</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 313</td><td>Solution Thermodynamics</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 311</td><td>Special Topics in Unit Operations</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 4xx</td><td>Elective III (General Elective)</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ChE 302</td><td>Chemical Engineering Laboratory II</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>ChE 308</td><td>Chemical Process Analysis Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>Chem 352</td><td>Instrumental Methods of Analysis Sessional</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 1 Total</td><td>19.5 credits</td></tr>
+
+                    <tr class="term-header"><td colspan="4">Level 3 — Term 2</td></tr>
+                    <tr><td>ChE 305</td><td>Mass Transfer II</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 309</td><td>Particle Technology</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 401</td><td>Reaction Engineering</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 4xx</td><td>Elective IV (Specialization — 1 of 3)</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ChE 4xx</td><td>Elective V (General Elective)</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ChE 304</td><td>Chemical Engineering Laboratory III</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>ChE 306</td><td>Chemical Engineering Laboratory IV</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>ChE 310</td><td>Computational Techniques in Chemical Engineering</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 2 Total</td><td>19.5 credits</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
+            <!-- YEAR 4 -->
             <div id="year4" class="tab-panel" data-tab-group="curriculum">
               <div class="table-wrapper">
                 <table class="data-table">
-                  <thead>
-                    <tr><th>Course Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr>
-                  </thead>
+                  <thead><tr><th>Code</th><th>Course Title</th><th>Credits</th><th>Type</th></tr></thead>
                   <tbody>
-                    <tr><td>ChE 401</td><td>Chemical Plant Design I</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 403</td><td>Chemical Plant Design II</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 405</td><td>Safety, Health &amp; Environment</td><td>2.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 407</td><td>Industrial Training / Plant Visit</td><td>1.5</td><td><span class="tag">Practical</span></td></tr>
-                    <tr><td>ChE 409</td><td>Senior Design Project (Thesis)</td><td>6.0</td><td><span class="tag tag--navy">Core</span></td></tr>
-                    <tr><td>ChE 4xx</td><td>Technical Elective III</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
-                    <tr><td>ChE 4xx</td><td>Technical Elective IV</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
-                    <tr><td>ChE 4xx</td><td>Technical Elective V</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
-                    <tr><td>Hum 401</td><td>Engineering Management</td><td>2.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
-                    <tr><td>Hum 403</td><td>Professional Ethics</td><td>1.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr class="term-header"><td colspan="4">Level 4 — Term 1</td></tr>
+                    <tr><td>ChE 403</td><td>Process Control</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 413</td><td>Process Design</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 417</td><td>Fundamentals of Process Safety</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 453</td><td>Transport Phenomena</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 4xx</td><td>Elective VI (Specialization — 2 of 3)</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ChE 402</td><td>Chemical Engineering Laboratory V</td><td>1.5</td><td><span class="tag">Lab</span></td></tr>
+                    <tr><td>ChE 400</td><td>Project / Thesis I</td><td>3.0</td><td><span class="tag tag--navy">Thesis</span></td></tr>
+                    <tr><td>ChE 408</td><td>Process Design Sessional I</td><td>1.5</td><td><span class="tag">Design</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 1 Total</td><td>21.0 credits</td></tr>
+
+                    <tr class="term-header"><td colspan="4">Level 4 — Term 2</td></tr>
+                    <tr><td>ChE 415</td><td>Project Engineering and Professional Ethics</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 409</td><td>Corrosion Engineering</td><td>3.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 411</td><td>Economics and Management of Chemical Process Industries</td><td>4.0</td><td><span class="tag tag--navy">Core</span></td></tr>
+                    <tr><td>ChE 4xx</td><td>Elective VII (Specialization — 3 of 3)</td><td>3.0</td><td><span class="tag tag--gold">Elective</span></td></tr>
+                    <tr><td>ChE 400</td><td>Project / Thesis II</td><td>3.0</td><td><span class="tag tag--navy">Thesis</span></td></tr>
+                    <tr><td>ChE 408</td><td>Process Design Sessional II</td><td>3.0</td><td><span class="tag">Design</span></td></tr>
+                    <tr class="total-row"><td colspan="3">Term 2 Total</td><td>19.0 credits</td></tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
-            <!-- Admission -->
-            <div class="section-heading" style="margin-top:3rem;">
+            <!-- ── ELECTIVE COURSES ── -->
+            <div class="section-heading" style="margin-top:var(--sp-12);">
+              <p class="section-heading__label">Electives</p>
+              <h2 class="section-heading__title">Elective Course Groups</h2>
+              <hr class="section-heading__line" />
+            </div>
+            <p style="font-size:0.88rem;color:var(--gray-600);line-height:1.8;margin-bottom:var(--sp-6);">
+              Students choose <strong>5 electives</strong> totalling 15 credit hours: 2 from the General group (Electives III &amp; V) and 3 from one Specialization group (Electives IV, VI &amp; VII — at least 2 must be from the same specialization track).
+            </p>
+
+            <p style="font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:var(--sp-3);">General Electives (choose any 2)</p>
+            <div class="table-wrapper" style="margin-bottom:var(--sp-8);">
+              <table class="data-table">
+                <thead><tr><th>Code</th><th>Course Title</th><th>Credits</th></tr></thead>
+                <tbody>
+                  <tr><td>ChE 429</td><td>Sustainable Process Engineering</td><td>3.0</td></tr>
+                  <tr><td>ChE 431</td><td>Food Preservation and Processing</td><td>3.0</td></tr>
+                  <tr><td>ChE 433</td><td>Polymers and Petrochemicals</td><td>3.0</td></tr>
+                  <tr><td>ChE 439</td><td>Polymer Processing</td><td>3.0</td></tr>
+                  <tr><td>ChE 441</td><td>Fertilizer, Pulp and Paper Technology</td><td>3.0</td></tr>
+                  <tr><td>ChE 443</td><td>Food and Sugar Technology</td><td>3.0</td></tr>
+                  <tr><td>ChE 445</td><td>Textile Engineering and Technology</td><td>3.0</td></tr>
+                  <tr><td>ChE 457</td><td>Reactor Design</td><td>3.0</td></tr>
+                  <tr><td>ChE 459</td><td>Materials Science</td><td>3.0</td></tr>
+                  <tr><td>ChE 461</td><td>Chemical Process Modelling and Optimization</td><td>3.0</td></tr>
+                  <tr><td>ChE 471</td><td>Biochemistry</td><td>3.0</td></tr>
+                  <tr><td>Math 325</td><td>Fourier Analysis and Special Functions</td><td>3.0</td></tr>
+                  <tr><td>Math 327</td><td>Multivariate Statistical Analysis and Complex Analysis</td><td>3.0</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:var(--sp-4);">Specialization Tracks (choose 3 from one track)</p>
+            <div class="spec-grid" style="margin-bottom:var(--sp-10);">
+              <div class="spec-card">
+                <div class="spec-card__title">🧬 Biochemical Engineering</div>
+                <div class="spec-card__courses">
+                  <span>ChE 473</span> Biochemical Engineering I<br>
+                  <span>ChE 475</span> Biochemical Engineering II<br>
+                  <span>ChE 477</span> Biomolecular Engineering<br>
+                  <span>ChE 479</span> Bioprocess Engineering
+                </div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card__title">⚡ Energy Engineering</div>
+                <div class="spec-card__courses">
+                  <span>ChE 421</span> Fuel Science<br>
+                  <span>ChE 423</span> Solid Fuel Systems<br>
+                  <span>ChE 425</span> Energy Management
+                </div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card__title">🌿 Environmental Engineering</div>
+                <div class="spec-card__courses">
+                  <span>ChE 481</span> Environmental Science I<br>
+                  <span>ChE 483</span> Environmental Science II<br>
+                  <span>ChE 485</span> Industrial Pollution Control
+                </div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card__title">🎛 Process Control</div>
+                <div class="spec-card__courses">
+                  <span>ChE 321</span> Process Data Analytics<br>
+                  <span>ChE 323</span> Process Dynamics, Modelling and Simulation<br>
+                  <span>ChE 447</span> Digital Process Control<br>
+                  <span>ChE 449</span> Optimization in Chemical Engineering
+                </div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card__title">🔥 Process Safety Engineering</div>
+                <div class="spec-card__courses">
+                  <span>ChE 463</span> Risk Analysis in Safety Engineering<br>
+                  <span>ChE 465</span> Industrial Safety Engineering<br>
+                  <span>ChE 467</span> Occupational Safety and Health<br>
+                  <span>ChE 469</span> Fire Safety in Process Industries
+                </div>
+              </div>
+              <div class="spec-card">
+                <div class="spec-card__title">🛢 Petroleum Engineering</div>
+                <div class="spec-card__courses">
+                  <span>PMRE 401</span> Introduction to Petroleum Engineering<br>
+                  <span>PMRE 403</span> Natural Gas Production and Transportation<br>
+                  <span>PMRE 411</span> Petroleum Reservoir Engineering<br>
+                  <span>PMRE 413</span> Natural Gas Engineering<br>
+                  <span>PMRE 415</span> Gas and Oil Well Drilling and Logging<br>
+                  <span>PMRE 417</span> Transmission and Distribution of Natural Gas
+                </div>
+              </div>
+            </div>
+
+            <!-- ── ADMISSION ── -->
+            <div class="section-heading">
               <p class="section-heading__label">Admission</p>
               <h2 class="section-heading__title">Admission Requirements</h2>
               <hr class="section-heading__line" />
             </div>
 
-            <div style="background:var(--off-white);border:1px solid var(--gray-200);padding:2rem;margin-bottom:1.5rem;">
-              <p style="color:var(--gray-600);line-height:1.8;margin-bottom:1rem;">
-                Admission to the B.Sc. Chemical Engineering program is through the <strong style="color:var(--navy);">BUET Undergraduate Admission Test</strong>, conducted annually. Candidates must fulfil the following minimum requirements:
+            <div style="background:var(--off-white);border:1px solid var(--gray-200);border-left:4px solid var(--gold);padding:var(--sp-6) var(--sp-8);margin-bottom:var(--sp-6);">
+              <p style="color:var(--gray-600);line-height:1.8;margin-bottom:var(--sp-4);">
+                Students are admitted to the undergraduate program through BUET's central admission examination as per university rules. Candidates must meet the following requirements:
               </p>
               <ul style="color:var(--gray-600);line-height:2;padding-left:1.25rem;list-style:disc;">
                 <li>Minimum GPA of 5.00 in both SSC and HSC examinations (Science Group)</li>
-                <li>Pass in Mathematics, Physics, and Chemistry at HSC level</li>
+                <li>Must have passed in Mathematics, Physics, and Chemistry at HSC level</li>
                 <li>Bangladeshi citizenship or NRB status</li>
-                <li>Qualify in the BUET Admission Test (held every academic year)</li>
+                <li>Qualify in the BUET Undergraduate Admission Test</li>
               </ul>
             </div>
 
-            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <div style="display:flex;gap:var(--sp-4);flex-wrap:wrap;">
               <a class="btn btn--primary" href="../notices/index.html">Admission Notices</a>
               <a class="btn btn--outline" href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Admission Portal</a>
+              <a class="btn btn--outline" href="../assets/files/BSc_ChE_Curriculum_2023.pdf" target="_blank">⬇ Download Full Curriculum (PDF)</a>
             </div>
-          </div>
 
-          <!-- Sidebar -->
+          </div><!-- /main content -->
+
+          <!-- ══ SIDEBAR ══ -->
           <aside class="sidebar">
+
             <div class="sidebar-widget">
               <h3 class="sidebar-widget__title">Academics</h3>
               <a class="sidebar-nav__item active" href="undergraduate.html">Undergraduate Program</a>
@@ -262,29 +697,35 @@
             </div>
 
             <div class="sidebar-widget">
-              <h3 class="sidebar-widget__title">Key Information</h3>
+              <h3 class="sidebar-widget__title">Key Facts</h3>
               <div style="font-size:0.85rem;color:var(--gray-600);line-height:1.9;">
-                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Degree</span><span>B.Sc. Engg.</span></div>
-                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Duration</span><span>4 Years</span></div>
-                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Intake</span><span>~60 seats</span></div>
-                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Mode</span><span>Full-time</span></div>
-                <div style="display:flex;justify-content:space-between;padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Language</span><span>English</span></div>
+                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Degree</span><span>B.Sc. Engg. (Chem.)</span></div>
+                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Duration</span><span>4 Years / 8 Terms</span></div>
+                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Total Credits</span><span>158.5 hrs</span></div>
+                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Min. CGPA</span><span>2.20 to graduate</span></div>
+                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Annual Intake</span><span>120 students</span></div>
+                <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--gray-200);padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Max. Duration</span><span>7 years</span></div>
+                <div style="display:flex;justify-content:space-between;padding:0.4rem 0;"><span style="font-weight:600;color:var(--navy);">Mode</span><span>Full-time</span></div>
               </div>
             </div>
 
             <div class="sidebar-widget">
-              <h3 class="sidebar-widget__title">Technical Electives</h3>
-              <p style="font-size:0.83rem;color:var(--gray-600);margin-bottom:0.75rem;">Students may choose from electives including:</p>
-              <div style="display:flex;flex-direction:column;gap:0.4rem;">
-                <span class="tag">Polymer Technology</span>
-                <span class="tag">Environmental Engineering</span>
-                <span class="tag">Food Process Engineering</span>
-                <span class="tag">Petroleum Refining</span>
+              <h3 class="sidebar-widget__title">Specialization Tracks</h3>
+              <div style="display:flex;flex-direction:column;gap:var(--sp-2);">
                 <span class="tag">Biochemical Engineering</span>
-                <span class="tag">Renewable Energy</span>
-                <span class="tag">Corrosion Engineering</span>
-                <span class="tag">Nanotechnology</span>
+                <span class="tag">Energy Engineering</span>
+                <span class="tag">Environmental Engineering</span>
+                <span class="tag">Process Control</span>
+                <span class="tag">Process Safety Engineering</span>
+                <span class="tag">Petroleum Engineering</span>
               </div>
+            </div>
+
+            <div class="sidebar-widget">
+              <h3 class="sidebar-widget__title">Curriculum Approved</h3>
+              <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.7;">
+                This curriculum was prepared by the Department of Chemical Engineering, BUET in <strong>July 2023</strong> and approved by the Academic Council.
+              </p>
             </div>
 
             <div class="sidebar-widget">
@@ -294,6 +735,7 @@
                 <a href="mailto:undergrad@che.buet.ac.bd" style="color:var(--gold-dark);font-weight:600;">undergrad@che.buet.ac.bd</a>
               </p>
             </div>
+
           </aside>
 
         </div>
@@ -302,6 +744,7 @@
 
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
     <div class="container footer__main">
       <div class="footer-col">
