@@ -302,8 +302,8 @@ ul { list-style: none; }
 .navbar__logo-icon {
   width: 44px;
   height: 44px;
-  background: var(--gold);
-  border-radius: 50%;
+  background: none; /* var(--gold); */
+  border-radius: 0; /* 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
