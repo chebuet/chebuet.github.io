@@ -3,10 +3,386 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research — ChE BUET</title>
-  <meta name="description" content="Research activities and research groups of the Department of Chemical Engineering, BUET." />
+  <title>Research Groups — Department of Chemical Engineering, BUET</title>
+  <meta name="description" content="Research groups of the Department of Chemical Engineering, Bangladesh University of Engineering and Technology (BUET)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css" />
-  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png" />
+
+  <style>
+    /* ── Research page overrides & new components ─────────────── */
+
+    :root {
+      --buet-navy:   #1a2744;
+      --buet-purple: #4e2a84;
+      --buet-gold:   #c9a227;
+      --buet-light:  #f5f3ef;
+      --text-body:   #2d2d2d;
+      --text-muted:  #6b6b6b;
+      --card-bg:     #ffffff;
+      --radius:      12px;
+    }
+
+    /* Page hero */
+    .research-hero {
+      background: linear-gradient(135deg, var(--buet-navy) 0%, #2a1d5c 50%, #1a3a5c 100%);
+      padding: 80px 0 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .research-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(201,162,39,0.12) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(78,42,132,0.3) 0%, transparent 50%);
+    }
+    .research-hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+    }
+    .research-hero__eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--buet-gold);
+      margin-bottom: 16px;
+    }
+    .research-hero__title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .research-hero__title em {
+      font-style: italic;
+      color: var(--buet-gold);
+    }
+    .research-hero__desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      max-width: 700px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      background: var(--buet-light);
+      border-bottom: 1px solid #e0dcd4;
+      padding: 10px 0;
+    }
+    .breadcrumb__inner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .breadcrumb__inner a { color: var(--buet-purple); text-decoration: none; }
+    .breadcrumb__inner a:hover { text-decoration: underline; }
+    .breadcrumb__sep { color: #bbb; }
+
+    /* Section layout */
+    .research-section {
+      padding: 72px 0 80px;
+      background: var(--buet-light);
+    }
+    .research-section + .research-section {
+      background: #fff;
+    }
+    .research-section + .research-section + .research-section {
+      background: var(--buet-light);
+    }
+    .section-header {
+      margin-bottom: 48px;
+    }
+    .section-header__label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--buet-gold);
+      margin-bottom: 10px;
+    }
+    .section-header__title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      color: var(--buet-navy);
+      line-height: 1.2;
+    }
+    .section-header__rule {
+      width: 56px;
+      height: 3px;
+      background: var(--buet-gold);
+      margin-top: 16px;
+      border-radius: 2px;
+    }
+
+    /* ── Research Group Cards ───────────────────────────────────── */
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .group-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid #e8e4dc;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .group-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
+
+    .group-card__accent {
+      height: 5px;
+    }
+    .group-card--cpi    .group-card__accent { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+    .group-card--pse    .group-card__accent { background: linear-gradient(90deg, #2c3e7a, #3498db); }
+    .group-card--seer   .group-card__accent { background: linear-gradient(90deg, #1a6b3a, #27ae60); }
+    .group-card--qeb    .group-card__accent { background: linear-gradient(90deg, #6d2fa0, #9b59b6); }
+    .group-card--bet    .group-card__accent { background: linear-gradient(90deg, #b35c00, #e67e22); }
+    .group-card--esrg   .group-card__accent { background: linear-gradient(90deg, #1a5c6b, #16a085); }
+
+    .group-card__body {
+      padding: 28px 28px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .group-card__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .group-card--cpi  .group-card__icon { background: #fef0ee; }
+    .group-card--pse  .group-card__icon { background: #edf3fc; }
+    .group-card--seer .group-card__icon { background: #edfaf3; }
+    .group-card--qeb  .group-card__icon { background: #f5effe; }
+    .group-card--bet  .group-card__icon { background: #fef5ec; }
+    .group-card--esrg .group-card__icon { background: #edfaf8; }
+
+    .group-card__name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.22rem;
+      font-weight: 600;
+      color: var(--buet-navy);
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .group-card__focus {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .group-card__desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-body);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .group-card__members {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #f0ece4;
+    }
+    .group-card__members-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .group-card__member-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .group-card__member-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.76rem;
+      background: var(--buet-light);
+      color: var(--buet-navy);
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid #e0dcd4;
+    }
+
+    .group-card__footer {
+      padding: 16px 28px 22px;
+      border-top: 1px solid #f0ece4;
+    }
+    .group-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--buet-purple);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .group-card__link:hover { gap: 11px; }
+    .group-card__link .arrow { font-size: 1rem; }
+
+    /* ── Research Areas / Themes strip ─────────────────────────── */
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .theme-item {
+      background: var(--card-bg);
+      border: 1px solid #e8e4dc;
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: box-shadow 0.2s;
+    }
+    .theme-item:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+    .theme-item__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--buet-gold);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .theme-item__name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--buet-navy);
+      line-height: 1.4;
+    }
+
+    /* ── Faculty research interests ────────────────────────────── */
+    .faculty-research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .faculty-research-card {
+      background: var(--card-bg);
+      border: 1px solid #e8e4dc;
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      transition: box-shadow 0.2s;
+    }
+    .faculty-research-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+    .faculty-research-card__name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--buet-navy);
+      margin-bottom: 6px;
+    }
+    .faculty-research-card__spec {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── CTA strip ─────────────────────────────────────────────── */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--buet-navy) 0%, #2a1d5c 100%);
+      padding: 60px 0;
+      text-align: center;
+    }
+    .cta-strip__title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .cta-strip__sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 30px;
+    }
+    .cta-strip__actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 13px 28px;
+      background: var(--buet-gold);
+      color: var(--buet-navy);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.88; }
+    .btn-ghost-white {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 13px 28px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-ghost-white:hover { background: rgba(255,255,255,0.1); }
+
+    /* Active nav item */
+    .nav-link.active { color: var(--buet-gold) !important; }
+
+    /* Container */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    @media (max-width: 640px) {
+      .groups-grid { grid-template-columns: 1fr; }
+      .themes-grid { grid-template-columns: 1fr; }
+      .faculty-research-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -23,7 +399,7 @@
     </div>
   </div>
 
-  <!-- NAVIGATION -->
+  <!-- NAVBAR -->
   <header class="navbar" role="banner">
     <div class="container navbar__inner">
       <a class="navbar__logo" href="../index.html" aria-label="Home — ChE BUET">
@@ -39,7 +415,7 @@
       <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
         <div class="nav-item"><a class="nav-link" href="../index.html">Home</a></div>
         <div class="nav-item">
-          <a class="nav-link" href="../about/index.html" data-dropdown="about">About <span class="chevron">▾</span></a>
+          <a class="nav-link" href="../about/index.html">About <span class="chevron">▾</span></a>
           <div class="dropdown">
             <a class="dropdown__item" href="../about/index.html">About the Department</a>
             <a class="dropdown__item" href="../about/mission-vision.html">Mission &amp; Vision</a>
@@ -48,22 +424,23 @@
           </div>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="../people/index.html" data-dropdown="people">People <span class="chevron">▾</span></a>
+          <a class="nav-link" href="../people/index.html">People <span class="chevron">▾</span></a>
           <div class="dropdown">
             <a class="dropdown__item" href="../people/faculty.html">Faculty</a>
-            <a class="dropdown__item" href="../people/faculty-on-leave.html">Faculty on Leave</a>
-            <a class="dropdown__item" href="../people/former-faculty.html">Former Faculty</a>
             <a class="dropdown__item" href="../people/staff.html">Staff</a>
+            <a class="dropdown__item" href="../people/students.html">Students</a>
           </div>
         </div>
         <div class="nav-item">
-          <a class="nav-link" href="../academics/index.html" data-dropdown="academics">Academics <span class="chevron">▾</span></a>
+          <a class="nav-link" href="../academics/index.html">Academics <span class="chevron">▾</span></a>
           <div class="dropdown">
             <a class="dropdown__item" href="../academics/undergraduate.html">Undergraduate</a>
             <a class="dropdown__item" href="../academics/postgraduate.html">Postgraduate</a>
           </div>
         </div>
-        <div class="nav-item"><a class="nav-link active" href="index.html">Research</a></div>
+        <div class="nav-item">
+          <a class="nav-link active" href="index.html">Research</a>
+        </div>
         <div class="nav-item"><a class="nav-link" href="../news-events/index.html">News &amp; Events</a></div>
         <div class="nav-item"><a class="nav-link" href="../notices/index.html">Notices</a></div>
         <div class="nav-item"><a class="nav-link" href="../brtc/index.html">BRTC</a></div>
@@ -72,181 +449,208 @@
     </div>
   </header>
 
-  <!-- PAGE HERO -->
-  <section class="page-hero" aria-label="Research">
-    <div class="container page-hero__inner">
-      <p class="hero__eyebrow">Department of Chemical Engineering</p>
-      <h1 class="page-hero__title">Research</h1>
-      <p class="page-hero__subtitle">Advancing knowledge through collaborative, multidisciplinary research that addresses Bangladesh's industrial, environmental, and societal challenges.</p>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../index.html">Home</a>
-        <span aria-hidden="true">›</span>
-        <span aria-current="page">Research</span>
-      </nav>
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <div class="container breadcrumb__inner">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb__sep">›</span>
+      <span>Research Groups</span>
     </div>
-  </section>
+  </div>
 
   <main id="main-content">
 
-    <!-- RESEARCH OVERVIEW STATS -->
-    <section class="section section--alt" aria-label="Research highlights">
+    <!-- HERO -->
+    <section class="research-hero" aria-label="Research at ChE BUET">
       <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-6);text-align:center;">
-          <div style="padding:var(--sp-6);background:var(--white);border:1px solid var(--gray-200);">
-            <div style="font-family:var(--font-serif);font-size:2.5rem;font-weight:600;color:var(--gold);line-height:1;">5+</div>
-            <div style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-600);margin-top:var(--sp-2);">Research Groups</div>
-          </div>
-          <div style="padding:var(--sp-6);background:var(--white);border:1px solid var(--gray-200);">
-            <div style="font-family:var(--font-serif);font-size:2.5rem;font-weight:600;color:var(--gold);line-height:1;">25+</div>
-            <div style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-600);margin-top:var(--sp-2);">Active Faculty Researchers</div>
-          </div>
-          <div style="padding:var(--sp-6);background:var(--white);border:1px solid var(--gray-200);">
-            <div style="font-family:var(--font-serif);font-size:2.5rem;font-weight:600;color:var(--gold);line-height:1;">50+</div>
-            <div style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-600);margin-top:var(--sp-2);">Ongoing Projects</div>
-          </div>
-          <div style="padding:var(--sp-6);background:var(--white);border:1px solid var(--gray-200);">
-            <div style="font-family:var(--font-serif);font-size:2.5rem;font-weight:600;color:var(--gold);line-height:1;">200+</div>
-            <div style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-600);margin-top:var(--sp-2);">Journal Publications</div>
-          </div>
+        <div class="research-hero__inner">
+          <p class="research-hero__eyebrow">Research &amp; Innovation</p>
+          <h1 class="research-hero__title">
+            Research <em>Groups</em><br>at ChE BUET
+          </h1>
+          <p class="research-hero__desc">
+            The Department conducts research spanning a wide range of chemical engineering subfields —
+            process systems engineering, safety engineering, biochemical engineering &amp; biotechnology,
+            environmental engineering, and fuel &amp; energy systems. Our research groups undertake
+            exciting and impactful projects in collaboration with national and international experts.
+          </p>
         </div>
       </div>
     </section>
 
     <!-- RESEARCH GROUPS -->
-    <section class="section" aria-labelledby="groups-heading">
+    <section class="research-section" aria-labelledby="groups-heading">
       <div class="container">
-        <div class="section-heading">
-          <p class="section-heading__label">Research</p>
-          <h2 class="section-heading__title" id="groups-heading">Research Groups</h2>
-          <hr class="section-heading__line" />
-          <p style="margin-top:var(--sp-4);color:var(--gray-600);max-width:620px;">Our research groups bring together faculty and students to tackle focused problems across chemical engineering's frontiers. Click on any group to learn more.</p>
+        <div class="section-header">
+          <p class="section-header__label">Our Groups</p>
+          <h2 class="section-header__title" id="groups-heading">Active Research Groups</h2>
+          <div class="section-header__rule"></div>
         </div>
 
-        <div class="research-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-6);">
+        <div class="groups-grid">
 
-          <!-- PSE -->
-          <article class="card" style="display:flex;flex-direction:column;">
-            <div style="padding:var(--sp-8);border-bottom:1px solid var(--gray-200);background:linear-gradient(135deg,var(--navy-dark),var(--navy));color:var(--white);">
-              <div style="display:flex;align-items:center;gap:var(--sp-4);">
-                <div style="width:52px;height:52px;background:rgba(201,169,75,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">⚙️</div>
-                <div>
-                  <span style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(201,169,75,0.2);color:var(--gold);padding:0.15rem 0.5rem;border-radius:2px;margin-bottom:var(--sp-1);">PSE</span>
-                  <h3 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--white);line-height:1.25;">Process Systems Engineering</h3>
+          <!-- 1. BUET CPI Safety -->
+          <article class="group-card group-card--cpi">
+            <div class="group-card__accent"></div>
+            <div class="group-card__body">
+              <div class="group-card__icon">🔥</div>
+              <h3 class="group-card__name">BUET CPI Safety Research Group</h3>
+              <p class="group-card__focus">Process Safety · Chemical Process Industries</p>
+              <p class="group-card__desc">
+                Focused on hazard identification, risk analysis, and safety management in chemical
+                process industries. Research covers fire safety, explosion risk, industrial disaster
+                prevention, and the development of safety standards relevant to Bangladeshi industry.
+              </p>
+              <div class="group-card__members">
+                <p class="group-card__members-label">Key Faculty</p>
+                <div class="group-card__member-list">
+                  <span class="group-card__member-tag">Dr. Syeda Sultana Razia</span>
+                  <span class="group-card__member-tag">Dr. Md. Easir Arafat Khan</span>
                 </div>
               </div>
             </div>
-            <div style="padding:var(--sp-6);flex:1;display:flex;flex-direction:column;">
-              <p style="font-size:0.875rem;color:var(--gray-600);line-height:1.75;margin-bottom:var(--sp-4);">
-                The PSE group focuses on the mathematical modelling, simulation, optimisation, and control of complex chemical and biochemical processes. Key areas include process integration, energy efficiency, and systems-level approaches to sustainable manufacturing.
-              </p>
-              <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-6);">
-                <span class="tag">Process Optimisation</span>
-                <span class="tag">Simulation</span>
-                <span class="tag">Control Systems</span>
-                <span class="tag">Energy Integration</span>
-              </div>
-              <a class="btn btn--primary" href="pse.html" style="align-self:flex-start;">Learn More →</a>
+            <div class="group-card__footer">
+              <a class="group-card__link" href="https://cpisafety.com/" target="_blank" rel="noopener">
+                Visit Group Website <span class="arrow">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- SEER -->
-          <article class="card" style="display:flex;flex-direction:column;">
-            <div style="padding:var(--sp-8);border-bottom:1px solid var(--gray-200);background:linear-gradient(135deg,#1a3d1a,#2d6a2d);color:var(--white);">
-              <div style="display:flex;align-items:center;gap:var(--sp-4);">
-                <div style="width:52px;height:52px;background:rgba(255,255,255,0.1);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🌱</div>
-                <div>
-                  <span style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);padding:0.15rem 0.5rem;border-radius:2px;margin-bottom:var(--sp-1);">SEER</span>
-                  <h3 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--white);line-height:1.25;">Sustainability in Engineering &amp; Environment Research</h3>
+          <!-- 2. Process Systems Engineering -->
+          <article class="group-card group-card--pse">
+            <div class="group-card__accent"></div>
+            <div class="group-card__body">
+              <div class="group-card__icon">⚙️</div>
+              <h3 class="group-card__name">Process Systems Engineering Research Group</h3>
+              <p class="group-card__focus">Process Control · Modelling · Optimisation</p>
+              <p class="group-card__desc">
+                Advancing the design, control, and optimisation of chemical processes through
+                mathematical modelling, simulation, and data-driven methods. Research topics include
+                controller performance monitoring, process identification, and plantwide control.
+              </p>
+              <div class="group-card__members">
+                <p class="group-card__members-label">Key Faculty</p>
+                <div class="group-card__member-list">
+                  <span class="group-card__member-tag">Dr. Md. Ali Ahammad Shoukat Choudhury</span>
+                  <span class="group-card__member-tag">Dr. Nahid Sanzida</span>
+                  <span class="group-card__member-tag">Dr. Kawnish Kirtania</span>
                 </div>
               </div>
             </div>
-            <div style="padding:var(--sp-6);flex:1;display:flex;flex-direction:column;">
-              <p style="font-size:0.875rem;color:var(--gray-600);line-height:1.75;margin-bottom:var(--sp-4);">
-                SEER addresses the critical intersection of engineering and environmental sustainability. The group conducts research in green chemistry, life-cycle assessment, carbon capture, renewable energy integration, and sustainable industrial practices tailored to Bangladesh's development needs.
-              </p>
-              <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-6);">
-                <span class="tag">Green Chemistry</span>
-                <span class="tag">Life-Cycle Assessment</span>
-                <span class="tag">Carbon Capture</span>
-                <span class="tag">Renewable Energy</span>
-              </div>
-              <a class="btn btn--primary" href="seer.html" style="align-self:flex-start;">Learn More →</a>
+            <div class="group-card__footer">
+              <a class="group-card__link" href="https://psegroup.che.buet.ac.bd" target="_blank" rel="noopener">
+                Visit Group Website <span class="arrow">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- BET -->
-          <article class="card" style="display:flex;flex-direction:column;">
-            <div style="padding:var(--sp-8);border-bottom:1px solid var(--gray-200);background:linear-gradient(135deg,#1a2a4d,#2a4080);color:var(--white);">
-              <div style="display:flex;align-items:center;gap:var(--sp-4);">
-                <div style="width:52px;height:52px;background:rgba(201,169,75,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🧫</div>
-                <div>
-                  <span style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(201,169,75,0.2);color:var(--gold);padding:0.15rem 0.5rem;border-radius:2px;margin-bottom:var(--sp-1);">BET</span>
-                  <h3 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--white);line-height:1.25;">Bio and Environmental Technology</h3>
+          <!-- 3. SEER -->
+          <article class="group-card group-card--seer">
+            <div class="group-card__accent"></div>
+            <div class="group-card__body">
+              <div class="group-card__icon">🌿</div>
+              <h3 class="group-card__name">Sustainability in Energy &amp; Environment Research (SEER)</h3>
+              <p class="group-card__focus">Energy · Environment · Sustainability</p>
+              <p class="group-card__desc">
+                Investigating sustainable pathways for energy production and environmental remediation.
+                Research spans solid fuels, gasification, biomass-to-liquid conversion, CO₂ utilisation,
+                low-carbon technologies, and the hydrogen economy.
+              </p>
+              <div class="group-card__members">
+                <p class="group-card__members-label">Key Faculty</p>
+                <div class="group-card__member-list">
+                  <span class="group-card__member-tag">Dr. Md. Mominur Rahman</span>
+                  <span class="group-card__member-tag">Dr. Kazi Bayzid Kabir</span>
+                  <span class="group-card__member-tag">Dr. Md. Iqbal Hossain</span>
                 </div>
               </div>
             </div>
-            <div style="padding:var(--sp-6);flex:1;display:flex;flex-direction:column;">
-              <p style="font-size:0.875rem;color:var(--gray-600);line-height:1.75;margin-bottom:var(--sp-4);">
-                The BET group bridges biological sciences and chemical engineering to develop innovative solutions for environmental remediation, biofuel production, wastewater treatment, and biosensor development. The group's work is closely aligned with Bangladesh's challenges in water quality and agro-industrial waste valorisation.
-              </p>
-              <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-6);">
-                <span class="tag">Biofuels</span>
-                <span class="tag">Wastewater Treatment</span>
-                <span class="tag">Biosensors</span>
-                <span class="tag">Bioremediation</span>
-              </div>
-              <a class="btn btn--primary" href="bet.html" style="align-self:flex-start;">Learn More →</a>
+            <div class="group-card__footer">
+              <a class="group-card__link" href="https://seer-group.org" target="_blank" rel="noopener">
+                Visit Group Website <span class="arrow">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Add more groups below as needed -->
-          <article class="card" style="display:flex;flex-direction:column;">
-            <div style="padding:var(--sp-8);border-bottom:1px solid var(--gray-200);background:linear-gradient(135deg,#3d1a1a,#7a2d2d);color:var(--white);">
-              <div style="display:flex;align-items:center;gap:var(--sp-4);">
-                <div style="width:52px;height:52px;background:rgba(255,255,255,0.1);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🔥</div>
-                <div>
-                  <span style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);padding:0.15rem 0.5rem;border-radius:2px;margin-bottom:var(--sp-1);">RCE</span>
-                  <h3 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--white);line-height:1.25;">Reaction &amp; Catalysis Engineering</h3>
+          <!-- 4. QEB -->
+          <article class="group-card group-card--qeb">
+            <div class="group-card__accent"></div>
+            <div class="group-card__body">
+              <div class="group-card__icon">🧬</div>
+              <h3 class="group-card__name">Quantitative &amp; Environmental Biotechnology Group (QEB)</h3>
+              <p class="group-card__focus">Bioenvironmental · Bioprocess · Medical Imaging</p>
+              <p class="group-card__desc">
+                Applying quantitative methods to biological and environmental systems. Research covers
+                bioenvironmental engineering, biological and medical image analysis, quantitative
+                biology and biotechnology, biochemical &amp; bioprocess engineering, and air pollution modelling.
+              </p>
+              <div class="group-card__members">
+                <p class="group-card__members-label">Key Faculty</p>
+                <div class="group-card__member-list">
+                  <span class="group-card__member-tag">Dr. Shoeb Ahmed</span>
+                  <span class="group-card__member-tag">Dr. Iftheker Ahmed Khan</span>
                 </div>
               </div>
             </div>
-            <div style="padding:var(--sp-6);flex:1;display:flex;flex-direction:column;">
-              <p style="font-size:0.875rem;color:var(--gray-600);line-height:1.75;margin-bottom:var(--sp-4);">
-                Focused on heterogeneous catalysis, reactor design, and reaction kinetics, this group works on developing novel catalysts and processes for petroleum refining, polymer synthesis, and emerging green chemistry routes relevant to Bangladesh's industry.
-              </p>
-              <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-6);">
-                <span class="tag">Heterogeneous Catalysis</span>
-                <span class="tag">Reactor Design</span>
-                <span class="tag">Kinetics</span>
-                <span class="tag">Polymer Synthesis</span>
-              </div>
-              <a class="btn btn--primary" href="rce.html" style="align-self:flex-start;">Learn More →</a>
+            <div class="group-card__footer">
+              <a class="group-card__link" href="http://shoebahmed.buet.ac.bd/QEB.html" target="_blank" rel="noopener">
+                Visit Group Website <span class="arrow">→</span>
+              </a>
             </div>
           </article>
 
-          <!-- Materials & Nanotechnology -->
-          <article class="card" style="display:flex;flex-direction:column;grid-column:1/-1;">
-            <div style="padding:var(--sp-8);border-bottom:1px solid var(--gray-200);background:linear-gradient(135deg,#1a2d3d,#2d5070);color:var(--white);">
-              <div style="display:flex;align-items:center;gap:var(--sp-4);">
-                <div style="width:52px;height:52px;background:rgba(201,169,75,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">🧲</div>
-                <div>
-                  <span style="display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:rgba(201,169,75,0.2);color:var(--gold);padding:0.15rem 0.5rem;border-radius:2px;margin-bottom:var(--sp-1);">MNT</span>
-                  <h3 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--white);line-height:1.25;">Materials &amp; Nanotechnology</h3>
+          <!-- 5. Bio & Environmental Technology -->
+          <article class="group-card group-card--bet">
+            <div class="group-card__accent"></div>
+            <div class="group-card__body">
+              <div class="group-card__icon">🧫</div>
+              <h3 class="group-card__name">Bio &amp; Environmental Technology Group</h3>
+              <p class="group-card__focus">Biotechnology · Environmental Engineering · Sustainability</p>
+              <p class="group-card__desc">
+                Integrating biotechnology and environmental engineering to develop sustainable industrial
+                solutions. Research interests include biosensing, bio-surface engineering, paper-based
+                diagnostics, biomaterials, and environmental remediation technologies.
+              </p>
+              <div class="group-card__members">
+                <p class="group-card__members-label">Key Faculty</p>
+                <div class="group-card__member-list">
+                  <span class="group-card__member-tag">Dr. Mohidus Samad Khan</span>
+                  <span class="group-card__member-tag">Dr. Nafisa Islam</span>
+                  <span class="group-card__member-tag">Dr. Mahbuba Jannat</span>
                 </div>
               </div>
             </div>
-            <div style="padding:var(--sp-6);flex:1;display:flex;flex-direction:column;">
-              <p style="font-size:0.875rem;color:var(--gray-600);line-height:1.75;margin-bottom:var(--sp-4);">
-                The MNT group investigates the synthesis, characterisation, and application of advanced materials including nanomaterials, membranes, composites, and smart materials. Applications span energy storage, drug delivery, water purification, and functional coatings.
+            <div class="group-card__footer">
+              <a class="group-card__link" href="http://www.mohidkhan.com" target="_blank" rel="noopener">
+                Visit Group Website <span class="arrow">→</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- 6. ESRG -->
+          <article class="group-card group-card--esrg">
+            <div class="group-card__accent"></div>
+            <div class="group-card__body">
+              <div class="group-card__icon">🌍</div>
+              <h3 class="group-card__name">Environment &amp; Sustainability Research Group (ESRG)</h3>
+              <p class="group-card__focus">Environmental Science · Nanocomposites · Water Treatment</p>
+              <p class="group-card__desc">
+                Pursuing research at the interface of environmental science and chemical engineering.
+                Focus areas include adsorption, biochar synthesis, advanced oxidation processes,
+                nanocomposite synthesis, physico-chemical and biological water treatment.
               </p>
-              <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-6);">
-                <span class="tag">Nanomaterials</span>
-                <span class="tag">Membranes</span>
-                <span class="tag">Energy Storage</span>
-                <span class="tag">Drug Delivery</span>
-                <span class="tag">Composites</span>
+              <div class="group-card__members">
+                <p class="group-card__members-label">Key Faculty</p>
+                <div class="group-card__member-list">
+                  <span class="group-card__member-tag">Dr. Md. Shahinoor Islam</span>
+                  <span class="group-card__member-tag">Dr. Md. Tanvir Sowgath</span>
+                </div>
               </div>
-              <a class="btn btn--primary" href="mnt.html" style="align-self:flex-start;">Learn More →</a>
+            </div>
+            <div class="group-card__footer">
+              <a class="group-card__link" href="https://environmental-research-group.webnode.co.uk/" target="_blank" rel="noopener">
+                Visit Group Website <span class="arrow">→</span>
+              </a>
             </div>
           </article>
 
@@ -254,61 +658,160 @@
       </div>
     </section>
 
-    <!-- FACILITIES -->
-    <section class="section section--alt" aria-labelledby="facilities-heading">
+    <!-- RESEARCH THEMES -->
+    <section class="research-section" aria-labelledby="themes-heading">
       <div class="container">
-        <div class="section-heading section-heading--center">
-          <p class="section-heading__label">Infrastructure</p>
-          <h2 class="section-heading__title" id="facilities-heading">Research Facilities</h2>
-          <hr class="section-heading__line" />
+        <div class="section-header">
+          <p class="section-header__label">What We Study</p>
+          <h2 class="section-header__title" id="themes-heading">Core Research Themes</h2>
+          <div class="section-header__rule"></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-6);margin-top:var(--sp-8);">
-          <div style="background:var(--white);padding:var(--sp-6);border:1px solid var(--gray-200);border-radius:4px;text-align:center;">
-            <div style="font-size:2rem;margin-bottom:var(--sp-3);">🏛️</div>
-            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:var(--sp-2);">Unit Operations Lab</h4>
-            <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.6;">Equipped with pilot-scale distillation, absorption, and extraction units for experimental research and teaching.</p>
+        <div class="themes-grid">
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Process Control &amp; Performance Monitoring</span>
           </div>
-          <div style="background:var(--white);padding:var(--sp-6);border:1px solid var(--gray-200);border-radius:4px;text-align:center;">
-            <div style="font-size:2rem;margin-bottom:var(--sp-3);">⚗️</div>
-            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:var(--sp-2);">Reaction Engineering Lab</h4>
-            <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.6;">Houses batch and continuous reactors, along with in-situ analytical instruments for kinetic studies.</p>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Chemical Process Safety &amp; Hazard Analysis</span>
           </div>
-          <div style="background:var(--white);padding:var(--sp-6);border:1px solid var(--gray-200);border-radius:4px;text-align:center;">
-            <div style="font-size:2rem;margin-bottom:var(--sp-3);">🔭</div>
-            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:var(--sp-2);">Materials Characterisation Lab</h4>
-            <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.6;">Instruments for surface area analysis, electron microscopy, XRD, FTIR, and thermal analysis.</p>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Solid Fuels, Gasification &amp; Biomass Conversion</span>
           </div>
-          <div style="background:var(--white);padding:var(--sp-6);border:1px solid var(--gray-200);border-radius:4px;text-align:center;">
-            <div style="font-size:2rem;margin-bottom:var(--sp-3);">💧</div>
-            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:var(--sp-2);">Environmental Analysis Lab</h4>
-            <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.6;">Water quality monitoring, pollutant analysis, and environmental impact assessment capabilities.</p>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Low-Carbon Technology &amp; H₂ Economy</span>
           </div>
-          <div style="background:var(--white);padding:var(--sp-6);border:1px solid var(--gray-200);border-radius:4px;text-align:center;">
-            <div style="font-size:2rem;margin-bottom:var(--sp-3);">🧬</div>
-            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:var(--sp-2);">Bioprocess Lab</h4>
-            <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.6;">Bioreactors, fermenters, and downstream processing equipment for biotechnology research.</p>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Biotechnology &amp; Bioprocess Engineering</span>
           </div>
-          <div style="background:var(--white);padding:var(--sp-6);border:1px solid var(--gray-200);border-radius:4px;text-align:center;">
-            <div style="font-size:2rem;margin-bottom:var(--sp-3);">💻</div>
-            <h4 style="font-family:var(--font-serif);color:var(--navy);margin-bottom:var(--sp-2);">Computational Lab</h4>
-            <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.6;">High-performance computing nodes with commercial (Aspen, HYSYS) and open-source simulation software.</p>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Environmental Remediation &amp; Water Treatment</span>
+          </div>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Biosensing, Biomaterials &amp; Diagnostics</span>
+          </div>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Nanocomposite Synthesis &amp; Applications</span>
+          </div>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Advanced Oxidation &amp; Photocatalytic Processes</span>
+          </div>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Air Pollution Modelling &amp; Environmental Impact Assessment</span>
+          </div>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Biological &amp; Medical Image Analysis</span>
+          </div>
+          <div class="theme-item">
+            <div class="theme-item__dot"></div>
+            <span class="theme-item__name">Industrial Sustainability &amp; Cleaner Production</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COLLABORATE CTA -->
-    <section class="section" aria-label="Collaboration">
-      <div class="container" style="text-align:center;max-width:700px;">
-        <p class="section-heading__label">Get Involved</p>
-        <h2 style="font-family:var(--font-serif);font-size:clamp(1.75rem,3vw,2.5rem);color:var(--navy);margin-bottom:var(--sp-4);">Interested in Collaborating?</h2>
-        <hr class="section-heading__line" style="margin:0 auto var(--sp-6);" />
-        <p style="color:var(--gray-600);font-size:0.95rem;line-height:1.8;margin-bottom:var(--sp-8);">
-          We welcome collaboration with industry, government bodies, NGOs, and international academic institutions. If you are interested in joint research, consultancy, or sponsored projects, please get in touch with our department.
-        </p>
-        <div style="display:flex;gap:var(--sp-4);justify-content:center;flex-wrap:wrap;">
-          <a class="btn btn--primary" href="../contact/index.html">Contact the Department</a>
-          <a class="btn btn--outline" href="../people/faculty.html">Browse Faculty</a>
+    <!-- FACULTY RESEARCH INTERESTS -->
+    <section class="research-section" aria-labelledby="faculty-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-header__label">Faculty</p>
+          <h2 class="section-header__title" id="faculty-heading">Faculty Research Specialisations</h2>
+          <div class="section-header__rule"></div>
+        </div>
+        <div class="faculty-research-grid">
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Md. Mominur Rahman</p>
+            <p class="faculty-research-card__spec">Energy and Environment, Sustainability</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Syeda Sultana Razia</p>
+            <p class="faculty-research-card__spec">Process safety, Chemical safety &amp; security, Distillation and separation processes, Effluent treatment</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Md. Ali Ahammad Shoukat Choudhury</p>
+            <p class="faculty-research-card__spec">Process Control, Chemical Engineering Modelling and Identification, Controller Performance Monitoring</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Md. Shahinoor Islam</p>
+            <p class="faculty-research-card__spec">Adsorption &amp; Biochar synthesis, Advanced oxidation (Fenton &amp; photocatalytic), Nanocomposite synthesis, Physico-chemical &amp; biological treatment</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Shoeb Ahmed</p>
+            <p class="faculty-research-card__spec">Bioenvironmental Engineering, Biological &amp; Medical Image Analysis, Quantitative Biology &amp; Biotechnology, Biochemical &amp; Bioprocess Engineering, Air Pollution Modelling</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Kazi Bayzid Kabir</p>
+            <p class="faculty-research-card__spec">Solid Fuels, Gasification, Coal/Biomass-to-Liquid, Heterogeneous catalysis</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Nahid Sanzida</p>
+            <p class="faculty-research-card__spec">Process Control</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Mohidus Samad Khan</p>
+            <p class="faculty-research-card__spec">Biotechnology, Environmental Engineering, Industrial Sustainability, Bio-surface Engineering, Paper-based Diagnostics</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Nafisa Islam</p>
+            <p class="faculty-research-card__spec">Biocompatible materials, Biosensing, Environmental Chemistry, Biomaterials</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Md. Easir Arafat Khan</p>
+            <p class="faculty-research-card__spec">Hazard &amp; risk analysis, Air pollution, Environmental Impact Assessment, Chemical process safety, Fire safety management</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Md. Iqbal Hossain</p>
+            <p class="faculty-research-card__spec">Fuel Chemistry and Technology, Energy Management, Cleaner Production, Separation, Catalysis-Kinetics-Hydrodynamics in Multiphase Flow</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Kawnish Kirtania</p>
+            <p class="faculty-research-card__spec">Low carbon technology, H₂ economy, Thermo-catalytic conversion, Bioenergy, CO₂ utilisation</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Iftheker Ahmed Khan</p>
+            <p class="faculty-research-card__spec">Bioenvironmental Engineering, Biological &amp; Medical Image Analysis, Quantitative Biology &amp; Biotechnology, Biochemical &amp; Bioprocess Engineering</p>
+          </div>
+
+          <div class="faculty-research-card">
+            <p class="faculty-research-card__name">Dr. Mahbuba Jannat</p>
+            <p class="faculty-research-card__spec">Biochemical Engineering, Biomaterials, Environmental applications</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-strip" aria-label="Get involved in research">
+      <div class="container">
+        <h2 class="cta-strip__title">Interested in Joining Our Research?</h2>
+        <p class="cta-strip__sub">Explore graduate opportunities or reach out to a research group directly.</p>
+        <div class="cta-strip__actions">
+          <a class="btn-gold" href="../academics/postgraduate.html">Postgraduate Programmes</a>
+          <a class="btn-ghost-white" href="../people/faculty.html">Browse Faculty Profiles</a>
+          <a class="btn-ghost-white" href="../contact/index.html">Contact Us</a>
         </div>
       </div>
     </section>
@@ -323,7 +826,10 @@
           <div class="footer-col__logo-icon">ChE</div>
           <div class="footer-col__logo-text">Chemical Engineering<br><small style="font-weight:400;font-size:0.75rem;opacity:0.7;">BUET</small></div>
         </div>
-        <p class="footer-col__desc">The Department of Chemical Engineering at BUET has been shaping chemical engineers since 1961, producing graduates who lead industry and academia nationally and internationally.</p>
+        <p class="footer-col__desc">
+          The Department of Chemical Engineering at BUET has been shaping chemical engineers
+          since 1961, producing graduates who lead industry and academia nationally and internationally.
+        </p>
         <div class="footer-col__social" aria-label="Social media links">
           <a class="social-link" href="#" aria-label="Facebook">f</a>
           <a class="social-link" href="#" aria-label="LinkedIn" style="font-family:serif;">in</a>
@@ -340,13 +846,13 @@
         </nav>
       </div>
       <div class="footer-col">
-        <h3 class="footer-col__title">Academics</h3>
-        <nav aria-label="Academics links">
-          <a class="footer-nav__item" href="../academics/undergraduate.html">Undergraduate</a>
-          <a class="footer-nav__item" href="../academics/postgraduate.html">Postgraduate</a>
-          <a class="footer-nav__item" href="index.html">Research</a>
-          <a class="footer-nav__item" href="../people/faculty.html">Faculty</a>
-          <a class="footer-nav__item" href="../people/staff.html">Staff</a>
+        <h3 class="footer-col__title">Research</h3>
+        <nav aria-label="Research links">
+          <a class="footer-nav__item" href="index.html">Research Groups</a>
+          <a class="footer-nav__item" href="https://cpisafety.com/" target="_blank" rel="noopener">CPI Safety Group</a>
+          <a class="footer-nav__item" href="https://psegroup.che.buet.ac.bd" target="_blank" rel="noopener">PSE Group</a>
+          <a class="footer-nav__item" href="https://seer-group.org" target="_blank" rel="noopener">SEER Group</a>
+          <a class="footer-nav__item" href="http://www.mohidkhan.com" target="_blank" rel="noopener">Bio &amp; Env. Group</a>
         </nav>
       </div>
       <div class="footer-col">
@@ -370,5 +876,16 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script>
+    // Navbar toggle (same pattern as index)
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('navMenu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open);
+      });
+    }
+  </script>
 </body>
 </html>
