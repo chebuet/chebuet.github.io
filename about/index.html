@@ -4,15 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About the Department — ChE BUET</title>
-  <meta name="description" content="About the Department of Chemical Engineering, BUET — its mission, history, and people." />
+  <meta name="description" content="About the Department of Chemical Engineering, BUET — established 1961, offering B.Sc., M.Sc. and Ph.D. programs in chemical engineering." />
   <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
 
   <div class="topbar">
     <div class="container topbar__inner">
       <span>Bangladesh University of Engineering and Technology (BUET)</span>
-      <nav class="topbar__links">
+      <nav class="topbar__links" aria-label="Quick links">
         <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main</a>
         <a href="../notices/index.html">Notices</a>
         <a href="../contact/index.html">Contact</a>
@@ -21,10 +22,10 @@
     </div>
   </div>
 
-  <header class="navbar">
+  <header class="navbar" role="banner">
     <div class="container navbar__inner">
-      <a class="navbar__logo" href="../index.html">
-        <div class="navbar__logo-icon">ChE</div>
+      <a class="navbar__logo" href="../index.html" aria-label="Home — ChE BUET">
+        <div class="navbar__logo-icon" aria-hidden="true">ChE</div>
         <div class="navbar__logo-text">
           <span class="navbar__logo-dept">Chemical Engineering</span>
           <span class="navbar__logo-univ">Bangladesh University of Engineering &amp; Technology</span>
@@ -33,12 +34,12 @@
       <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      <nav class="navbar__nav" id="navMenu">
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
         <div class="nav-item"><a class="nav-link" href="../index.html">Home</a></div>
         <div class="nav-item">
           <a class="nav-link active" href="index.html" data-dropdown="about">About <span class="chevron">▾</span></a>
           <div class="dropdown">
-            <a class="dropdown__item" href="index.html">About the Department</a>
+            <a class="dropdown__item active" href="index.html">About the Department</a>
             <a class="dropdown__item" href="mission-vision.html">Mission &amp; Vision</a>
             <a class="dropdown__item" href="history.html">History</a>
             <a class="dropdown__item" href="gallery.html">Gallery</a>
@@ -69,22 +70,25 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
+
     <div class="page-banner">
       <div class="container">
         <nav class="page-banner__breadcrumb" aria-label="Breadcrumb">
           <a href="../index.html">Home</a>
           <span>›</span>
-          <span>About</span>
+          <span aria-current="page">About</span>
         </nav>
         <h1 class="page-banner__title">About the Department</h1>
-        <p class="page-banner__subtitle">Chemical Engineering at BUET — Over Six Decades of Excellence</p>
+        <p class="page-banner__subtitle">Chemical Engineering at BUET — over six decades of excellence</p>
       </div>
     </div>
 
     <section class="section">
       <div class="container content-with-sidebar">
-        <div class="main-content">
+
+        <!-- ══ MAIN ══ -->
+        <div>
 
           <div class="section-heading">
             <p class="section-heading__label">Overview</p>
@@ -92,76 +96,122 @@
             <hr class="section-heading__line" />
           </div>
 
-          <p style="margin-bottom:1.25rem;line-height:1.8;">
+          <p style="margin-bottom:1.25rem;line-height:1.8;color:var(--gray-600);">
             The Department of Chemical Engineering at the Bangladesh University of Engineering and
             Technology (BUET) is one of the pioneering engineering departments in Bangladesh,
-            established in 1961. Over more than six decades, the department has been a cornerstone
-            of engineering education and research in the country, producing graduates who have
-            gone on to distinguished careers in industry, government, and academia across the world.
+            established in <strong style="color:var(--navy);">1961</strong>. Over more than six
+            decades, the department has been a cornerstone of engineering education and research,
+            producing graduates who have gone on to distinguished careers in industry, government,
+            and academia across the world.
           </p>
-          <p style="margin-bottom:1.25rem;line-height:1.8;">
-            The department offers rigorous undergraduate (B.Sc. in Chemical Engineering),
-            postgraduate (M.Sc. Engg.), and doctoral (Ph.D.) programs. With a strong emphasis
-            on both theoretical knowledge and practical skills, the curriculum is regularly updated
-            to reflect global developments in the field.
+          <p style="margin-bottom:1.25rem;line-height:1.8;color:var(--gray-600);">
+            The department offers a four-year <strong style="color:var(--navy);">B.Sc. in Chemical
+            Engineering</strong> (B.Sc. Engg. (Chem.)), postgraduate M.Sc. Engineering, and doctoral
+            Ph.D. programs. From 2020 onwards, 120 undergraduate students are admitted each year.
+            With a strong emphasis on both theoretical knowledge and practical skills, the curriculum
+            is regularly updated to reflect global developments in the field — the current B.Sc.
+            curriculum was approved by the Academic Council in July 2023.
           </p>
-          <p style="margin-bottom:2.5rem;line-height:1.8;">
+          <p style="margin-bottom:var(--sp-10);line-height:1.8;color:var(--gray-600);">
             Research in the department spans a diverse range of areas including process systems
             engineering, environmental engineering, energy and fuels, biochemical engineering,
-            and materials &amp; nanotechnology. The department is home to state-of-the-art
-            laboratories and computing facilities that support cutting-edge research.
+            polymer &amp; petrochemicals, process safety, and materials science. The department
+            also provides industrial testing and consultancy services through the university's
+            Bureau of Research, Testing and Consultation (BRTC).
           </p>
 
-          <!-- Key Facts -->
+          <!-- Key Facts grid -->
           <div class="section-heading">
             <p class="section-heading__label">At a Glance</p>
             <h2 class="section-heading__title">Key Facts</h2>
             <hr class="section-heading__line" />
           </div>
 
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2.5rem;">
-            <div style="padding:1.25rem;background:var(--off-white);border-left:3px solid var(--gold);">
-              <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.25rem;">Founded</div>
-              <div style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600;color:var(--navy);">1961</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-4);margin-bottom:var(--sp-10);">
+            <div style="padding:var(--sp-5);background:var(--off-white);border-left:4px solid var(--gold);">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--sp-1);">Founded</div>
+              <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--navy);">1961</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);margin-top:2px;">Erstwhile East Pakistan University of Engineering and Technology</div>
             </div>
-            <div style="padding:1.25rem;background:var(--off-white);border-left:3px solid var(--gold);">
-              <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.25rem;">Faculty Members</div>
-              <div style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600;color:var(--navy);">25+</div>
+            <div style="padding:var(--sp-5);background:var(--off-white);border-left:4px solid var(--gold);">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--sp-1);">Annual Intake</div>
+              <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--navy);">120 Students</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);margin-top:2px;">Undergraduate program (from 2020 onwards)</div>
             </div>
-            <div style="padding:1.25rem;background:var(--off-white);border-left:3px solid var(--gold);">
-              <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.25rem;">Students</div>
-              <div style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600;color:var(--navy);">500+</div>
+            <div style="padding:var(--sp-5);background:var(--off-white);border-left:4px solid var(--gold);">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--sp-1);">Programs Offered</div>
+              <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--navy);">B.Sc. · M.Sc. · Ph.D.</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);margin-top:2px;">Full-time, English-medium programs</div>
             </div>
-            <div style="padding:1.25rem;background:var(--off-white);border-left:3px solid var(--gold);">
-              <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.25rem;">Research Laboratories</div>
-              <div style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600;color:var(--navy);">10+</div>
+            <div style="padding:var(--sp-5);background:var(--off-white);border-left:4px solid var(--gold);">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--sp-1);">Total Credits (B.Sc.)</div>
+              <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--navy);">158.5 Credit Hours</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);margin-top:2px;">Over 8 terms across 4 years</div>
+            </div>
+            <div style="padding:var(--sp-5);background:var(--off-white);border-left:4px solid var(--gold);">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--sp-1);">Faculty</div>
+              <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--navy);">25+</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);margin-top:2px;">Full-time faculty with national &amp; international degrees</div>
+            </div>
+            <div style="padding:var(--sp-5);background:var(--off-white);border-left:4px solid var(--gold);">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:var(--sp-1);">Location</div>
+              <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;color:var(--navy);">Dhaka, Bangladesh</div>
+              <div style="font-size:0.8rem;color:var(--gray-600);margin-top:2px;">BUET Campus, Palashi, Dhaka – 1000</div>
             </div>
           </div>
 
+          <!-- Vision + Mission summary (sourced from 2023 curriculum) -->
+          <div class="section-heading">
+            <p class="section-heading__label">Guiding Principles</p>
+            <h2 class="section-heading__title">Vision &amp; Mission</h2>
+            <hr class="section-heading__line" />
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);margin-bottom:var(--sp-10);">
+            <div style="background:var(--navy);color:var(--white);padding:var(--sp-8);border-radius:2px;">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-3);">Vision</div>
+              <p style="font-family:var(--font-serif);font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.9);">
+                To become a leading chemical engineering department globally through academic excellence, research and innovation.
+              </p>
+            </div>
+            <div style="background:var(--off-white);border:1px solid var(--gray-200);border-left:4px solid var(--gold);padding:var(--sp-8);">
+              <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:var(--sp-3);">Mission</div>
+              <ul style="font-size:0.87rem;color:var(--gray-600);line-height:2;list-style:none;padding:0;">
+                <li style="border-bottom:1px solid var(--gray-200);padding-bottom:var(--sp-2);margin-bottom:var(--sp-2);">🎓 World-class education preparing graduates for industry, academia, and research</li>
+                <li style="border-bottom:1px solid var(--gray-200);padding-bottom:var(--sp-2);margin-bottom:var(--sp-2);">🔬 Research aligned with sustainable development goals</li>
+                <li>🤝 Close collaboration with process industries and continuous professional development</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Explore cards -->
           <div class="section-heading">
             <p class="section-heading__label">Explore</p>
             <h2 class="section-heading__title">Learn More</h2>
             <hr class="section-heading__line" />
           </div>
 
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
-            <a class="card" href="mission-vision.html" style="padding:1.5rem;text-align:center;text-decoration:none;">
-              <div style="font-size:2rem;margin-bottom:0.75rem;">🎯</div>
-              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy);">Mission &amp; Vision</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4);">
+            <a class="card" href="mission-vision.html" style="padding:var(--sp-8);text-align:center;text-decoration:none;display:block;">
+              <div style="font-size:2rem;margin-bottom:var(--sp-3);">🎯</div>
+              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:var(--sp-2);">Mission &amp; Vision</div>
+              <p style="font-size:0.8rem;color:var(--gray-600);">Our guiding principles and educational objectives</p>
             </a>
-            <a class="card" href="history.html" style="padding:1.5rem;text-align:center;text-decoration:none;">
-              <div style="font-size:2rem;margin-bottom:0.75rem;">📜</div>
-              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy);">Department History</div>
+            <a class="card" href="history.html" style="padding:var(--sp-8);text-align:center;text-decoration:none;display:block;">
+              <div style="font-size:2rem;margin-bottom:var(--sp-3);">📜</div>
+              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:var(--sp-2);">Department History</div>
+              <p style="font-size:0.8rem;color:var(--gray-600);">Six decades of growth, from 1961 to today</p>
             </a>
-            <a class="card" href="gallery.html" style="padding:1.5rem;text-align:center;text-decoration:none;">
-              <div style="font-size:2rem;margin-bottom:0.75rem;">📸</div>
-              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy);">Photo Gallery</div>
+            <a class="card" href="gallery.html" style="padding:var(--sp-8);text-align:center;text-decoration:none;display:block;">
+              <div style="font-size:2rem;margin-bottom:var(--sp-3);">📸</div>
+              <div style="font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:var(--sp-2);">Photo Gallery</div>
+              <p style="font-size:0.8rem;color:var(--gray-600);">Life, labs, events, and milestones at ChE BUET</p>
             </a>
           </div>
 
         </div>
 
-        <!-- Sidebar -->
+        <!-- ══ SIDEBAR ══ -->
         <aside class="sidebar">
           <div class="sidebar-widget">
             <h3 class="sidebar-widget__title">About Pages</h3>
@@ -172,31 +222,48 @@
               <a class="sidebar-nav__item" href="gallery.html">Gallery</a>
             </nav>
           </div>
+
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget__title">Programs</h3>
+            <nav aria-label="Programs">
+              <a class="sidebar-nav__item" href="../academics/undergraduate.html">B.Sc. Chemical Engineering</a>
+              <a class="sidebar-nav__item" href="../academics/postgraduate.html">M.Sc. Engineering</a>
+              <a class="sidebar-nav__item" href="../academics/postgraduate.html">Ph.D. Program</a>
+            </nav>
+          </div>
+
           <div class="sidebar-widget">
             <h3 class="sidebar-widget__title">Quick Contact</h3>
-            <p style="font-size:0.85rem;color:var(--gray-600);line-height:1.7;">
+            <p style="font-size:0.85rem;color:var(--gray-600);line-height:1.8;">
               Department of Chemical Engineering<br>
-              BUET, Dhaka – 1000<br>
-              <a href="mailto:head@che.buet.ac.bd" style="color:var(--gold-dark);">head@che.buet.ac.bd</a>
+              BUET, Dhaka – 1000, Bangladesh<br>
+              <a href="mailto:head@che.buet.ac.bd" style="color:var(--gold-dark);font-weight:600;">head@che.buet.ac.bd</a><br>
+              <a href="../contact/index.html" style="color:var(--navy);font-size:0.82rem;">→ Full contact details</a>
             </p>
           </div>
         </aside>
+
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container footer__main">
       <div class="footer-col">
         <div class="footer-col__logo">
           <div class="footer-col__logo-icon">ChE</div>
           <div class="footer-col__logo-text">Chemical Engineering<br><small style="font-weight:400;font-size:0.75rem;opacity:0.7;">BUET</small></div>
         </div>
-        <p class="footer-col__desc">Shaping chemical engineers since 1961 — producing graduates who lead industry and academia nationally and internationally.</p>
+        <p class="footer-col__desc">The Department of Chemical Engineering at BUET has been shaping chemical engineers since 1961, producing graduates who lead industry and academia nationally and internationally.</p>
+        <div class="footer-col__social" aria-label="Social media links">
+          <a class="social-link" href="#" aria-label="Facebook">f</a>
+          <a class="social-link" href="#" aria-label="LinkedIn" style="font-family:serif;">in</a>
+          <a class="social-link" href="#" aria-label="YouTube">▶</a>
+        </div>
       </div>
       <div class="footer-col">
         <h3 class="footer-col__title">About</h3>
-        <nav>
+        <nav aria-label="About links">
           <a class="footer-nav__item" href="index.html">About Department</a>
           <a class="footer-nav__item" href="mission-vision.html">Mission &amp; Vision</a>
           <a class="footer-nav__item" href="history.html">History</a>
@@ -205,24 +272,31 @@
       </div>
       <div class="footer-col">
         <h3 class="footer-col__title">Academics</h3>
-        <nav>
+        <nav aria-label="Academics links">
           <a class="footer-nav__item" href="../academics/undergraduate.html">Undergraduate</a>
           <a class="footer-nav__item" href="../academics/postgraduate.html">Postgraduate</a>
           <a class="footer-nav__item" href="../research/index.html">Research</a>
           <a class="footer-nav__item" href="../people/faculty.html">Faculty</a>
+          <a class="footer-nav__item" href="../people/staff.html">Staff</a>
         </nav>
       </div>
       <div class="footer-col">
         <h3 class="footer-col__title">Contact</h3>
         <address style="font-style:normal;font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.8;">
+          Department of Chemical Engineering<br>
           BUET, Dhaka – 1000, Bangladesh<br>
+          <a href="tel:+8809666793777" style="color:rgba(255,255,255,0.6);">+880-9666-793777</a><br>
           <a href="mailto:head@che.buet.ac.bd" style="color:var(--gold);">head@che.buet.ac.bd</a>
         </address>
       </div>
     </div>
     <div class="container footer__bottom">
-      <span>&copy; 2025 Department of Chemical Engineering, BUET.</span>
-      <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a>
+      <span>&copy; 2025 Department of Chemical Engineering, BUET. All rights reserved.</span>
+      <span>
+        <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a>
+        &nbsp;·&nbsp;
+        <a href="../contact/index.html">Webmaster</a>
+      </span>
     </div>
   </footer>
 
