@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Faculty — ChE BUET</title>
   <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .faculty-card--linked { transition: box-shadow 0.2s, transform 0.2s; }
+    .faculty-card--linked:hover { box-shadow: 0 6px 24px rgba(10,34,64,0.15); transform: translateY(-2px); }
+    .faculty-card--linked:hover .faculty-card__profile-link { background: #c8922a !important; }
+  </style>
 </head>
 <body>
 
@@ -133,11 +138,12 @@
         <!-- Professors -->
         <h3 style="font-family:var(--font-serif);font-size:1.2rem;color:var(--navy);margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:2px solid var(--gold);">Professors</h3>
         <div class="faculty-grid" style="margin-bottom:3rem;">
-          <article class="card faculty-card">
+          <article class="card faculty-card faculty-card--linked" onclick="window.location='shoeb-ahmed.html'" style="cursor:pointer;position:relative;">
+            <a href="shoeb-ahmed.html" class="faculty-card__profile-link" aria-label="View profile of Dr. Shoeb Ahmed" style="position:absolute;top:0.6rem;right:0.6rem;background:#0a2240;color:#fff;font-size:0.7rem;font-family:sans-serif;font-weight:600;letter-spacing:0.05em;padding:0.2rem 0.55rem;border-radius:3px;text-decoration:none;z-index:2;transition:background 0.2s;">Profile →</a>
             <div class="faculty-card__photo" aria-label="Faculty photo"><img src="../assets/images/SA.jpeg"></div>
-            <h4 class="faculty-card__name">Dr. Shoeb Ahmed</h4>
+            <h4 class="faculty-card__name"><a href="shoeb-ahmed.html" style="color:inherit;text-decoration:none;">Dr. Shoeb Ahmed</a></h4>
             <p class="faculty-card__designation">Professor and Head of the Department</p>
-            <p class="faculty-card__email"><a href="mailto:shoebahmed@che.buet.ac.bd">shoebahmed@che.buet.ac.bd</a></p>
+            <p class="faculty-card__email"><a href="mailto:shoebahmed@che.buet.ac.bd" onclick="event.stopPropagation()">shoebahmed@che.buet.ac.bd</a></p>
             <p class="faculty-card__interests">Bioenvironmental Engineering, Biological and Medical Image Analysis, Quantitative Biology and Biotechnology, Biochemical and Bioprocess Engineering, Air Pollution Modelling</p>
           </article>
           <article class="card faculty-card">
