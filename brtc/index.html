@@ -9,6 +9,7 @@
   <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon"/>
   <style>
     /* ── Test Rates Table ─────────────────────────────────── */
+    /*
     .rates-controls {
       display: flex;
       flex-wrap: wrap;
@@ -128,7 +129,7 @@
       font-style: italic;
       display: none;
     }
-
+    */
     .pdf-download-bar {
       display: flex;
       align-items: center;
@@ -312,15 +313,18 @@
             <!-- ══════════════════════════════════════════
                  TEST RATES TABLE (2026)
                  ══════════════════════════════════════════ -->
+            
             <div class="section-heading">
               <p class="section-heading__label">Pricing</p>
               <h2 class="section-heading__title">Test Rates 2026</h2>
               <hr class="section-heading__line"/>
             </div>
+            
 
             <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:1.25rem;line-height:1.7;">
               All prices are in BDT and include 15% VAT where applicable. The Department of Chemical Engineering reserves the right to change rates at any time without prior notice.
             </p>
+            
 
             <!-- PDF Download bar -->
             <div class="pdf-download-bar">
@@ -329,12 +333,14 @@
                 <strong>BRTC Price List 2026 — Official PDF</strong>
                 <span>Download the complete, official test rates document as issued by BRTC.</span>
               </div>
-              <a class="btn btn--primary" href="assets/files/BRTC_Test_Rates_2026.pdf" download style="white-space:nowrap;flex-shrink:0;">
+              <a class="btn btn--primary" href="../assets/files/BRTC_Test_Rates_2026.pdf" download style="white-space:nowrap;flex-shrink:0;">
                 ⬇ Download PDF
               </a>
             </div>
+            
 
             <!-- Search + Filter controls -->
+            <!--
             <div class="rates-controls">
               <input class="rates-search" type="search" id="ratesSearch" placeholder="Search tests, methods, categories…" autocomplete="off" />
               <select class="rates-filter" id="ratesCategory">
@@ -354,6 +360,7 @@
               </select>
               <span class="rates-count" id="ratesCount"></span>
             </div>
+            
 
             <div class="rates-table-wrap">
               <table class="rates-table" id="ratesTable" aria-label="BRTC Test Rates 2026">
@@ -369,11 +376,16 @@
                   </tr>
                 </thead>
                 <tbody id="ratesBody">
+                -->
+            
                   <!-- rows injected by JS -->
+                <!--
                 </tbody>
               </table>
               <div class="no-results" id="noResults">No tests match your search. Try a different keyword or category.</div>
             </div>
+            -->
+            
 
             <div class="section-heading" style="margin-top:3.5rem;">
               <p class="section-heading__label">Process</p>
@@ -387,7 +399,9 @@
               <li>Testing / consultancy is conducted in the relevant department laboratory</li>
               <li>Official report is issued on department letterhead</li>
             </ol>
-          </div><!-- /main content -->
+          </div> 
+          -->
+          <!-- /main content -->
 
           <!-- SIDEBAR -->
           <aside class="sidebar">
@@ -418,7 +432,7 @@
               <p style="font-size:0.83rem;color:var(--gray-600);line-height:1.7;margin-bottom:0.75rem;">
                 Download the complete BRTC Test Rates 2026 as an official PDF document.
               </p>
-              <a class="btn btn--primary" href="assets/files/BRTC_Test_Rates_2026.pdf" download style="width:100%;justify-content:center;font-size:0.82rem;">
+              <a class="btn btn--primary" href="../assets/files/BRTC_Test_Rates_2026.pdf" download style="width:100%;justify-content:center;font-size:0.82rem;">
                 ⬇ BRTC_Test_Rates_2026.pdf
               </a>
             </div>
@@ -486,6 +500,7 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <!--
   <script>
   // ─── BRTC Test Rates Data (from BRTC Price List 2026) ────────────────────────
   const RATES = [
@@ -951,5 +966,6 @@
     });
   });
   </script>
+  -->
 </body>
 </html>
