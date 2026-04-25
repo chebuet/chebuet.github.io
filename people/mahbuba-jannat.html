@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Mahbuba Jannat — ChE BUET</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --profile-navy:#0a2240;--profile-gold:#c8922a;--profile-light:#f5f7fa;--profile-white:#ffffff;--profile-text:#2c3e50;--profile-muted:#6b7280;--profile-border:#e2e8f0;--profile-accent:#1a4a7a; }
+    .profile-hero { background:linear-gradient(135deg,#0a2240 0%,#1a4a7a 60%,#1e6fa8 100%);position:relative;overflow:hidden;padding:3rem 0 0; }
+    .profile-hero::before { content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .profile-hero__inner { display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:end;position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2rem; }
+    .profile-photo-col { display:flex;flex-direction:column;align-items:center; }
+    .profile-photo { width:220px;height:260px;object-fit:cover;object-position:top center;border-radius:4px 4px 0 0;box-shadow:0 8px 40px rgba(0,0,0,0.4);display:block;background:rgba(255,255,255,0.08); }
+    .profile-photo-placeholder { width:220px;height:260px;border-radius:4px 4px 0 0;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:5rem;color:rgba(255,255,255,0.3); }
+    .profile-meta { padding-bottom:2.5rem;color:white; }
+    .profile-meta__tag { display:inline-block;background:var(--profile-gold);color:white;font-size:0.7rem;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:2px;margin-bottom:1rem; }
+    .profile-meta__name { font-family:'EB Garamond',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;line-height:1.15;margin:0 0 0.5rem;color:#fff; }
+    .profile-meta__title { font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:300;color:rgba(255,255,255,0.75);margin:0 0 1.5rem; }
+    .profile-meta__contacts { display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:1.5rem; }
+    .profile-meta__contact-item { display:flex;align-items:center;gap:0.4rem;font-family:'DM Sans',sans-serif;font-size:0.875rem;color:rgba(255,255,255,0.8); }
+    .profile-meta__contact-item svg { flex-shrink:0;opacity:0.7; }
+    .profile-meta__contact-item a { color:rgba(255,255,255,0.9);text-decoration:none;transition:color 0.2s; }
+    .profile-meta__contact-item a:hover { color:var(--profile-gold); }
+    .profile-social-links { display:flex;gap:0.6rem;flex-wrap:wrap; }
+    .profile-social-btn { display:inline-flex;align-items:center;gap:0.4rem;padding:0.4rem 0.9rem;border:1px solid rgba(255,255,255,0.25);border-radius:3px;color:rgba(255,255,255,0.85);font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;text-decoration:none;transition:all 0.2s;background:rgba(255,255,255,0.07);backdrop-filter:blur(4px); }
+    .profile-social-btn:hover { background:var(--profile-gold);border-color:var(--profile-gold);color:white; }
+    .profile-body { max-width:1100px;margin:0 auto;padding:3rem 2rem 4rem;display:grid;grid-template-columns:1fr 300px;gap:3rem;align-items:start; }
+    .profile-main { min-width:0; }
+    .profile-section { margin-bottom:3rem; }
+    .profile-section__header { display:flex;align-items:center;gap:0.8rem;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:2px solid var(--profile-border); }
+    .profile-section__icon { width:32px;height:32px;background:var(--profile-navy);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .profile-section__title { font-family:'EB Garamond',Georgia,serif;font-size:1.4rem;font-weight:600;color:var(--profile-navy);margin:0; }
+    .research-tags { display:flex;flex-wrap:wrap;gap:0.5rem; }
+    .research-tag { background:#eef2f8;border:1px solid #d0daea;color:var(--profile-navy);font-family:'DM Sans',sans-serif;font-size:0.83rem;padding:0.35rem 0.85rem;border-radius:20px;font-weight:500; }
+    .edu-timeline { list-style:none;padding:0;margin:0; }
+    .edu-item { display:grid;grid-template-columns:100px 1fr;gap:0 1.2rem;padding:1rem 0;border-bottom:1px solid var(--profile-border); }
+    .edu-item:last-child { border-bottom:none; }
+    .edu-item__year { font-family:'EB Garamond',Georgia,serif;font-size:1.1rem;font-weight:600;color:var(--profile-gold);padding-top:0.15rem; }
+    .edu-item__degree { font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.95rem;color:var(--profile-text);margin:0 0 0.2rem; }
+    .edu-item__institution { font-family:'DM Sans',sans-serif;font-size:0.875rem;color:var(--profile-muted);margin:0; }
+    .pub-list { list-style:none;padding:0;margin:0; }
+    .pub-item { padding:1.1rem 0 1.1rem 1.2rem;border-bottom:1px solid var(--profile-border);position:relative;font-family:'DM Sans',sans-serif;font-size:0.875rem;line-height:1.65;color:var(--profile-text); }
+    .pub-item:last-child { border-bottom:none; }
+    .pub-item::before { content:'';position:absolute;left:0;top:1.5rem;width:4px;height:4px;border-radius:50%;background:var(--profile-gold); }
+    .pub-item__journal { font-style:italic;color:var(--profile-accent); }
+    .pub-item a { color:var(--profile-accent);text-decoration:none;font-weight:500; }
+    .pub-item a:hover { text-decoration:underline;color:var(--profile-gold); }
+    .pub-section-label { font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--profile-muted);margin:1.5rem 0 0.5rem;padding-left:1.2rem; }
+    .pub-section-label:first-child { margin-top:0; }
+    .honors-list { list-style:none;padding:0;margin:0; }
+    .honor-item { display:flex;align-items:flex-start;gap:0.8rem;padding:0.9rem 0;border-bottom:1px solid var(--profile-border); }
+    .honor-item:last-child { border-bottom:none; }
+    .honor-item__icon { width:32px;height:32px;background:linear-gradient(135deg,#f5c518,#e6a817);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.9rem; }
+    .honor-item__text { font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--profile-text);font-weight:500;padding-top:0.4rem; }
+    .profile-sidebar { position:sticky;top:100px; }
+    .sidebar-card { background:var(--profile-white);border:1px solid var(--profile-border);border-radius:8px;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+    .sidebar-card__header { background:var(--profile-navy);color:white;font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.7rem 1.2rem; }
+    .sidebar-card__body { padding:1.2rem; }
+    .contact-row { display:flex;align-items:flex-start;gap:0.6rem;margin-bottom:0.9rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--profile-text); }
+    .contact-row:last-child { margin-bottom:0; }
+    .contact-row svg { flex-shrink:0;margin-top:2px;color:var(--profile-muted); }
+    .contact-row a { color:var(--profile-accent);text-decoration:none; }
+    .contact-row a:hover { color:var(--profile-gold); }
+    .academic-links { display:flex;flex-direction:column;gap:0.5rem; }
+    .academic-link-btn { display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.9rem;border:1px solid var(--profile-border);border-radius:6px;text-decoration:none;font-family:'DM Sans',sans-serif;font-size:0.83rem;font-weight:500;color:var(--profile-text);transition:all 0.2s;background:var(--profile-light); }
+    .academic-link-btn:hover { background:var(--profile-navy);color:white;border-color:var(--profile-navy); }
+    .stat-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.8rem; }
+    .stat-item { background:var(--profile-light);border-radius:6px;padding:0.8rem 0.6rem;text-align:center;border:1px solid var(--profile-border); }
+    .stat-item__num { display:block;font-family:'EB Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--profile-navy);line-height:1; }
+    .stat-item__label { display:block;font-family:'DM Sans',sans-serif;font-size:0.7rem;color:var(--profile-muted);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem; }
+    .courses-list { list-style:none;padding:0;margin:0; }
+    .courses-list li { font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--profile-text);padding:0.4rem 0;border-bottom:1px solid var(--profile-border);display:flex;align-items:center;gap:0.5rem; }
+    .courses-list li:last-child { border-bottom:none; }
+    .courses-list li::before { content:'▸';color:var(--profile-gold);font-size:0.75rem; }
+    .profile-breadcrumb { background:rgba(255,255,255,0.06);padding:0.6rem 2rem;font-family:'DM Sans',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.55);max-width:1100px;margin:0 auto; }
+    .profile-breadcrumb a { color:rgba(255,255,255,0.7);text-decoration:none; }
+    .profile-breadcrumb a:hover { color:var(--profile-gold); }
+    .profile-breadcrumb span { margin:0 0.4rem; }
+    @media (max-width:900px) { .profile-hero__inner { grid-template-columns:1fr;gap:1.5rem;align-items:center; } .profile-photo-col { flex-direction:row;gap:1.5rem;align-items:flex-end; } .profile-photo,.profile-photo-placeholder { width:140px;height:170px; } .profile-body { grid-template-columns:1fr; } .profile-sidebar { position:static; } }
+    @media (max-width:600px) { .profile-hero__inner { padding:0 1rem; } .profile-body { padding:2rem 1rem; } .edu-item { grid-template-columns:80px 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar"><div class="container topbar__inner"><span>Bangladesh University of Engineering and Technology (BUET)</span><nav class="topbar__links"><a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main</a><a href="../notices/index.html">Notices</a><a href="../contact/index.html">Contact</a></nav></div></div>
+
+  <header class="navbar" role="banner">
+    <div class="container navbar__inner">
+      <a class="navbar__logo" href="/index.html" aria-label="Home — ChE BUET"><div class="navbar__logo-icon" aria-hidden="true"><img src="/assets/images/favicon.png" alt="ChE Logo"></div><div class="navbar__logo-text"><span class="navbar__logo-dept">Chemical Engineering</span><span class="navbar__logo-univ">Bangladesh University of Engineering &amp; Technology</span></div></a>
+      <button class="navbar__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="navbar__nav" id="navMenu" aria-label="Main navigation">
+        <div class="nav-item"><a class="nav-link" href="/index.html">Home</a></div>
+        <div class="nav-item"><a class="nav-link" href="/about/index.html">About <span class="chevron">▾</span></a><div class="dropdown"><a class="dropdown__item" href="/about/index.html">About the Department</a><a class="dropdown__item" href="/about/mission-vision.html">Mission &amp; Vision</a><a class="dropdown__item" href="/about/history.html">History</a><a class="dropdown__item" href="/about/gallery.html">Gallery</a></div></div>
+        <div class="nav-item"><a class="nav-link active" href="/people/index.html">People <span class="chevron">▾</span></a><div class="dropdown"><a class="dropdown__item" href="/people/faculty.html">Faculty</a><a class="dropdown__item" href="/people/faculty-on-leave.html">Faculty on Leave</a><a class="dropdown__item" href="/people/former-faculty.html">Former Faculty</a><a class="dropdown__item" href="/people/staff.html">Staff</a></div></div>
+        <div class="nav-item"><a class="nav-link" href="/academics/index.html">Academics <span class="chevron">▾</span></a><div class="dropdown"><a class="dropdown__item" href="/academics/undergraduate.html">Undergraduate</a><a class="dropdown__item" href="/academics/postgraduate.html">Postgraduate</a></div></div>
+        <div class="nav-item"><a class="nav-link" href="/research/index.html">Research</a></div>
+        <div class="nav-item"><a class="nav-link" href="/news-events/index.html">News &amp; Events</a></div>
+        <div class="nav-item"><a class="nav-link" href="/notices/index.html">Notices</a></div>
+        <div class="nav-item"><a class="nav-link" href="/brtc/index.html">BRTC</a></div>
+        <div class="nav-item"><a class="nav-link" href="/contact/index.html">Contact</a></div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="profile-hero">
+      <nav class="profile-breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span>›</span><a href="faculty.html">People</a><span>›</span><a href="faculty.html">Faculty</a><span>›</span><span style="color:rgba(255,255,255,0.85);">Dr. Mahbuba Jannat</span>
+      </nav>
+
+      <div class="profile-hero__inner">
+        <div class="profile-photo-col">
+          <img class="profile-photo" src="../assets/images/MJ.jpg" alt="Dr. Mahbuba Jannat" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="profile-photo-placeholder" style="display:none;">👤</div>
+        </div>
+
+        <div class="profile-meta">
+          <span class="profile-meta__tag">Assistant Professor</span>
+          <h1 class="profile-meta__name">Dr. Mahbuba Jannat</h1>
+          <p class="profile-meta__title">Department of Chemical Engineering, BUET · Dhaka-1000, Bangladesh</p>
+
+          <div class="profile-meta__contacts">
+            <span class="profile-meta__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              <a href="mailto:mahbuba@che.buet.ac.bd">mahbuba@che.buet.ac.bd</a>
+            </span>
+          </div>
+
+          <div class="profile-social-links">
+            <a class="profile-social-btn" href="https://scholar.google.com/citations?hl=en&user=gjb6mA0AAAAJ" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+              Google Scholar
+            </a>
+            <a class="profile-social-btn" href="https://www.researchgate.net/profile/Mahbuba-Jannat" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.586 0c-.818 0-1.536.5-1.844 1.25l-3.03 7.5-3.029-7.5C11.375.5 10.657 0 9.839 0 8.607 0 7.607 1 7.607 2.232c0 .25.036.5.107.732l4.286 10.625-1.143 2.857c-.286.714-1.286 1.214-1.429.214-.286-1.857-1.714-2.5-3.464-2.5C3.82 14.16 2 15.946 2 18.232 2 20.554 3.82 22.25 6.107 22.25c2.75 0 4.25-1.286 4.25-3.571v-.179l.25.643h2.357l.25-.643v.179c0 2.285 1.5 3.571 4.25 3.571 2.286 0 4.107-1.696 4.107-4.018 0-2.286-1.821-4.072-4.107-4.072-1.75 0-3.179.643-3.464 2.5-.143 1-.75.5-1.036-.214l1.286-3.25L21.5 2.946C21.571 2.696 21.607 2.446 21.607 2.196 21.607 1 20.821 0 19.586 0z"/></svg>
+              ResearchGate
+            </a>
+            <a class="profile-social-btn" href="https://che.buet.ac.bd/mahbuba-jannat/" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+              Department Profile
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="background:#f5f7fa;border-bottom:1px solid #e2e8f0;"><div style="max-width:1100px;margin:0 auto;padding:0 2rem;"><div style="display:flex;gap:1px;overflow-x:auto;"><a href="#research" style="padding:0.8rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;color:#0a2240;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;" onmouseover="this.style.borderColor='#c8922a'" onmouseout="this.style.borderColor='transparent'">Research</a><a href="#education" style="padding:0.8rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;color:#0a2240;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;" onmouseover="this.style.borderColor='#c8922a'" onmouseout="this.style.borderColor='transparent'">Education</a><a href="#publications" style="padding:0.8rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;color:#0a2240;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;" onmouseover="this.style.borderColor='#c8922a'" onmouseout="this.style.borderColor='transparent'">Publications</a><a href="#honors" style="padding:0.8rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;color:#0a2240;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;" onmouseover="this.style.borderColor='#c8922a'" onmouseout="this.style.borderColor='transparent'">Honors &amp; Awards</a></div></div></div>
+
+    <div class="profile-body">
+      <div class="profile-main">
+
+        <section class="profile-section" id="research">
+          <div class="profile-section__header">
+            <div class="profile-section__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8922a" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <h2 class="profile-section__title">Research Interests</h2>
+          </div>
+          <div class="research-tags">
+            <span class="research-tag">Biosensors &amp; Millifluidic Devices</span>
+            <span class="research-tag">Microfluidic Systems</span>
+            <span class="research-tag">3D Printing in Chemical Engineering</span>
+            <span class="research-tag">Liquid Crystal Sensors</span>
+            <span class="research-tag">Enzyme Immobilization</span>
+            <span class="research-tag">Enzymatic Processes &amp; Bioassays</span>
+            <span class="research-tag">Wastewater Treatment</span>
+            <span class="research-tag">Coagulation &amp; Flocculation</span>
+          </div>
+
+          <p style="margin-top:1.5rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;line-height:1.75;color:#4a5568;">
+            Dr. Jannat's research is focused on developing <strong>innovative millifluidic and microfluidic biosensing platforms</strong> for continuous bioassays and environmental monitoring. Her doctoral work at the National University of Singapore (NUS) with Prof. Ki-Leung Yang demonstrated pioneering liquid crystal-based sensors for protease detection and enzyme immobilization on flexible tubing surfaces. Back at BUET, she has expanded into wastewater treatment research, working on optimizing coagulation processes. In 2023, Dr. Jannat was awarded a prestigious research grant from <strong>The Royal Society, UK</strong> (International Science Partnership Fund, ISPF) worth £112,500.
+          </p>
+        </section>
+
+        <section class="profile-section" id="education">
+          <div class="profile-section__header">
+            <div class="profile-section__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8922a" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <h2 class="profile-section__title">Education</h2>
+          </div>
+          <ul class="edu-timeline">
+            <li class="edu-item">
+              <span class="edu-item__year">Ph.D.</span>
+              <div>
+                <p class="edu-item__degree">Ph.D. in Chemical &amp; Biomolecular Engineering</p>
+                <p class="edu-item__institution">National University of Singapore (NUS), Singapore (Advisor: Prof. Ki-Leung Yang)</p>
+              </div>
+            </li>
+            <li class="edu-item">
+              <span class="edu-item__year">B.Sc.</span>
+              <div>
+                <p class="edu-item__degree">B.Sc. in Chemical Engineering</p>
+                <p class="edu-item__institution">Bangladesh University of Engineering &amp; Technology (BUET)</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="profile-section" id="publications">
+          <div class="profile-section__header">
+            <div class="profile-section__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8922a" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <h2 class="profile-section__title">Selected Publications</h2>
+          </div>
+
+          <p class="pub-section-label">Journal Articles</p>
+          <ul class="pub-list">
+            <li class="pub-item">
+              Dhrubo AAK, <strong>Jannat M</strong>, and Hossain MS (2023). "Enhancing the performance of coagulants for wastewater treatment by varying and optimizing the experimental parameters." <span class="pub-item__journal">Journal of Water Process Engineering</span>, 55: 104144.
+            </li>
+            <li class="pub-item">
+              <strong>Jannat M</strong>, Yang KL (2020). "A Millifluidic Device with Embedded Cross-linked Enzyme Aggregates for Degradation of H₂O₂." <span class="pub-item__journal">ACS Applied Materials &amp; Interfaces</span>, 12: 6768–6775.
+            </li>
+            <li class="pub-item">
+              <strong>Jannat M</strong>, Yang KL (2019). "Liquid Crystal-Enabled Protease Inhibition Assays Developed in a Millifluidic Device." <span class="pub-item__journal">Sensors and Actuators B: Chemical</span>, 296: 126595.
+            </li>
+            <li class="pub-item">
+              <strong>Jannat M</strong>, Yang KL (2018). "Immobilization of Enzymes on Flexible Tubing Surfaces for Continuous Bioassays." <span class="pub-item__journal">Langmuir</span>, 34: 14226–14233.
+            </li>
+            <li class="pub-item">
+              <strong>Jannat M</strong>, Yang KL (2018). "Continuous Protease Assays using Liquid Crystal as a Reporter." <span class="pub-item__journal">Sensors and Actuators B: Chemical</span>, 269: 8–14.
+            </li>
+          </ul>
+
+          <p class="pub-section-label" style="margin-top:1.5rem;">Conference Presentations</p>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <strong>Jannat M</strong>, Yang KL. "Millifluidic devices with immobilized enzymes for continuous bioreactions." SELECTBIO Conference — Flow Chemistry Asia 2019, Tokyo, Japan.
+            </li>
+            <li class="pub-item">
+              <strong>Jannat M</strong>, Yang KL. "Mechanistic Study of Enzyme Immobilization on Flexible Tubing Surfaces." AIChE Annual Meeting 2018, Pittsburgh, USA.
+            </li>
+            <li class="pub-item">
+              <strong>Jannat M</strong>, Yang KL. "Continuous Protease Assays using Liquid Crystal as a Reporter." AIChE Annual Meeting 2018, Pittsburgh, USA.
+            </li>
+          </ul>
+
+          <p style="margin-top:1.2rem;font-family:'DM Sans',sans-serif;font-size:0.83rem;color:#6b7280;">
+            For the full publication list, visit the
+            <a href="https://scholar.google.com/citations?hl=en&user=gjb6mA0AAAAJ" target="_blank" style="color:#1a4a7a;font-weight:500;">Google Scholar profile</a> or
+            <a href="https://www.researchgate.net/profile/Mahbuba-Jannat" target="_blank" style="color:#1a4a7a;font-weight:500;">ResearchGate</a>.
+          </p>
+        </section>
+
+        <section class="profile-section" id="honors">
+          <div class="profile-section__header">
+            <div class="profile-section__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8922a" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+            <h2 class="profile-section__title">Honors &amp; Awards</h2>
+          </div>
+          <ul class="honors-list">
+            <li class="honor-item">
+              <div class="honor-item__icon">🇬🇧</div>
+              <div class="honor-item__text">Royal Society Research Grant (2023) — International Science Partnership Fund (ISPF), UK; £112,500 for international collaborative research</div>
+            </li>
+            <li class="honor-item">
+              <div class="honor-item__icon">🎓</div>
+              <div class="honor-item__text">NUS Research Scholarship — Full scholarship for doctoral studies at the National University of Singapore</div>
+            </li>
+            <li class="honor-item">
+              <div class="honor-item__icon">🏛️</div>
+              <div class="honor-item__text">Departmental Recognition — DChE secured the second highest external research funding award (2022–23) through collaborative grants including Dr. Jannat's research</div>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+
+      <aside class="profile-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card__header">Contact</div>
+          <div class="sidebar-card__body">
+            <div class="contact-row">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Department of Chemical Engineering, BUET, Dhaka-1000, Bangladesh</span>
+            </div>
+            <div class="contact-row">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+              <a href="mailto:mahbuba@che.buet.ac.bd">mahbuba@che.buet.ac.bd</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__header">Academic Profiles</div>
+          <div class="sidebar-card__body">
+            <div class="academic-links">
+              <a class="academic-link-btn" href="https://scholar.google.com/citations?hl=en&user=gjb6mA0AAAAJ" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#4285F4"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+                Google Scholar
+              </a>
+              <a class="academic-link-btn" href="https://www.researchgate.net/profile/Mahbuba-Jannat" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#00CCBB"><path d="M19.586 0c-.818 0-1.536.5-1.844 1.25l-3.03 7.5-3.029-7.5C11.375.5 10.657 0 9.839 0 8.607 0 7.607 1 7.607 2.232c0 .25.036.5.107.732l4.286 10.625-1.143 2.857c-.286.714-1.286 1.214-1.429.214-.286-1.857-1.714-2.5-3.464-2.5C3.82 14.16 2 15.946 2 18.232 2 20.554 3.82 22.25 6.107 22.25c2.75 0 4.25-1.286 4.25-3.571v-.179l.25.643h2.357l.25-.643v.179c0 2.285 1.5 3.571 4.25 3.571 2.286 0 4.107-1.696 4.107-4.018 0-2.286-1.821-4.072-4.107-4.072-1.75 0-3.179.643-3.464 2.5-.143 1-.75.5-1.036-.214l1.286-3.25L21.5 2.946C21.571 2.696 21.607 2.446 21.607 2.196 21.607 1 20.821 0 19.586 0z"/></svg>
+                ResearchGate
+              </a>
+              <a class="academic-link-btn" href="https://che.buet.ac.bd/mahbuba-jannat/" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                Department Profile
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__header">Research Metrics</div>
+          <div class="sidebar-card__body">
+            <div class="stat-grid">
+              <div class="stat-item">
+                <span class="stat-item__num">76+</span>
+                <span class="stat-item__label">Citations</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-item__num">5+</span>
+                <span class="stat-item__label">Publications</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-item__num">NUS</span>
+                <span class="stat-item__label">PhD (SG)</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-item__num">£113k</span>
+                <span class="stat-item__label">Royal Soc.</span>
+              </div>
+            </div>
+            <p style="font-family:'DM Sans',sans-serif;font-size:0.75rem;color:#9ca3af;margin:0.8rem 0 0;text-align:center;">Source: ResearchGate / Google Scholar</p>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card__header">Courses Taught</div>
+          <div class="sidebar-card__body">
+            <ul class="courses-list">
+              <li>Biosensors &amp; Lab-on-Chip</li>
+              <li>Environmental Engineering</li>
+              <li>Chemical Engineering Lab</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__main">
+      <div class="footer-col"><div class="footer-col__logo"><div class="footer-col__logo-icon">ChE</div><div class="footer-col__logo-text">Chemical Engineering<br><small style="opacity:0.7;font-weight:400;font-size:0.75rem;">BUET</small></div></div><p class="footer-col__desc">Shaping chemical engineers since 1961.</p></div>
+      <div class="footer-col"><h3 class="footer-col__title">People</h3><nav><a class="footer-nav__item" href="faculty.html">Faculty</a><a class="footer-nav__item" href="faculty-on-leave.html">Faculty on Leave</a><a class="footer-nav__item" href="former-faculty.html">Former Faculty</a><a class="footer-nav__item" href="staff.html">Staff</a></nav></div>
+      <div class="footer-col"><h3 class="footer-col__title">Academics</h3><nav><a class="footer-nav__item" href="../academics/undergraduate.html">Undergraduate</a><a class="footer-nav__item" href="../academics/postgraduate.html">Postgraduate</a><a class="footer-nav__item" href="../research/index.html">Research</a></nav></div>
+      <div class="footer-col"><h3 class="footer-col__title">Contact</h3><address style="font-style:normal;font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.8;">BUET, Dhaka – 1000<br><a href="mailto:head@che.buet.ac.bd" style="color:var(--gold);">head@che.buet.ac.bd</a></address></div>
+    </div>
+    <div class="container footer__bottom"><span>&copy; 2025 Department of Chemical Engineering, BUET.</span><a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a></div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
