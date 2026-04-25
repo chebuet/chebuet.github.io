@@ -1389,8 +1389,9 @@ ul { list-style: none; }
 .footer-col__logo-icon {
   width: 40px;
   height: 40px;
-  background: var(--gold);
-  border-radius: 50%;
+  background: none; /* var(--gold); */
+  border-radius: 0; /* 50%; */
+   /*
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1398,6 +1399,7 @@ ul { list-style: none; }
   font-weight: 700;
   color: var(--navy-dark);
   font-size: 0.95rem;
+   */
 }
 
 .footer-col__logo-text {
