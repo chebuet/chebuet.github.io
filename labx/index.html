@@ -86,18 +86,18 @@ select option{background:var(--bg3)}
 const {useState,useEffect,useRef}=React;
 
 const LABS=[
-  {id:1,name:"Chemical Reaction Engineering Lab",code:"ChE 314",type:"experimental",coordinator:"Dr. Rahman"},
-  {id:2,name:"Transport Phenomena Lab",code:"ChE 322",type:"experimental",coordinator:"Dr. Islam"},
-  {id:3,name:"Thermodynamics Lab",code:"ChE 212",type:"experimental",coordinator:"Dr. Ahmed"},
-  {id:4,name:"Fluid Mechanics Lab",code:"ChE 216",type:"experimental",coordinator:"Dr. Hossain"},
-  {id:5,name:"Heat Transfer Lab",code:"ChE 316",type:"experimental",coordinator:"Dr. Karim"},
-  {id:6,name:"Mass Transfer Lab",code:"ChE 420",type:"experimental",coordinator:"Dr. Bari"},
-  {id:7,name:"Process Control Lab",code:"ChE 208",type:"computational",coordinator:"Dr. Chowdhury"},
-  {id:8,name:"Simulation & Optimization Lab",code:"ChE 306",type:"computational",coordinator:"Dr. Siddique"},
-  {id:9,name:"Numerical Methods Lab",code:"ChE 310",type:"computational",coordinator:"Dr. Alam"},
+  {id:1,name:"Computer Programming and Applications",code:"ChE 208",type:"computational",coordinator:"Faisal Ahmed"},
+  {id:2,name:"Material and Energy Balance Sessional",code:"ChE 202",type:"computational",coordinator:"Md. Kamrul Hasan"},
+  {id:3,name:"Chemical Engineering Laboratory I",code:"ChE 206",type:"experimental",coordinator:"Hasan Tasnim Salehin"},
+  {id:4,name:"Chemical Engineering Laboratory II",code:"ChE 302",type:"experimental",coordinator:"Md. Khairul Bahar"},
+  {id:5,name:"Chemical Process Analysis",code:"ChE 308",type:"computational",coordinator:"Hasan Tasnim Salehin"},
+  {id:6,name:"Chemical Engineering Laboratory III",code:"ChE 304",type:"experimental",coordinator:"Md. Farhatul Abrar"},
+  {id:7,name:"Chemical Engineering Laboratory IV",code:"ChE 306",type:"computational",coordinator:"Md. Khairul Bahar"},
+  {id:8,name:"Computational Techniques in Chemical Engineering",code:"ChE 310",type:"computational",coordinator:"Musfekur Rahman"},
+  {id:9,name:"Chemical Engineering Laboratory V",code:"ChE 310",type:"experimental",coordinator:"Md. Farhatul Abrar"},
 ];
 
-const EVAL_TYPES=["Quiz","Viva","Video Demonstration","Poster Presentation","Report"];
+const EVAL_TYPES=["Attendance","Instant Viva/ Quiz","Report","Board Viva","Video Demonstration/ Presentation","Poster Presentation","Final Quiz"];
 
 const USERS=[
   {id:1,email:"coordinator@buet.ac.bd",password:"coord123",name:"Dr. Rahman",role:"coordinator"},
@@ -105,7 +105,7 @@ const USERS=[
   {id:3,email:"admin2@buet.ac.bd",password:"admin123",name:"Dr. Ahmed",role:"admin"},
 ];
 
-const STUDENT_IDS=Array.from({length:40},(_,i)=>`1905${String(i+1).padStart(3,"0")}`);
+const STUDENT_IDS=Array.from({length:120},(_,i)=>`2102${String(i+1).padStart(3,"0")}`);
 
 function genMockMarks(){
   const m={};
