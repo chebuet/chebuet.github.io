@@ -19,7 +19,7 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: #0b1f3a;
+      background: #001e42;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,66 +32,158 @@
       visibility: hidden;
       pointer-events: none;
     }
-    .loader-logo {
+
+    /* Radial glow */
+    #page-loader::before {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,75,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Logo wrap — fades in */
+    .loader-logo-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.75rem;
-      animation: loaderFadeIn 0.6s ease forwards;
+      gap: 1.5rem;
+      animation: loaderFadeIn 0.5s ease forwards;
+      position: relative;
     }
-    .loader-molecule {
-      width: 80px;
-      height: 80px;
-      animation: loaderSpin 3s linear infinite;
+
+    /* Logo image container */
+    .loader-logo-img {
+      width: 110px;
+      height: 110px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    /* The actual logo — always visible via base64 embed */
+    .loader-logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 0 20px rgba(201,169,75,0.5));
+    }
+
+    /* Outer spinning arc */
+    .loader-ring {
+      position: absolute;
+      inset: -16px;
+      width: calc(100% + 32px);
+      height: calc(100% + 32px);
+      border-radius: 50%;
+      border: 2.5px solid transparent;
+      border-top-color: #c9a94b;
+      border-right-color: rgba(201,169,75,0.25);
+      animation: spinCW 1s linear infinite;
+      z-index: 1;
+    }
+
+    /* Inner counter-spinning arc */
+    .loader-ring-2 {
+      position: absolute;
+      inset: -28px;
+      width: calc(100% + 56px);
+      height: calc(100% + 56px);
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      border-bottom-color: rgba(201,169,75,0.55);
+      border-left-color: rgba(201,169,75,0.2);
+      animation: spinCCW 1.6s linear infinite;
+      z-index: 1;
+    }
+
+    /* Gold orbiting dot on outer ring */
+    .loader-orbit {
+      position: absolute;
+      inset: -28px;
+      width: calc(100% + 56px);
+      height: calc(100% + 56px);
+      border-radius: 50%;
+      animation: spinCW 1.6s linear infinite;
+      z-index: 3;
+    }
+    .loader-orbit::after {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #c9a94b;
+      box-shadow: 0 0 10px rgba(201,169,75,0.9), 0 0 4px #fff;
+    }
+
+    /* Text labels */
+    .loader-text-block { text-align: center; }
     .loader-dept {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.2rem;
-      color: #c9a84c;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      font-weight: 600;
+      color: #c9a94b;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
     }
     .loader-univ {
       font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.2em;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
+
+    /* Progress bar */
+    .loader-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+    }
     .loader-bar-track {
-      width: 220px;
+      width: 160px;
       height: 2px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.07);
       border-radius: 2px;
       overflow: hidden;
     }
     .loader-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #c9a84c, #f0c96a);
+      background: linear-gradient(90deg, rgba(201,169,75,0.6), #c9a94b);
       border-radius: 2px;
-      animation: loaderBar 1.8s ease forwards;
       width: 0;
+      animation: loaderBar 1.4s cubic-bezier(0.4,0,0.2,1) forwards;
     }
     .loader-status {
       font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.15em;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
+
     @keyframes loaderFadeIn {
       from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes loaderSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spinCW  { to { transform: rotate(360deg);  } }
+    @keyframes spinCCW { to { transform: rotate(-360deg); } }
     @keyframes loaderBar {
       0%   { width: 0%; }
       30%  { width: 45%; }
-      60%  { width: 72%; }
-      85%  { width: 91%; }
+      65%  { width: 75%; }
+      85%  { width: 92%; }
       100% { width: 100%; }
     }
 
@@ -335,13 +427,223 @@
     #back-to-top:hover { background: #a8832a; }
 
     /* ═══════════════════════════════════════════════
-       FOOTER SOCIAL — icon size fix
+       IMAGE CAROUSEL
     ═══════════════════════════════════════════════ */
+    .carousel-section {
+      padding: 4rem 0;
+      background: var(--navy, #002147);
+      position: relative;
+      overflow: hidden;
+    }
+    .carousel-section .section-heading__label { color: rgba(201,169,75,0.7); }
+    .carousel-section .section-heading__title { color: #fff; }
+    .carousel-section .section-heading__line  { border-color: rgba(201,169,75,0.4); }
+
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+      aspect-ratio: 16/7;
+      background: #001530;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .carousel-slide.active img { transform: scale(1.02); }
+    .carousel-slide__caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem 1.25rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.72));
+      color: #fff;
+    }
+    .carousel-slide__caption h3 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .carousel-slide__caption p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* Placeholder slide (when no real image) */
+    .carousel-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      background: linear-gradient(135deg, #001f42 0%, #002d60 100%);
+    }
+    .carousel-placeholder svg { opacity: 0.25; }
+    .carousel-placeholder span { font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    /* Prev / Next buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .carousel-btn:hover {
+      background: rgba(201,169,75,0.8);
+      transform: translateY(-50%) scale(1.08);
+    }
+    .carousel-btn--prev { left: 1rem; }
+    .carousel-btn--next { right: 1rem; }
+
+    /* Dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .carousel-dot.active {
+      background: #c9a94b;
+      transform: scale(1.3);
+    }
+
+    /* Upload hint banner */
+    .carousel-hint {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.06em;
+    }
+    .carousel-hint a { color: rgba(201,169,75,0.6); text-decoration: underline; }
     .social-link {
       transition: background 0.2s ease, transform 0.2s ease;
     }
     .social-link:hover {
       transform: translateY(-2px);
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO BACKGROUND CAROUSEL
+    ═══════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background carousel lives behind everything */
+    .hero__bg-carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero__bg-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      transform: scale(1.04);
+      transition: opacity 1.2s ease-in-out, transform 6s ease-out;
+    }
+
+    .hero__bg-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Dark overlay — keeps text readable */
+    .hero__bg-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      /* Gradient: darker on the left (text side), lighter on right */
+      background: linear-gradient(
+        105deg,
+        rgba(0, 21, 47, 0.78) 0%,
+        rgba(0, 21, 47, 0.60) 50%,
+        rgba(0, 21, 47, 0.45) 100%
+      );
+    }
+
+    /* Make the hex pattern sit on top of image but below content */
+    .hero__bg-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .hero__inner { position: relative; z-index: 3; }
+
+    /* Subtle slide indicator dots at bottom of hero */
+    .hero__carousel-dots {
+      position: absolute;
+      bottom: 1.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      gap: 0.45rem;
+    }
+    .hero__carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    .hero__carousel-dot.active {
+      background: #c9a94b;
+      transform: scale(1.4);
     }
 
     /* ═══════════════════════════════════════════════
@@ -358,41 +660,24 @@
        ║  LOADING SCREEN                                      ║
        ╚══════════════════════════════════════════════════════╝ -->
   <div id="page-loader" role="status" aria-label="Loading page">
-    <div class="loader-logo">
-      <!-- Animated molecule SVG -->
-      <svg class="loader-molecule" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Central atom -->
-        <circle cx="40" cy="40" r="8" fill="#c9a84c" opacity="0.9"/>
-        <!-- Orbiting atoms -->
-        <circle cx="40" cy="12" r="5" fill="#c9a84c" opacity="0.5"/>
-        <circle cx="40" cy="68" r="5" fill="#c9a84c" opacity="0.5"/>
-        <circle cx="12" cy="40" r="5" fill="#c9a84c" opacity="0.5"/>
-        <circle cx="68" cy="40" r="5" fill="#c9a84c" opacity="0.5"/>
-        <circle cx="18" cy="18" r="4" fill="#f0c96a" opacity="0.4"/>
-        <circle cx="62" cy="62" r="4" fill="#f0c96a" opacity="0.4"/>
-        <circle cx="62" cy="18" r="4" fill="#f0c96a" opacity="0.4"/>
-        <circle cx="18" cy="62" r="4" fill="#f0c96a" opacity="0.4"/>
-        <!-- Bonds -->
-        <line x1="40" y1="32" x2="40" y2="17" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
-        <line x1="40" y1="48" x2="40" y2="63" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
-        <line x1="32" y1="40" x2="17" y2="40" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
-        <line x1="48" y1="40" x2="63" y2="40" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
-        <line x1="34" y1="34" x2="22" y2="22" stroke="rgba(240,201,106,0.3)" stroke-width="1"/>
-        <line x1="46" y1="46" x2="58" y2="58" stroke="rgba(240,201,106,0.3)" stroke-width="1"/>
-        <line x1="46" y1="34" x2="58" y2="22" stroke="rgba(240,201,106,0.3)" stroke-width="1"/>
-        <line x1="34" y1="46" x2="22" y2="58" stroke="rgba(240,201,106,0.3)" stroke-width="1"/>
-        <!-- Orbit ring -->
-        <circle cx="40" cy="40" r="28" stroke="rgba(201,168,76,0.15)" stroke-width="1" fill="none" stroke-dasharray="4 3"/>
-      </svg>
-      <div class="loader-dept">Chemical Engineering</div>
-      <div class="loader-univ">Bangladesh University of Engineering &amp; Technology</div>
+    <div class="loader-logo-wrap">
+      <div class="loader-logo-img">
+        <div class="loader-ring-2"></div>
+        <div class="loader-ring"></div>
+        <div class="loader-orbit"></div>
+        <img src="data:image/jpeg;base64,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" alt="ChE BUET logo">
+      </div>
+      <div class="loader-text-block">
+        <div class="loader-dept">Chemical Engineering</div>
+        <div class="loader-univ">Bangladesh University of Engineering &amp; Technology</div>
+      </div>
     </div>
-    <div>
+    <div class="loader-bar-wrap">
       <div class="loader-bar-track">
         <div class="loader-bar-fill"></div>
       </div>
+      <div class="loader-status">Loading&hellip;</div>
     </div>
-    <div class="loader-status">Initializing department portal&hellip;</div>
   </div>
 
   <!-- ╔══════════════════════════════════════════════════════╗
@@ -501,8 +786,41 @@
          ║  HERO                                                ║
          ╚══════════════════════════════════════════════════════╝ -->
     <section class="hero" aria-label="Welcome" id="hero">
-      <!-- Animated hexagonal lattice background -->
-      <svg class="hero__bg-pattern" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+      <!-- ── Background image carousel ────────────────────── -->
+      <div class="hero__bg-carousel" aria-hidden="true">
+
+        <div class="hero__bg-slide active"
+            style="background-image: url('assets/images/poster_presentation.jpg');
+                    background-color: #001530;"></div>
+
+        <div class="hero__bg-slide"
+            style="background-image: url('assets/images/si.jpg');
+                    background-color: #001530;"></div>
+
+        <div class="hero__bg-slide"
+            style="background-image: url('assets/images/spring_fest.jpg');
+                    background-color: #001530;"></div>
+
+        <div class="hero__bg-slide"
+            style="background-image: url('assets/images/competition.jpg');
+                    background-color: #001530;"></div>
+
+        <div class="hero__bg-slide"
+            style="background-image: url('assets/images/laminar.jpg');
+                    background-color: #001530;"></div>
+
+        <div class="hero__bg-slide"
+            style="background-image: url('assets/images/che_lawn_empty.jpg');
+                    background-color: #001530;"></div>
+
+      </div>
+
+      <!-- Dark gradient overlay -->
+      <div class="hero__bg-overlay" aria-hidden="true"></div>
+
+      <!-- Animated hexagonal lattice (on top of image, below content) -->
+      <svg class="hero__bg-pattern" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="opacity:0.04;">
         <defs>
           <pattern id="hex" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
             <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="white" stroke-width="0.8"/>
@@ -510,6 +828,15 @@
         </defs>
         <rect width="1440" height="600" fill="url(#hex)"/>
       </svg>
+
+      <!-- Slide indicator dots -->
+      <div class="hero__carousel-dots">
+        <button class="hero__carousel-dot active" data-hero-slide="0" aria-label="Slide 1"></button>
+        <button class="hero__carousel-dot" data-hero-slide="1" aria-label="Slide 2"></button>
+        <button class="hero__carousel-dot" data-hero-slide="2" aria-label="Slide 3"></button>
+        <button class="hero__carousel-dot" data-hero-slide="3" aria-label="Slide 4"></button>
+        <button class="hero__carousel-dot" data-hero-slide="4" aria-label="Slide 5"></button>
+      </div>
 
       <div class="container hero__inner">
 
@@ -993,16 +1320,23 @@
 
   <script>
     /* ═══════════════════════════════════════════════════════
-       LOADING SCREEN
+       LOADING SCREEN — show for min 2s then fade
     ═══════════════════════════════════════════════════════ */
-    window.addEventListener('load', function () {
+    var loaderStart = Date.now();
+    function dismissLoader() {
+      var elapsed   = Date.now() - loaderStart;
+      var remaining = Math.max(0, 1500 - elapsed);
       setTimeout(function () {
         var loader = document.getElementById('page-loader');
-        var body   = document.body;
-        loader.classList.add('hidden');
-        body.classList.add('loaded');
-      }, 1900);
-    });
+        if (loader) loader.classList.add('hidden');
+        document.body.classList.add('loaded');
+      }, remaining);
+    }
+    if (document.readyState === 'complete') {
+      dismissLoader();
+    } else {
+      window.addEventListener('load', dismissLoader);
+    }
 
     /* ═══════════════════════════════════════════════════════
        STICKY NAVBAR SHRINK
@@ -1079,6 +1413,113 @@
         });
       });
     });
+
+    /* ═══════════════════════════════════════════════════════
+       IMAGE CAROUSEL
+    ═══════════════════════════════════════════════════════ */
+    (function () {
+      var track  = document.getElementById('carouselTrack');
+      var slides = track ? track.querySelectorAll('.carousel-slide') : [];
+      var dots   = document.querySelectorAll('.carousel-dot');
+      var prevBtn = document.getElementById('carouselPrev');
+      var nextBtn = document.getElementById('carouselNext');
+      var current = 0;
+      var total   = slides.length;
+      var autoTimer;
+
+      if (!track || total === 0) return;
+
+      function goTo(index) {
+        slides[current].classList.remove('active');
+        dots[current] && dots[current].classList.remove('active');
+        dots[current] && dots[current].setAttribute('aria-selected', 'false');
+
+        current = (index + total) % total;
+
+        slides[current].classList.add('active');
+        dots[current] && dots[current].classList.add('active');
+        dots[current] && dots[current].setAttribute('aria-selected', 'true');
+
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      }
+
+      function next() { goTo(current + 1); }
+      function prev() { goTo(current - 1); }
+
+      function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(next, 4500);
+      }
+      function stopAuto() { clearInterval(autoTimer); }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { prev(); startAuto(); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { next(); startAuto(); });
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          goTo(parseInt(this.getAttribute('data-slide')));
+          startAuto();
+        });
+      });
+
+      /* Touch / swipe support */
+      var touchStartX = 0;
+      track.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].clientX;
+        stopAuto();
+      }, { passive: true });
+      track.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+        startAuto();
+      }, { passive: true });
+
+      /* Pause on hover */
+      track.addEventListener('mouseenter', stopAuto);
+      track.addEventListener('mouseleave', startAuto);
+
+      startAuto();
+    })();
+
+    /* ═══════════════════════════════════════════════════════
+       HERO BACKGROUND CAROUSEL
+    ═══════════════════════════════════════════════════════ */
+    (function () {
+      var bgSlides = document.querySelectorAll('.hero__bg-slide');
+      var bgDots   = document.querySelectorAll('.hero__carousel-dot');
+      var bgCurrent = 0;
+      var bgTotal   = bgSlides.length;
+      var bgTimer;
+
+      if (!bgTotal) return;
+
+      function bgGoTo(index) {
+        bgSlides[bgCurrent].classList.remove('active');
+        bgDots[bgCurrent] && bgDots[bgCurrent].classList.remove('active');
+
+        bgCurrent = (index + bgTotal) % bgTotal;
+
+        bgSlides[bgCurrent].classList.add('active');
+        bgDots[bgCurrent] && bgDots[bgCurrent].classList.add('active');
+      }
+
+      function bgNext() { bgGoTo(bgCurrent + 1); }
+
+      function bgStart() {
+        bgStop();
+        bgTimer = setInterval(bgNext, 3500);
+      }
+      function bgStop() { clearInterval(bgTimer); }
+
+      bgDots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          bgGoTo(parseInt(this.getAttribute('data-hero-slide')));
+          bgStart();
+        });
+      });
+
+      bgStart();
+    })();
 
     /* ═══════════════════════════════════════════════════════
        BACK TO TOP
