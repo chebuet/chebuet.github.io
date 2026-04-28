@@ -568,64 +568,71 @@
 
           </div><!-- /left -->
 
-          <!-- Right: Inquiry Form -->
           <div>
             <div class="form-card">
               <h2 class="form-card__title">Send Us a Message</h2>
               <p class="form-card__subtitle">Fill in the form and we will get back to you within two working days. Fields marked <span style="color:#c53030;">*</span> are required.</p>
 
-              <form id="contactForm" novalidate>
+              <form id="contactForm" action="https://formspree.io/f/xdayqood" method="POST">
+  
+                <!-- hidden helpers -->
+                <input type="hidden" name="_subject" value="New Contact Form Submission - ChE BUET">
+                
                 <div class="form-row">
                   <div class="form-group">
                     <label for="fname">First Name <span>*</span></label>
-                    <input type="text" id="fname" name="fname" placeholder="e.g. Rahim" required autocomplete="given-name" />
+                    <input type="text" id="fname" name="fname" required />
                   </div>
                   <div class="form-group">
                     <label for="lname">Last Name <span>*</span></label>
-                    <input type="text" id="lname" name="lname" placeholder="e.g. Chowdhury" required autocomplete="family-name" />
+                    <input type="text" id="lname" name="lname" required />
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="email">Email Address <span>*</span></label>
-                  <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+                  <input type="email" id="email" name="email" required />
                 </div>
 
                 <div class="form-group">
-                  <label for="phone">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" placeholder="+880-1XXX-XXXXXX" autocomplete="tel" />
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" />
                 </div>
 
                 <div class="form-group">
-                  <label for="affiliation">Organization / Institution</label>
-                  <input type="text" id="affiliation" name="affiliation" placeholder="Your university, company, or organization" autocomplete="organization" />
+                  <label for="affiliation">Organization</label>
+                  <input type="text" id="affiliation" name="affiliation" />
                 </div>
 
                 <div class="form-group">
                   <label for="subject">Subject <span>*</span></label>
                   <select id="subject" name="subject" required>
-                    <option value="" disabled selected>Select a topic…</option>
-                    <option value="admission">Admission Enquiry</option>
-                    <option value="academic">Academic / Course Query</option>
-                    <option value="research">Research Collaboration</option>
-                    <option value="brtc">BRTC / Testing Services</option>
-                    <option value="faculty">Faculty Contact</option>
-                    <option value="media">Media / Press</option>
+                    <option value="">Select...</option>
+                    <option value="admission">Admission</option>
+                    <option value="academic">Academic</option>
+                    <option value="research">Research</option>
+                    <option value="brtc">BRTC</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="media">Media</option>
                     <option value="other">Other</option>
                   </select>
                 </div>
 
                 <div class="form-group">
                   <label for="message">Message <span>*</span></label>
-                  <textarea id="message" name="message" placeholder="Please describe your inquiry in detail…" required></textarea>
+                  <textarea id="message" name="message" required></textarea>
                 </div>
 
-                <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center;">
+                <button type="submit" class="btn btn--primary" id="submitBtn">
                   Send Message →
                 </button>
 
-                <div class="form-success" id="formSuccess" role="alert">
-                  ✅ Thank you! Your message has been sent. We'll be in touch within two working days.
+                <div class="form-success" id="formSuccess">
+                  ✅ Message sent successfully! We’ll respond within two working days.
+                </div>
+
+                <div class="form-success" id="formError" style="display:none; background:#fff5f5; border-color:#feb2b2; color:#c53030;">
+                  ❌ Something went wrong. Please try again.
                 </div>
               </form>
             </div>
@@ -732,27 +739,80 @@
 
   <script src="../assets/js/main.js"></script>
   <script>
-    // Simple form demo — replace with a backend endpoint or Formspree/Netlify Forms
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const required = this.querySelectorAll('[required]');
-      let valid = true;
-      required.forEach(field => {
-        if (!field.value.trim()) {
-          field.style.borderColor = '#c53030';
-          valid = false;
-        } else {
-          field.style.borderColor = '';
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successBox = document.getElementById('formSuccess');
+    const errorBox = document.getElementById('formError');
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      submitBtn.textContent = isLoading ? "Sending..." : "Send Message →";
+    }
+
+    function showSuccess() {
+      successBox.classList.add('show');
+      errorBox.style.display = 'none';
+
+      setTimeout(() => {
+        successBox.classList.remove('show');
+      }, 6000);
+    }
+
+    function showError(message = "Something went wrong. Please try again.") {
+      errorBox.textContent = "❌ " + message;
+      errorBox.style.display = 'block';
+      successBox.classList.remove('show');
+    }
+
+    function validateForm(formData) {
+      const requiredFields = ['fname', 'lname', 'email', 'subject', 'message'];
+
+      for (let field of requiredFields) {
+        if (!formData.get(field) || !formData.get(field).trim()) {
+          return false;
         }
-      });
-      if (valid) {
-        document.getElementById('formSuccess').classList.add('show');
-        this.reset();
-        setTimeout(() => {
-          document.getElementById('formSuccess').classList.remove('show');
-        }, 6000);
+      }
+      return true;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      // Basic validation
+      if (!validateForm(formData)) {
+        showError("Please fill all required fields.");
+        return;
+      }
+
+      try {
+        setLoading(true);
+
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          form.reset();
+          showSuccess();
+        } else {
+          showError(result?.error || "Submission failed.");
+        }
+
+      } catch (err) {
+        showError("Network error. Please try again.");
+      } finally {
+        setLoading(false);
       }
     });
   </script>
+
 </body>
 </html>
