@@ -272,6 +272,7 @@
       overflow: hidden;
       line-height: 0;
       margin-bottom: -2px;
+      margin-top: -2px;
     }
     .wave-divider svg {
       display: block;
@@ -572,6 +573,14 @@
     .hero {
       position: relative;
       overflow: hidden;
+      min-height: calc(100vh - 104px); /* viewport minus topbar (~34px) + navbar (70px) */
+      padding-bottom: 5rem !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero__inner {
+      width: 100%;
     }
 
     /* Background carousel lives behind everything */
@@ -895,9 +904,9 @@
     </section>
 
     <!-- Wave divider -->
-    <div class="wave-divider">
-      <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:48px;">
-        <path d="M0,32 C240,0 480,48 720,24 C960,0 1200,48 1440,16 L1440,48 L0,48 Z" fill="var(--white, #fff)"/>
+    <div class="wave-divider" style="background:transparent;">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:60px;display:block;">
+        <path d="M0,40 C240,8 480,58 720,32 C960,6 1200,56 1440,24 L1440,60 L0,60 Z" fill="#ffffff"/>
       </svg>
     </div>
 
