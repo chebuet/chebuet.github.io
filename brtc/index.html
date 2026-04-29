@@ -8,8 +8,41 @@
   <link rel="stylesheet" href="../assets/css/style.css"/>
   <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon"/>
   <style>
+    /* ── Sidebar layout fix ────────────────────────────────── */
+    .content-with-sidebar {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      align-items: start;
+      width: 100%;
+      min-width: 0;
+    }
+    .content-with-sidebar > * {
+      min-width: 0;
+      overflow: hidden;
+    }
+    .sidebar {
+      width: 100%;
+      max-width: 300px;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    .sidebar-widget {
+      box-sizing: border-box;
+      width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    @media (max-width: 900px) {
+      .content-with-sidebar {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        max-width: 100%;
+      }
+    }
+
     /* ── Test Rates Table ─────────────────────────────────── */
-    /*
     .rates-controls {
       display: flex;
       flex-wrap: wrap;
@@ -55,6 +88,35 @@
       border: 1px solid var(--gray-200);
       border-radius: 3px;
     }
+    /* ── Hide native bottom scrollbar on the table wrap ─────── */
+    .rates-table-wrap {
+      scrollbar-width: none;
+    }
+    .rates-table-wrap::-webkit-scrollbar { display: none; }
+
+    /* ── Floating sticky scrollbar ──────────────────────────── */
+    #floatingScroll {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      overflow-x: auto;
+      overflow-y: hidden;
+      height: 20px;
+      background: rgba(255,255,255,0.97);
+      border-top: 2px solid var(--gold, #b8972a);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      display: none;
+      transition: opacity 0.2s;
+    }
+    #floatingScroll::-webkit-scrollbar { height: 10px; }
+    #floatingScroll::-webkit-scrollbar-thumb {
+      background: var(--navy, #1a2a4a);
+      border-radius: 5px;
+    }
+    #floatingScroll::-webkit-scrollbar-track { background: #eee; }
+    #floatingScrollInner { height: 1px; }
     .rates-table {
       width: 100%;
       border-collapse: collapse;
@@ -129,7 +191,6 @@
       font-style: italic;
       display: none;
     }
-    */
     .pdf-download-bar {
       display: flex;
       align-items: center;
@@ -339,8 +400,11 @@
             </div>
             
 
+            <!-- Quick category nav -->
+            <div id="quickNav" style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">
+              <span style="font-size:0.75rem;color:var(--gray-500);align-self:center;margin-right:0.3rem;">Jump to:</span>
+            </div>
             <!-- Search + Filter controls -->
-            <!--
             <div class="rates-controls">
               <input class="rates-search" type="search" id="ratesSearch" placeholder="Search tests, methods, categories…" autocomplete="off" />
               <select class="rates-filter" id="ratesCategory">
@@ -362,7 +426,7 @@
             </div>
             
 
-            <div class="rates-table-wrap">
+            <div class="rates-table-wrap" id="ratesWrap">
               <table class="rates-table" id="ratesTable" aria-label="BRTC Test Rates 2026">
                 <thead>
                   <tr>
@@ -371,20 +435,16 @@
                     <th data-col="test">Name of Test <span class="sort-icon">⇅</span></th>
                     <th data-col="price">Test Price (BDT) <span class="sort-icon">⇅</span></th>
                     <th data-col="vat">VAT 15% (BDT) <span class="sort-icon">⇅</span></th>
-                    <th data-col="total">Total (BDT) <span class="sort-icon">⇅</span></th>
+                    <th data-col="total">Total incl. VAT (BDT) <span class="sort-icon">⇅</span></th>
                     <th data-col="method">Method</th>
                   </tr>
                 </thead>
                 <tbody id="ratesBody">
-                -->
-            
                   <!-- rows injected by JS -->
-                <!--
                 </tbody>
               </table>
               <div class="no-results" id="noResults">No tests match your search. Try a different keyword or category.</div>
             </div>
-            -->
             
 
             <div class="section-heading" style="margin-top:3.5rem;">
@@ -456,18 +516,31 @@
 
   <footer class="footer" role="contentinfo">
     <div class="container footer__main">
+
       <div class="footer-col">
         <div class="footer-col__logo">
-          <div class="footer-col__logo-icon">ChE</div>
+          <!-- ChE logo image instead of text -->
+          <img src="../assets/images/favicon.png" alt="ChE BUET Logo" style="width:48px;height:48px;object-fit:contain;border-radius:4px;">
           <div class="footer-col__logo-text">Chemical Engineering<br><small style="font-weight:400;font-size:0.75rem;opacity:0.7;">BUET</small></div>
         </div>
-        <p class="footer-col__desc">The Department of Chemical Engineering at BUET has been shaping chemical engineers since 1961, producing graduates who lead industry and academia nationally and internationally.</p>
+        <p class="footer-col__desc">
+          The Department of Chemical Engineering at BUET has been shaping chemical engineers
+          since 1948, producing graduates who lead industry and academia nationally and internationally.
+        </p>
         <div class="footer-col__social" aria-label="Social media links">
-          <a class="social-link" href="#" aria-label="Facebook">f</a>
+          <!-- Facebook only — LinkedIn and YouTube commented out -->
+          <a class="social-link" href="https://web.facebook.com/ChEDeptBUET" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <!--
           <a class="social-link" href="#" aria-label="LinkedIn" style="font-family:serif;">in</a>
           <a class="social-link" href="#" aria-label="YouTube">▶</a>
+          -->
         </div>
       </div>
+
       <div class="footer-col">
         <h3 class="footer-col__title">About</h3>
         <nav aria-label="About links">
@@ -477,6 +550,7 @@
           <a class="footer-nav__item" href="../about/gallery.html">Gallery</a>
         </nav>
       </div>
+
       <div class="footer-col">
         <h3 class="footer-col__title">Academics</h3>
         <nav aria-label="Academics links">
@@ -487,24 +561,30 @@
           <a class="footer-nav__item" href="../people/staff.html">Staff</a>
         </nav>
       </div>
+
       <div class="footer-col">
         <h3 class="footer-col__title">Contact</h3>
         <address style="font-style:normal;font-size:0.85rem;color:rgba(255,255,255,0.6);line-height:1.8;">
           Department of Chemical Engineering<br>
           BUET, Dhaka – 1000, Bangladesh<br>
-          <a href="tel:+88029665609" style="color:rgba(255,255,255,0.6);">(880) 2-966-5609</a><br>
+          <a href="tel:+8802223365609" style="color:rgba(255,255,255,0.6);">+880-2223-365609</a><br>
           <a href="mailto:headche@che.buet.ac.bd" style="color:var(--gold);">headche@che.buet.ac.bd</a>
         </address>
       </div>
+
     </div>
+
     <div class="container footer__bottom">
-      <span>&copy; 2025 Department of Chemical Engineering, BUET. All rights reserved.</span>
-      <span><a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a> &nbsp;·&nbsp; <a href="../contact/index.html">Webmaster</a></span>
+      <span>&copy; 2026 Department of Chemical Engineering, BUET. All rights reserved.</span>
+      <span>
+        <a href="https://www.buet.ac.bd" target="_blank" rel="noopener">BUET Main Website</a>
+        &nbsp;·&nbsp;
+        <a href="../contact/index.html">Webmaster</a>
+      </span>
     </div>
   </footer>
 
   <script src="../assets/js/main.js"></script>
-  <!--
   <script>
   // ─── BRTC Test Rates Data (from BRTC Price List 2026) ────────────────────────
   const RATES = [
@@ -824,32 +904,110 @@
     { cat:"Customs", sub:"Non-Portland Cement Mixture", test:"Sulfurous Compound (SO₃)", price:7000, vat:1050, total:8050, method:"ASTM C114" },
     { cat:"Customs", sub:"Eterac Acrylic Polyol Polyurethane Coating", test:"Color, Solid Content, Acid Value, Solubility in Water, Flash Point, Relative Density", price:21500, vat:3225, total:24725, method:"Visual Inspection, ASTM D 1298, ASTM D93, ASTM D5142" },
     { cat:"Customs", sub:"Potassium Methyl Siliconate", test:"Potassium (K), Particle Density, Solid Content, pH", price:21500, vat:3225, total:24725, method:"Flame Photometric, ASTM D1298, ASTM D3173" },
-    { cat:"Customs", sub:"Fire Bricks", test:"SiO₂, Al₂O₃, CaO, SO₃, Fe₂O₃", price:21500, vat:3225, total:24725, method:"ASTM C114" },
-    { cat:"Customs", sub:"Glucose / Starch", test:"Refractive Index, Solubility, pH, Specific Gravity, Melting Point, Flammability, Sulphate, Sodium", price:21500, vat:3225, total:24725, method:"Refractometric, ASTM D1298, ASTM D1293, Flame Photometric, Spectrophotometric" },
+    // ── Item 5: Fire Bricks — individual tests, each 7,000+1,050=8,050; grand total 40,250
+    { cat:"Customs", sub:"Fire Bricks", test:"Silica (SiO₂)",        price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Fire Bricks", test:"Alumina (Al₂O₃)",      price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Fire Bricks", test:"Calcium Oxide (CaO)",   price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Fire Bricks", test:"Sulfur Trioxide (SO₃)", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Fire Bricks", test:"Iron Oxide (Fe₂O₃)",    price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    // ── Item 6: Glucose / Starch — individual prices sum: 33,325+4,999=38,324
+    { cat:"Customs", sub:"Glucose / Starch", test:"Refractive Index of Glucose, Solubility in Hot/Cold Water and Alcohol, pH, Specific Gravity, Melting Point, Flammability, Sulphate (SO₄²⁻), Sodium", price:33325, vat:4999, total:38324, method:"Refractometric, ASTM D1298, ASTM D1293, Flame Photometric, Spectrophotometric" },
+    // ── Item 7
     { cat:"Customs", sub:"Soda Ash Light / Disodium Carbonate", test:"Sodium Carbonate, Loss on Drying, Density", price:21500, vat:3225, total:24725, method:"Titrimetric, ASTM D1298, ASTM D3173" },
+    // ── Item 8
     { cat:"Customs", sub:"Lubricating Oil / Base Oil / Mineral Oil", test:"Mineral Oil Additives, Flash Point, Viscosity, Density", price:21500, vat:3225, total:24725, method:"ASTM D 1298, D 5142, D88, D93" },
+    // ── Item 9
     { cat:"Customs", sub:"Stone Chip / Basalt / Clay", test:"Appearance, Size, Shape, Aggregate Form", price:21500, vat:3225, total:24725, method:"Visual Inspection, ASTM C 136, ASTM C 939" },
+    // ── Item 10
     { cat:"Customs", sub:"Micronutrient Premix", test:"B Vitamins, Minerals (Fe, Ca, Mg)", price:21500, vat:3225, total:24725, method:"Titration, Spectrophotometric" },
-    { cat:"Customs", sub:"Dolomite Powder", test:"Calcium (Ca), Magnesium (Mg)", price:21500, vat:3225, total:24725, method:"AAS, Titration, Raman Spectroscopy, Spectrophotometric" },
+    // ── Item 11
+    { cat:"Customs", sub:"Dolomite Powder (CaMg(CO₃)₂)", test:"Calcium (Ca), Magnesium (Mg)", price:21500, vat:3225, total:24725, method:"AAS, Titration, Raman Spectroscopy, Spectrophotometric" },
+    // ── Item 12 (was MISSING)
+    { cat:"Customs", sub:"BONDEX / Emulsion of Acrylic Polymeric Water", test:"Acrylic Polymer Resin, Moisture", price:21500, vat:3225, total:24725, method:"ASTM D 1298, ASTM D3173" },
+    // ── Item 13
     { cat:"Customs", sub:"Silica Sand / Sand C-778 / Silica Quartz", test:"SiO₂, SO₃²⁻, Loss of Ignition", price:21500, vat:3225, total:24725, method:"ASTM C114, ASTM C25, Gravimetric" },
+    // ── Item 14
     { cat:"Customs", sub:"Sodium Bicarbonate", test:"Sodium Bicarbonate", price:7000, vat:1050, total:8050, method:"Titrimetric" },
-    { cat:"Customs", sub:"Azo Dye Carbonamite", test:"Conformity Test, Concentration, Al₂O₃, Cl", price:21500, vat:3225, total:24725, method:"AAS, ASTM D1298" },
-    { cat:"Customs", sub:"DMI 65 Water Filtration Media", test:"Bulk Density, SG, SiO₂, Mn₂O₃, CaCO₃", price:21500, vat:3225, total:24725, method:"ASTM C114, ASTM D1298" },
-    { cat:"Customs", sub:"Na₂CO₃", test:"Concentration (%)", price:7000, vat:1050, total:8050, method:"Titrimetric" },
-    { cat:"Customs", sub:"K₂SiO₃", test:"SG, Viscosity, Insoluble Matter, K₂SiO₃, Sodium Content", price:21500, vat:3225, total:24725, method:"ASTM D88, ASTM D1298, Gravimetric, AAS" },
-    { cat:"Customs", sub:"Limestone (Custom)", test:"CaO, SiO₂, IR, MgO, LOI", price:21500, vat:3225, total:24725, method:"ASTM C25" },
-    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Water Solubility, Al₂O₃, Iron as Fe₂O₃, Water Soluble Iron as Fe, Insoluble Matter, pH, Color", price:21500, vat:3225, total:24725, method:"ASTM C 2598, Visual Inspection, ASTM D1293" },
-    { cat:"Customs", sub:"Floor Hardener", test:"Silica, Alumina, Iron Oxide, Calcium Oxide", price:21500, vat:3225, total:24725, method:"ASTM C114" },
+    // ── Item 15 (was MISSING)
+    { cat:"Customs", sub:"Sodium (SBS) (NaHSO₃)", test:"SO₂, SO₃²⁻, pH", price:21500, vat:3225, total:24725, method:"ASTM D1293, Titrimetric" },
+    // ── Item 16 (was MISSING)
+    { cat:"Customs", sub:"Filler Master Batch (Black Color Masterbatch)", test:"Carbon Black, Melting Point, Stability Temperature, Density", price:21500, vat:3225, total:24725, method:"ASTM D 1298, ASTM D1603" },
+    // ── Item 17 (was MISSING)
+    { cat:"Customs", sub:"Common Salt / Table Salt", test:"Sodium Chloride, Density, Melting Point, Boiling Point", price:21500, vat:3225, total:24725, method:"AAS, ASTM D1298" },
+    // ── Item 18: Azo Dye Carbonamite — 4 tests × 7,000; grand total 32,200
+    { cat:"Customs", sub:"Azo Dye Carbonamite", test:"Conformity Test",         price:7000, vat:1050, total:8050, method:"AAS, Spectrophotometric" },
+    { cat:"Customs", sub:"Azo Dye Carbonamite", test:"Concentration of Azo Dye", price:7000, vat:1050, total:8050, method:"AAS, Spectrophotometric" },
+    { cat:"Customs", sub:"Azo Dye Carbonamite", test:"Al₂O₃",                  price:7000, vat:1050, total:8050, method:"AAS, Spectrophotometric" },
+    { cat:"Customs", sub:"Azo Dye Carbonamite", test:"Cl (Chloride)",           price:7000, vat:1050, total:8050, method:"AAS, Spectrophotometric" },
+    // ── Item 19: DMI 65 — individual prices sum: 24,000+3,600=27,600
+    { cat:"Customs", sub:"DMI 65 Water Filtration Media", test:"Bulk Density, SG, Chemical Contents (SiO₂, Mn₂O₃, CaCO₃)", price:24000, vat:3600, total:27600, method:"ASTM C114, ASTM D1298" },
+    // ── Item 20 (was MISSING)
+    { cat:"Customs", sub:"Compound Plasticizer", test:"Color, SG, Loss on Drying, Refractive Index, Acidity, Ester Content", price:21500, vat:3225, total:24725, method:"Visual Inspection, Refractometric, Titrimetric, ASTM C494, Gravimetric" },
+    // ── Item 21: Na₂SO₄ (was wrongly labelled Na₂CO₃)
+    { cat:"Customs", sub:"Na₂SO₄", test:"Concentration (%)", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    // ── Item 22 (was MISSING)
+    { cat:"Customs", sub:"Beta Carotene", test:"Solubility in Water", price:21500, vat:3225, total:24725, method:"Gravimetric, Spectrophotometric" },
+    // ── Item 23 (was MISSING)
+    { cat:"Customs", sub:"Cyclohexane Thermal Decomposition", test:"Thermal Decomposition on Drying, Bulk Density", price:21500, vat:3225, total:24725, method:"FTIR, Gravimetric, ASTM D1293, ASTM D88, ASTM D1298" },
+    // ── Item 24 (was MISSING)
+    { cat:"Customs", sub:"Microcapsule Blue", test:"Solid Content, pH, Viscosity, SG, Solubility in Water, Solubility in Organic Solvent", price:21500, vat:3225, total:24725, method:"Gravimetric, ASTM D1293, ASTM D88, ASTM D1298" },
+    // ── Item 25 (was MISSING)
+    { cat:"Customs", sub:"Textile Finishing Agent", test:"Solubility in Water, Solubility in Organic Solvent, Density, Moisture, Organic and Inorganic Content", price:21500, vat:3225, total:24725, method:"Gravimetric, ASTM D1298, ASTM D3173" },
+    // ── Item 26 (was MISSING)
+    { cat:"Customs", sub:"Ethyl-Vinyl Acetate", test:"Organic and Inorganic Materials, Melting Point, Sulfur, Insoluble Residue, Solubility in CS₂, Moisture Content, S Content", price:21500, vat:3225, total:24725, method:"Gravimetric, ASTM D3172, ASTM D3173" },
+    // ── Item 27: Limestone (Custom) — 5 tests × 7,000; grand total 40,250
+    { cat:"Customs", sub:"Limestone (Custom)", test:"CaO Content",  price:7000, vat:1050, total:8050, method:"ASTM C25" },
+    { cat:"Customs", sub:"Limestone (Custom)", test:"SiO₂",         price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Limestone (Custom)", test:"IR",            price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Limestone (Custom)", test:"MgO",           price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Limestone (Custom)", test:"LOI",           price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    // ── Item 28: K₂SiO₃ — individual prices sum: 23,500+3,525=27,025
+    { cat:"Customs", sub:"K₂SiO₃", test:"SG, Viscosity, Insoluble Matter, K₂SiO₃, Sodium Content", price:23500, vat:3525, total:27025, method:"ASTM D88, ASTM D1298, Gravimetric, AAS" },
+    // ── Item 29 (was MISSING)
+    { cat:"Customs", sub:"Bentonite Powder Sample", test:"Gel Time, Liquid Limit, Swelling Index", price:21500, vat:3225, total:24725, method:"IS 12446-1988" },
+    // ── Item 30 (was MISSING — different from item 8)
+    { cat:"Customs", sub:"Lubricating Oil", test:"Mineral Base Oil Content, Flash Point, Viscosity and Viscosity Index, Color Speckle, Na₂CO₃, NaCl, Na₂SO₄", price:21500, vat:3225, total:24725, method:"ASTM D 88, ASTM D 93" },
+    // ── Item 31 (was MISSING) — Binding Materials, Alum package price
+    { cat:"Customs", sub:"Binding Materials – Aluminum Sulphate (Alum)", test:"Water Solubility, Al₂O₃, Iron as Fe₂O₃, Water Soluble Iron as Fe, Insoluble Matter, pH, Color", price:21500, vat:3225, total:24725, method:"Titrimetric, AAS" },
+    // ── Item 32: Aluminum Sulphate (Alum) — individual prices sum: 33,600+5,040=38,640
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Water Solubility",                    price:3000, vat:450,  total:3450, method:"ASTM C 2598" },
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Aluminum Compound (Al₂O₃)",           price:7000, vat:1050, total:8050, method:"ASTM C 2598" },
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Iron Compound as Fe₂O₃",              price:7000, vat:1050, total:8050, method:"ASTM E 291" },
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Water Soluble Iron Compound as Fe",   price:7000, vat:1050, total:8050, method:"ASTM E 291" },
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Insoluble Matter",                    price:7000, vat:1050, total:8050, method:"ASTM C 2598" },
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"pH",                                  price:1500, vat:225,  total:1725, method:"ASTM D1293" },
+    { cat:"Customs", sub:"Aluminum Sulphate (Alum)", test:"Color",                               price:1100, vat:165,  total:1265, method:"Visual Inspection" },
+    // ── Item 33: Floor Hardener — 4 tests × 7,000; grand total 32,200
+    { cat:"Customs", sub:"Floor Hardener", test:"Silica",       price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Floor Hardener", test:"Alumina",      price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Floor Hardener", test:"Iron Oxide",   price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    { cat:"Customs", sub:"Floor Hardener", test:"Calcium Oxide", price:7000, vat:1050, total:8050, method:"ASTM C114" },
+    // ── Item 34
     { cat:"Customs", sub:"Hydraulic Oil", test:"Kinematic Viscosity @ 40°C", price:3000, vat:450, total:3450, method:"ASTM D 88" },
-    { cat:"Customs", sub:"HSD (High Speed Diesel)", test:"Density @ 15, Ash, Carbon Residue, Total Sulphur, Sediment, Water Content, Particle Contamination, Total Na+K, Calcium, Lead, Zinc", price:21500, vat:3225, total:24725, method:"AAS, ASTM D 1298, ASTM D 1796, ASTM D 3177" },
-    { cat:"Customs", sub:"Acetic Acid", test:"% of Acetic Acid", price:7000, vat:1050, total:8050, method:"Titrimetric" },
-    { cat:"Customs", sub:"Hydrotreating Catalyst", test:"Surface Area, Pore Volume, Bulk Density, CaO, MoO₃, S, Cl", price:21500, vat:3225, total:24725, method:"BET, AAS, ASTM C25" },
+    // ── Item 35: HSD — individual prices sum: 55,675+8,351=64,026
+    { cat:"Customs", sub:"HSD (High Speed Diesel)", test:"Density @ 15°C, Ash, Carbon Residue, Total Sulphur, Sediment, Water Content, Particle Contamination, Total Na+K, Calcium, Lead, Zinc", price:55675, vat:8351, total:64026, method:"AAS, ASTM D 1298, ASTM D 1796, ASTM D 3177" },
+    // ── Item 36 (was MISSING)
+    { cat:"Customs", sub:"Tri Sodium Phosphate", test:"Purity, Phosphate (%) and Na Ion, Organoleptic (Color, Turbidity, Odor)", price:21500, vat:3225, total:24725, method:"Spectrophotometric, Visual Inspection, Turbidity Meter, Extraction/Distillation" },
+    // ── Item 37 (was MISSING)
+    { cat:"Customs", sub:"Ethanol / Nickel Acid / Formic Acid / Nickel Sulphate", test:"Chemical Identification and Quantification", price:21500, vat:3225, total:24725, method:"Titrimetric, Spectrophotometric" },
+    // ── Item 38: Stove Test (was out of order — must come BEFORE Acetic Acid)
     { cat:"Customs", sub:"Stove Test", test:"Thermal Efficiency, Safety, Emission and IAP Test", price:75250, vat:11288, total:86538, method:"ISO 19867" },
-    { cat:"Customs", sub:"Paint Thinner", test:"VOC, Density, Boiling Point, Flash Point, Sulfur Content", price:21500, vat:3225, total:24725, method:"ASTM D 5142, ASTM D 1298, GC/GC-MS" },
-    { cat:"Customs", sub:"Dosing Chemicals", test:"Scale and Corrosion Inhibitor, Chelation Value", price:21500, vat:3225, total:24725, method:"Titrimetric" },
-    { cat:"Customs", sub:"Soil", test:"Bulk Density, Particle Density, Chemical Resistance, Uniformity Coefficient, Mesh Analysis", price:21500, vat:3225, total:24725, method:"Gravimetric" },
-    { cat:"Customs", sub:"Liquid PAC (Poly Aluminium Chloride)", test:"Appearance, pH, SO₄²⁻, Al₂O₃, Basicity, Iron as Fe, Arsenic, IR", price:21500, vat:3225, total:24725, method:"Colorimetric, Gravimetric, ASTM C 2598, Spectrophotometric" },
-    { cat:"Customs", sub:"Printing Ink", test:"Appearance, Dry Material Content, Surface Coating on Fabric/Paper/Metal, pH, Density", price:21500, vat:3225, total:24725, method:"ASTM D3172, D 5895, D1293, D1298, Visual Inspection" },
+    // ── Item 39: Acetic Acid
+    { cat:"Customs", sub:"Acetic Acid", test:"% of Acetic Acid", price:7000, vat:1050, total:8050, method:"Titrimetric" },
+    // ── Item 40: Hydrotreating Catalyst — individual prices sum: 35,250+5,288=40,538
+    { cat:"Customs", sub:"Hydrotreating Catalyst", test:"Surface Area, Pore Volume, Bulk Density, CaO, MoO₃, S, Cl", price:35250, vat:5288, total:40538, method:"BET, AAS, ASTM C25" },
+    // ── Item 41: Paint Thinner — individual prices sum: 36,150+5,423=41,573
+    { cat:"Customs", sub:"Paint Thinner", test:"VOC, Density, Boiling Point, Flash Point, Sulfur Content", price:36150, vat:5423, total:41573, method:"GC/GC-MS, ASTM D 5142, ASTM D 1298, ASTM D93" },
+    // ── Item 42: Dosing Chemicals — individual prices sum: 17,750+2,663=20,413
+    { cat:"Customs", sub:"Dosing Chemicals", test:"Scale and Corrosion Inhibitor, Chelation Value", price:17750, vat:2663, total:20413, method:"Titrimetric" },
+    // ── Item 43: Soil — individual prices sum: 19,000+2,850=21,850
+    { cat:"Customs", sub:"Soil", test:"Bulk Density, Particle Density, Chemical Resistance, Uniformity Coefficient, Mesh Analysis", price:19000, vat:2850, total:21850, method:"Gravimetric" },
+    // ── Item 44: Liquid PAC — individual prices sum: 33,850+5,078=38,928
+    { cat:"Customs", sub:"Liquid PAC (Poly Aluminium Chloride)", test:"Appearance, pH, SO₄²⁻, Al₂O₃, Basicity (Total Alkalinity), Iron as Fe, Arsenic, IR", price:33850, vat:5078, total:38928, method:"Colorimetric, Gravimetric, ASTM C 2598, Spectrophotometric" },
+    // ── Item 45 (was MISSING)
+    { cat:"Customs", sub:"Water Wash Detergent for Compressor", test:"pH, SG, Emulsion Stability", price:21500, vat:3225, total:24725, method:"ASTM D1293" },
+    // ── Item 46: Printing Ink — individual prices sum: 22,100+3,315=25,415
+    { cat:"Customs", sub:"Printing Ink", test:"Appearance, Dry Material Content, Surface Coating on Fabric, Surface Coating on Paper, Surface Coating on Metal, pH, Density", price:22100, vat:3315, total:25415, method:"ASTM D3172, ASTM D 5895, ASTM D1293, ASTM D1298, Visual Inspection" },
   ];
 
   // ─── Category badge class map ─────────────────────────────────────────────
@@ -895,6 +1053,7 @@
         <td class="total-cell">${fmt(r.total)}</td>
         <td class="method-cell">${r.method||'—'}</td>
       `;
+      if (i % 2 === 0) tr.style.background = 'rgba(0,0,0,0.015)';
       tbody.appendChild(tr);
     });
     updateCount();
@@ -963,6 +1122,73 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     buildRows();
+
+    // ── Floating sticky horizontal scrollbar ─────────────────
+    const wrap          = document.getElementById('ratesWrap');
+    const floatBar      = document.getElementById('floatingScroll');
+    const floatInner    = document.getElementById('floatingScrollInner');
+
+    // Match the inner dummy width to the table's scroll width
+    function syncFloatWidth() {
+      floatInner.style.width = wrap.scrollWidth + 'px';
+    }
+    syncFloatWidth();
+    new ResizeObserver(syncFloatWidth).observe(wrap);
+
+    // Position the floating bar to align with the table wrap horizontally
+    function positionFloatBar() {
+      const rect = wrap.getBoundingClientRect();
+      floatBar.style.left  = rect.left  + 'px';
+      floatBar.style.width = rect.width + 'px';
+      floatBar.style.right = 'auto';
+    }
+    positionFloatBar();
+    window.addEventListener('resize', positionFloatBar);
+
+    // Show/hide floating bar based on whether the table is in view
+    // (but the bottom of the table is NOT yet visible — i.e. native bar would be off-screen)
+    function updateFloatVisibility() {
+      const rect = wrap.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      // Show when table top is above viewport bottom AND table bottom is below viewport bottom
+      const tableInView  = rect.top < viewH && rect.bottom > 0;
+      const nativeHidden = rect.bottom > viewH; // native scrollbar scrolled off screen
+      floatBar.style.display = (tableInView && nativeHidden) ? 'block' : 'none';
+      positionFloatBar();
+    }
+    window.addEventListener('scroll', updateFloatVisibility, { passive: true });
+    updateFloatVisibility();
+
+    // Two-way sync: floating bar ↔ table wrap
+    let syncingFloat = false, syncingWrap = false;
+    floatBar.addEventListener('scroll', () => {
+      if (syncingWrap) return;
+      syncingFloat = true;
+      wrap.scrollLeft = floatBar.scrollLeft;
+      syncingFloat = false;
+    });
+    wrap.addEventListener('scroll', () => {
+      if (syncingFloat) return;
+      syncingWrap = true;
+      floatBar.scrollLeft = wrap.scrollLeft;
+      syncingWrap = false;
+    });
+    // Build quick-nav badges
+    const nav = document.getElementById('quickNav');
+    const cats = [...new Set(RATES.map(r => r.cat))];
+    cats.forEach(cat => {
+      const a = document.createElement('button');
+      a.textContent = cat;
+      a.className = 'category-badge ' + (BADGE[cat] || 'badge-other');
+      a.style.cssText = 'cursor:pointer;border:none;font-size:0.68rem;padding:0.2rem 0.5rem;';
+      a.title = 'Filter by ' + cat;
+      a.addEventListener('click', () => {
+        document.getElementById('ratesCategory').value = cat;
+        filterRows();
+        document.getElementById('ratesTable').scrollIntoView({behavior:'smooth', block:'start'});
+      });
+      nav.appendChild(a);
+    });
     document.getElementById('ratesSearch').addEventListener('input', filterRows);
     document.getElementById('ratesCategory').addEventListener('change', filterRows);
     document.querySelectorAll('thead th[data-col]').forEach(th => {
@@ -970,6 +1196,8 @@
     });
   });
   </script>
-  -->
+  <!-- Floating horizontal scrollbar for the rates table -->
+  <div id="floatingScroll"><div id="floatingScrollInner"></div></div>
+
 </body>
 </html>
